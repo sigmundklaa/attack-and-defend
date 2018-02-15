@@ -1,6 +1,4 @@
-private ["_strSide", "_strSpectGear"];
 
-waitUntil {!isNull player};
 
 player createDiaryRecord ["Diary", [localize "STR_Credits", format ["%1<br/><br/>%2<br/><br/>%3<br/><br/><img image='images\dtaslogo.jpg' width='350' height='175'/>", localize "STR_Credits1", localize "STR_Credits2", localize "STR_Credits3"]]];
 

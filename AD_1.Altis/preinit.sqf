@@ -1,7 +1,15 @@
+#include "script_macros.hpp"
+/*
+*		@File: preInit.sqf
+*		@Author: Gal Zohar
+*
+*		Description: Preinit
+*/
+
 private ["_i", "_maxi", "_markerCharArray", "_markerPrefixCharArray", "_equal", "_currentMarker"];
 
 // Create a mission entry for the server and client RPT file, easier to debug when you know what mission created the error
-diag_log text ""; 
+diag_log text "";
 diag_log text format["|=============================   %1   =============================|", missionName]; // stamp mission name
 diag_log text "";
 
@@ -29,4 +37,4 @@ _maxi = count _markerPrefixCharArray;
 } forEach allMapMarkers;
 
 // Workaround for bug 24051
-[] execVM "preinit2.sqf";
+[] spawn DFUNC(preInit);

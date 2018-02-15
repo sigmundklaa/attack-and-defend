@@ -1,1 +1,0 @@
-tfrChannelMenuClose = true;
