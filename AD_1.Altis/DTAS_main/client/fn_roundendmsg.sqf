@@ -12,7 +12,7 @@ switch (roundEnd) do
 {
 	case 1:
 	{
-		if (sidePlayer != lastAttackerSide) then
+		if (playerSide != lastAttackerSide) then
 		{
 			_bYouWin = true;
 			_str2 = localize "STR_EnemyTeamHasBeenEliminated";
@@ -25,10 +25,10 @@ switch (roundEnd) do
 			_notification = "DTASNotificationYourTeamDead";
 		};
 	};
-	
+
 	case 2:
 	{
-		if (sidePlayer == lastAttackerSide) then
+		if (playerSide == lastAttackerSide) then
 		{
 			_bYouWin = true;
 			_str2 = localize "STR_EnemyTeamHasBeenEliminated";
@@ -44,7 +44,7 @@ switch (roundEnd) do
 
 	case 3:
 	{
-		if (sidePlayer == lastAttackerSide) then
+		if (playerSide == lastAttackerSide) then
 		{
 			_bYouWin = true;
 			_str2 = localize "STR_YourTeamCapturedTheZone";
@@ -57,10 +57,10 @@ switch (roundEnd) do
 			_notification = "DTASNotificationCaptureLose";
 		};
 	};
-	
+
 	case 4:
 	{
-		if (sidePlayer != lastAttackerSide) then
+		if (playerSide != lastAttackerSide) then
 		{
 			_bYouWin = true;
 			_str2 = localize "STR_EnemyTeamRanOutOfTime";

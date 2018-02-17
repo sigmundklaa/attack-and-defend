@@ -21,7 +21,7 @@
 
 private _nvgs = "NVGoggles_OPFOR";
 private _attackerUniform = "U_I_G_Story_Protagonist_F";
-private _defenderUniform = "";
+private _defenderUniform = "U_I_C_Solider_Para_1_F";
 private _vest = "V_PlateCarrierL_CTRG";
 private _helmet = "H_HelmetB_Camo";
 private _hat = "H_Beret_Colonel";
@@ -61,7 +61,7 @@ aClasses = [
 		[],
 		[],
 		[_attackerUniform,[["FirstAidKit",5]]],
-		[_vest,[["optic_MRCO",1],["optic_hamr",1],[_nvgs,1],["20Rnd_762x51_Mag",8,30]]],
+		[_vest,[["optic_MRCO",1],["optic_hamr",1],[_nvgs,1],["30Rnd_762x39_Mag_F",8,30]]],
 		[],
 		_hat,
 		"",
@@ -161,7 +161,7 @@ dClasses = [
 		[],
 		[],
 		[_defenderUniform,[["FirstAidKit",5]]],
-		[_vest,[["optic_MRCO",1],["optic_hamr",1],[_nvgs,1],["20Rnd_762x51_Mag",8,30]]],
+		[_vest,[["optic_MRCO",1],["optic_hamr",1],[_nvgs,1],["30Rnd_762x39_Mag_F",8,30]]],
 		[],
 		_hat,
 		"",
@@ -226,6 +226,3 @@ dClasses = [
 		"MX-SW (30Rnd)"
 	]
 ];
-
-publicVariable "aClasses";
-publicVariable "dClasses";

@@ -1,7 +1,7 @@
 #include "..\script_macros.hpp"
 /*
 *		@File: fn_difficulty.sqf
-*		@Author: Sig
+*		@Author: Gal Zohar
 *
 *		Description: ???
 */

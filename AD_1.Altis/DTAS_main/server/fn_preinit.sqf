@@ -14,8 +14,7 @@ NightvisionParam = 1;
 [] call DFUNC(setDate);
 waitUntil {!isNil "paramsArray"};
 
-for [{_i = 0}, {_i < count paramsArray}, {_i = _i +1 }] do
-{
+for "_i" from 0 to ((count paramsArray) - 1) do {
 	_paramName =(configName ((missionConfigFile >> "Params") select _i));
 	_paramValue = (paramsArray select _i);
 	missionNameSpace setVariable [_paramName, _paramValue];

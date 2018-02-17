@@ -3,7 +3,7 @@ private ["_target", "_emptyPosCount"];
 _target = cursorTarget;
 
 // Check for valid cursor target.
-if ((_target != player) && (side _target == sidePlayer) && (player distance _target) < nameTagMaxDistance) then
+if ((_target != player) && (side _target isEqualTo playerSide) && (player distance _target) < nameTagMaxDistance) then
 {
 	// Handle "Man" cursor target.
 	if (_target isKindOf "Man") then
@@ -23,11 +23,10 @@ if ((_target != player) && (side _target == sidePlayer) && (player distance _tar
 };
 
 // Show names of current player's vehicle crew members.
-if (player != vehicle player) then	
+if (player != vehicle player) then
 {
 	_string = [vehicle player] call fnc_getVehicleCrewText;
-	
+
 	//[_string,1.2 ,0.8 ,0.1, 0, 0, 4] spawn BIS_fnc_dynamicText;
 	[_string,1.2 ,0.6 ,0.1, 0, 0, 4] spawn BIS_fnc_dynamicText;
 };
-

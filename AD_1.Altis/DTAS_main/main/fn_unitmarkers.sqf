@@ -30,13 +30,13 @@ for "_i" from 0 to 60 do
 	_currentMarker setMarkerTypeLocal "mil_triangle";
 	_currentMarker setMarkerSizeLocal [0.5,1];
 	_infMarkers set [_i, _currentMarker];
-	
+
 	_currentMarker = createMarkerLocal [format ["mrki%1text", _i], [1, 1]];
 	_currentMarker setMarkerShapeLocal "ICON";
 	_currentMarker setMarkerTypeLocal "mil_triangle";
 	_currentMarker setMarkerSizeLocal [0.6,0];
 	_textMarkers set [_i, _currentMarker];
-	
+
 	_currentMarker = createMarkerLocal [format ["mrkInsertion%1", _i], [1, 1]];
 	_currentMarker setMarkerShapeLocal "ICON";
 	_currentMarker setMarkerTypeLocal "mil_start";
@@ -51,18 +51,18 @@ while {true} do
 	{
 		_currentUnit = _x;
 		_leader = leader _currentUnit;
-		if ((_currentUnit isKindOf "Man") && ((side _currentUnit) == sidePlayer)) then
+		if ((_currentUnit isKindOf "Man") && ((side _currentUnit) == playerSide)) then
 		{
 			_currentMarker = _infMarkers select _i;
 			_currentTextMarker = _textMarkers select _i;
-			
+
 			if ((group _currentUnit) == (group player)) then
 			{
 				if (_currentUnit == _leader) then
 				{
 					_currentMarker setMarkerColorLocal _cmdColor;
 					_currentTextMarker setMarkerColorLocal _cmdColor;
-					
+
 					if ((!isJoining) && (player == _leader)) then
 					{
 						isGroupLeader = true;
@@ -87,7 +87,7 @@ while {true} do
 				_currentMarker setMarkerColorLocal _sideColor;
 				_currentTextMarker setMarkerColorLocal _sideColor;
 			};
-		
+
 			if ((alive _currentUnit) && (isPlayer _currentUnit)) then
 			{
 				_inTransportCargo = false;
@@ -113,24 +113,24 @@ while {true} do
 						_currentTextMarker setMarkerAlphaLocal 1;
 					};
 				};
-				
+
 				_currentMarker setMarkerPosLocal
 				[
 					(getPos _currentUnit select 0)
 					,(getPos _currentUnit select 1)
 				];
-			
+
 				_currentMarker setMarkerDirLocal (direction vehicle _currentUnit);
-				
+
 				_shortName = _currentUnit getVariable ["shortName", "-"];
-			
+
 				if (_shortName == "-") then
 				{
 					_shortNameArr = [];
 					_shortNameArrCount = 0;
 					_stack = [];
 					_stackIndex = 0;
-					_nameArr = toArray (name _currentUnit);					
+					_nameArr = toArray (name _currentUnit);
 					_nameArrLength = count _nameArr;
 					_index = 0;
 					_nameStartIndex = 0;
@@ -160,13 +160,13 @@ while {true} do
 							_stack set [_stackIndex, _openerIndex];
 							_stackIndex = _stackIndex + 1;
 						};
-						
+
 						if (_stackIndex == 0 && (!(_char in _skipChars))) then
 						{
 							_shortNameArr set [_shortNameArrCount, _char];
 							_shortNameArrCount = _shortNameArrCount + 1;
 						};
-					
+
 						if (_stackIndex > 0 && _closerIndex >= 0) then
 						{
 							if (_closerIndex == (_stack select (_stackIndex - 1))) then
@@ -174,10 +174,10 @@ while {true} do
 								_stackIndex = _stackIndex - 1;
 							};
 						};
-				
+
 						_index = _index + 1;
 					};
-					
+
 					if (_shortNameArrCount == 0) then
 					{
 						_index = _nameStartIndex;
@@ -187,15 +187,15 @@ while {true} do
 							if (!(_char in _skipChars)) then
 							{
 								_shortNameArr set [_shortNameArrCount, _char];
-								_shortNameArrCount = _shortNameArrCount + 1;	
+								_shortNameArrCount = _shortNameArrCount + 1;
 							};
 							_index = _index + 1;
 						};
 					};
-				
+
 					_shortName = toString _shortNameArr;
 					_currentUnit setVariable ["shortName", _shortName];
-					
+
 				};
 				_currentTextMarker setMarkerPosLocal markerPos _currentMarker;
 				_currentTextMarker setMarkerTextLocal _shortName;
@@ -206,11 +206,11 @@ while {true} do
 				_currentMarker setMarkerAlphaLocal 0;
 				_currentTextMarker setMarkerAlphaLocal 0;
 			};
-			
+
 			_i = _i + 1;
 		};
 	} forEach allUnits;
-	
+
 	while {_i<61} do
 	{
 		_currentMarker = _infMarkers select _i;
@@ -219,7 +219,7 @@ while {true} do
 		_currentTextMarker setMarkerAlphaLocal 0;
 		_i = _i + 1;
 	};
-	
+
 	_i = 0;
 	{
 		_group = _x;
@@ -230,7 +230,7 @@ while {true} do
 			&&
 			(!(isNull _leader))
 			&&
-			((side _group) == sidePlayer)
+			((side _group) == playerSide)
 			&&
 			(
 				(((side _group) == attackerSide)  && roundInProgress)
@@ -243,7 +243,7 @@ while {true} do
 		{
 			_currentMarker = _insertionMarkers select _i;
 			_pos = _group getVariable "insertionPos";
-			
+
 			_dx = (objPos select 0) - (_pos select 0);
 			_dy = (objPos select 1) - (_pos select 1);
 			_dir = atan (_dy/_dx);
@@ -267,18 +267,18 @@ while {true} do
 			_currentMarker setMarkerDirLocal _dir;
 			_currentMarker setMarkerPosLocal _pos;
 			_currentMarker setMarkerTextLocal format ["%1 (%2)", name _leader, localize format ["STR_InsertionVehicle%1s", _group getVariable "insertionType"]];
-			_currentMarker setMarkerAlphaLocal 1;			
+			_currentMarker setMarkerAlphaLocal 1;
 
 			_i = _i + 1;
 		};
 	} forEach allGroups;
-	
+
 	while {_i<61} do
 	{
 		_currentMarker = _insertionMarkers select _i;
 		_currentMarker setMarkerAlphaLocal 0;
 		_i = _i + 1;
 	};
-	
+
 	sleep 1;
 };

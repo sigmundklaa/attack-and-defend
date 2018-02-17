@@ -27,7 +27,7 @@ while {true} do
 
 	_lastTime = floor (endTime - time);
 	_actualDisplayedTime = _lastTime;
-	if (sidePlayer != attackerSide) then
+	if (playerSide != attackerSide) then
 	{
 		_actualDisplayedTime = _lastTime + fakeExtraDefenderTime;
 	};
@@ -44,6 +44,6 @@ while {true} do
 		_pausedString = " (P)";
 	};
 	_displayString = format ["%1:%2%3%4", _minutes, floor (_seconds / 10), floor (_seconds mod 10), _pausedString];
-	["update", _displayString] call FUNC(hudHandler);
+	["update", [_displayString]] call FUNC(hudHandler);
 	waitUntil {timerUpdated || ((endTime - time) < _lastTime)};
 };

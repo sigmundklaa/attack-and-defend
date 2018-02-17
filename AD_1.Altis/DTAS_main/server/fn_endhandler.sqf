@@ -6,13 +6,13 @@ if (!isDedicated) then
 		{
 			closeDialog 0;
 		};
-		if (sidePlayer == winnerSide) then
+		if (playerSide == winnerSide) then
 		{
-			["END1", sidePlayer == winnerSide, 1] spawn BIS_fnc_endMission;
+			["END1", playerSide == winnerSide, 1] spawn BIS_fnc_endMission;
 		}
 		else
 		{
-			["END2", sidePlayer == winnerSide, 1] spawn BIS_fnc_endMission;
+			["END2", playerSide == winnerSide, 1] spawn BIS_fnc_endMission;
 		};
 	};
 	"winnerSide" addPublicVariableEventHandler winnerSidePVHandler;
@@ -22,11 +22,13 @@ if (!isDedicated) then
 	};
 };
 
+private _maxScore = getNumber(missionConfigFile >> "CfgDTAS_Settings" >> "maxScore");
+
 if (isServer) then
 {
 	waitUntil {!(isNil "scoreW")};
 	waitUntil {!(isNil "scoreE")};
-	waitUntil {((scoreW >= maxScore) && (scoreW > (scoreE + 1))) || ((scoreE >= maxScore) && (scoreE > (scoreW + 1)))};
+	waitUntil {((scoreW >= _maxScore) && (scoreW > (scoreE + 1))) || ((scoreE >= _maxScore) && (scoreE > (scoreW + 1)))};
 	if (scoreW > scoreE) then
 	{
 		winnerSide = West;

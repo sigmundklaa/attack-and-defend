@@ -34,7 +34,7 @@ fnc_addActions =
 		isPlaying && ((time + timeLimit - endTime) > 5)
 		&&
 		(
-			(sidePlayer != attackerSide) && ((time + timeLimit - endTime) < 45) && (([getPos player, objPos] call fnc_getSqrDist) < 10000)
+			(playerSide != attackerSide) && ((time + timeLimit - endTime) < 45) && (([getPos player, objPos] call fnc_getSqrDist) < 10000)
 			||
 			((vehicle player != player) && (player == driver (vehicle player)) && ([getPos player, ((group player) getVariable ['insertionPos', [0, 0, 0]])] call fnc_getSqrDist) < 5625)
 		)
@@ -44,7 +44,7 @@ fnc_addActions =
 basePos = getPos player;
 _xOffset = (getPos player select 0) - (markerPos "respawn_west" select 0);
 _yOffset = (getPos player select 1) - (markerPos "respawn_west" select 1);
-if (sidePlayer == EAST) then
+if (playerSide == EAST) then
 {
 	_xOffset = (getPos player select 0) - (markerPos "respawn_east" select 0);
 	_yOffset = (getPos player select 1) - (markerPos "respawn_east" select 1);
@@ -79,14 +79,14 @@ fnc_respawn =
 	player setVariable ["preferDriver", preferDriver, true];
 	player setVariable ["vehicleRole", [objNull, false]];
 	player setVariable ["playerAllowDamage", false, true];
-	[_bGiveWeapons] call fnc_assignGear;
+	[_bGiveWeapons] call DFUNC(assignGear);
 	player setFatigue 0;
 };
 
 fnc_reveal =
 {
 	{(group player) reveal _x;} forEach ((getPos player) nearObjects ["B_SupplyCrate_F", 50]);
-	if (sidePlayer == WEST) then
+	if (playerSide == WEST) then
 	{
 		(group player) reveal westMenuFlag;
 	}
@@ -116,7 +116,7 @@ _aRadiusMarker setMarkerAlphaLocal 0;
 objPosHandlerClient =
 {
 	trgCapMsg setPos objPos;
-	if ((!roundInProgress) && (attackerSide == sidePlayer) && ([player] call fnc_isLeaderWithGroup)) then
+	if ((!roundInProgress) && (attackerSide == playerSide) && ([player] call fnc_isLeaderWithGroup)) then
 	{
 		hint (localize "STR_SelectInsertionMethod");
 	};
@@ -126,7 +126,7 @@ objPosHandlerClient =
 defaultInsertionPosHandler =
 {
 	private ["_dx", "_dy", "_dir"];
-	if (sidePlayer == attackerSide) then
+	if (playerSide == attackerSide) then
 	{
 		_dx = (objPos select 0) - (defaultInsertionPos select 0);
 		_dy = (objPos select 1) - (defaultInsertionPos select 1);
@@ -174,7 +174,7 @@ currentVehHandler =
 	bKeepPlayerInBox = false;
 
 	// Place the player near the vehicle, just in case getting the the vehicle gets messed up.
-	player setPos ([getPos _veh, 3] call fnc_findFlatEmpty);
+	player setPos ([getPos _veh, 3] call DFUNC(findFlatEmpty));
 
 	// Get in the vehicle.
 	if (_roleIndex == 0) then
@@ -219,7 +219,7 @@ player addEventHandler ["Killed",
 	private ["_killer"];
 	_killer = _this select 1;
 
-	if (sidePlayer == side _killer) then
+	if (playerSide == side _killer) then
 	{
 		TKer = _killer;
 		publicVariable "TKer";
@@ -235,7 +235,7 @@ TKerPVHandler =
 
 	_killer = _this select 0;
 
-	if (side _killer == sidePlayer) then
+	if (side _killer == playerSide) then
 	{
 		systemChat format [localize "STR_TKMessage", name _killer];
 	};
@@ -258,7 +258,7 @@ if (alive player) then
 	[] call fnc_addActions;
 };
 
-[] spawn DTAS_fnc_uniformFix;
+[] spawn DFUNC(uniformFix);
 
 // Variables for restriction checking.
 // Set enableRestrictionChecking to false and wait for restrictionCheckingEnabled to become false.
@@ -271,7 +271,7 @@ restrictionCheckingEnabled = true;
 	private ["_xPos", "_yPos", "_sight", "_FAKCount", "_maxFAKCount"];
 	_xPos = (markerPos "respawn_east") select 0;
 	_yPos = (markerPos "respawn_east") select 1;
-	if (sidePlayer == WEST) then
+	if (playerSide == WEST) then
 	{
 		_xPos = (markerPos "respawn_west") select 0;
 		_yPos = (markerPos "respawn_west") select 1;
@@ -293,14 +293,6 @@ restrictionCheckingEnabled = true;
 				player setPos [_xPos, _yPos];
 				player setVelocity [0, 0, 0];
 			};
-
-			if (isTFR && canHaveRadio) then
-			{
-				if ([] call TFAR_fnc_haveSWRadio) then
-				{
-					player unlinkItem ([] call TFAR_fnc_activeSwRadio);
-				};
-			};
 		};
 
 		if (player getVariable "groupKicked") then
@@ -310,7 +302,7 @@ restrictionCheckingEnabled = true;
 
 		if (isSpectating && ((isNull spectateUnit) || {!(alive spectateUnit)})) then
 		{
-			[] call fnc_nextSpectateUnit;
+			[] call DFUNC(nextSpectateUnit);
 		};
 
 		if (alive player && isPlaying && !bKeepPlayerInBox) then
@@ -321,60 +313,12 @@ restrictionCheckingEnabled = true;
 				[] spawn {hintC (localize "STR_CannotCarryBackpackAndLauncher");};
 			};
 
-			if
-			(
-				player hasWeapon "LMG_Zafir_F"
-				||
-				player hasWeapon "arifle_MX_SW_Black_F"
-				||
-				player hasWeapon "hlc_rifle_rpk"
-				||
-				player hasWeapon "rhs_weap_m240B_CAP"
-				||
-				player hasWeapon "rhs_weap_pkp"
-			) then
-			{
-				_sight = (primaryWeaponItems player) select 2;
-				if (_sight != "") then
-				{
-					player removePrimaryWeaponItem _sight;
-					player addItem _sight;
-					[] spawn {hintC (localize "STR_CannotAttachSightsToMG");};
-				};
-			};
-
-			if (((vehicle player) != player) && (sidePlayer != attackerSide)) then
+			if (((vehicle player) != player) && (playerSide != attackerSide)) then
 			{
 				if ([typeOf (vehicle player), true] call BIS_fnc_crewCount > 1) then
 				{
 					player action ["GetOut", vehicle player];
 					[] spawn {hintC (localize "STR_VehicleIsLocked");};
-				};
-			};
-
-			// Limit first aid kits.
-			if (!isMedic) then
-			{
-				_FAKCount = {toLower _x == "firstaidkit"} count (items player);
-				_maxFAKCount = 0;
-				if (sidePlayer == attackerSide) then
-				{
-					_maxFAKCount = 1;
-				};
-				if (_fakCount > _maxFAKCount) then
-				{
-					for "_i" from 0 to (_fakCount - _maxFAKCount - 1) do
-					{
-						player removeItem "FirstAidKit";
-					};
-					if (sidePlayer == attackerSide) then
-					{
-						[] spawn {hintC (localize "STR_OnlyMedicsOneFAK");};
-					}
-					else
-					{
-						[] spawn {hintC (localize "STR_OnlyMedicsFAK");};
-					};
 				};
 			};
 		};
@@ -394,17 +338,14 @@ while {isNil "roundInProgress"} do
 
 if (roundInProgress) then
 {
-	if (missingModsMessage == "" && missingTFRMessage == "") then
-	{
-		hintC localize "STR_WaitNextRound";
-	};
+	hintC localize "STR_WaitNextRound";
 };
 
 
 if (roundInProgress) then
 {
 	ace_sys_spectator_exit_spectator = nil;
-	[] call fnc_nextSpectateUnit;
+	[] call DFUNC(nextSpectateUnit);
 	while {roundInProgress} do
 	{
 		waitUntil {!roundInProgress || !alive player};
@@ -444,7 +385,7 @@ while {true} do
 	waitUntil {!restrictionCheckingEnabled};
 
 	player setVelocity [0,0,0];
-	if (sidePlayer == attackerSide) then
+	if (playerSide == attackerSide) then
 	{
 		if ((vehicle player == player) && (isNil "currentVeh")) then
 		{
@@ -458,7 +399,7 @@ while {true} do
 	else
 	{
 		_pos = [(objPos select 0) + _xOffset, (objPos select 1) + _yOffset];
-		_pos = [_pos, 3] call fnc_findFlatEmpty;
+		_pos = [_pos, 3] call DFUNC(findFlatEmpty);
 		bKeepPlayerInBox = false;
 		player setPos _pos;
 	};
@@ -484,7 +425,7 @@ while {true} do
 		};
 	};
 
-	if (sidePlayer == attackerSide) then
+	if (playerSide == attackerSide) then
 	{
 		_taskMessageTitle = "STR_CaptureTheZone";
 		_taskMessageText = "STR_CaptureTheZoneLong";
@@ -498,21 +439,6 @@ while {true} do
 	};
 	//["DTASNotificationAssigned", [localize _taskMessageTitle, localize _taskMessageText]] spawn BIS_fnc_showNotification;
 
-	if (missingModsMessage != "") then
-	{
-		[] spawn
-		{
-			removeAllWeapons player;
-			removeUniform player;
-			removeBackPack player;
-			removeVest player;
-			removeHeadGear player;
-			removeAllAssignedItems player;
-			player setDamage 1;
-			hintC missingModsMessage;
-		};
-	};
-
 	waitUntil {!(alive player) || !roundInProgress};
 	isPlaying = false;
 	player setVariable ["isPlaying", false];
@@ -521,7 +447,7 @@ while {true} do
 
 	if (roundInProgress) then
 	{
-		[] call fnc_nextSpectateUnit;
+		[] call DFUNC(nextSpectateUnit);
 	}
 	else
 	{
@@ -544,5 +470,5 @@ while {true} do
 	(group player) setVariable ["groupReady", false];
 	"mrkDefaultInsertion" setMarkerAlphaLocal 0;
 	[] call fnc_reveal;
-	[] call fnc_roundEndMessage;
+	[] call DFUNC(roundEndMsg);
 };

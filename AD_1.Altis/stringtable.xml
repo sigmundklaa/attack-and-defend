@@ -363,10 +363,10 @@
 		STR_ForceRoundStart
 		<Key ID="STR_ForceRoundStart">
 			<English>Force round start now!</English>
-		</Key>	
+		</Key>
 		<Key ID="STR_AutomaticAdminPause">
 			<English>Automatically Pause Round Start</English>
-		</Key>		
+		</Key>
 		<Key ID="STR_Never">
 			<English>Never</English>
 		</Key>
@@ -512,9 +512,9 @@
 		</Key>
 		<Key ID="STR_DefaultInsertion">
 			<English>Default (%1)</English>
-		</Key>		
+		</Key>
 		<Key ID="STR_JeepInsertion">
-			<English>Jeep Insertion</English>
+			<English>Ifrit Insertion</English>
 			<Russian>Вторжение с помощью джыпов</Russian>
 		</Key>
 		<Key ID="STR_BoatInsertion">
@@ -525,7 +525,7 @@
 			<English>Submarine Insertion</English>
 		</Key>
 		<Key ID="STR_LittlebirdInsertion">
-			<English>Littlebird Insertion</English>
+			<English>Orca Insertion</English>
 			<Russian>Вторжение с помощью верталетов</Russian>
 		</Key>
 		<Key ID="STR_SelectObjectivePosition">
@@ -669,7 +669,7 @@
 			<Russian>Ваша команда проиграла!</Russian>
 		</Key>
 		<Key ID="STR_TryWinAgain">
-			<English>Try win again! Next round will start shortly.</English>
+			<English>Your team won, well done! A new round will start shortly</English>
 		</Key>
 		<Key ID="STR_TryWinNext">
 			<English>Do better next time! Next round will start shortly.</English>

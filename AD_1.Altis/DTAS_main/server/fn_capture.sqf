@@ -1,3 +1,4 @@
+#include "..\..\script_macros.hpp"
 private ["_i", "_count", "_r", "_nextTick", "_fnc_extraAttackersInZone"];
 
 _fnc_extraAttackersInZone =
@@ -11,7 +12,7 @@ _fnc_extraAttackersInZone =
 		_defenderSide = WEST;
 	};
 	{
-		if ([_x] call fnc_isCapturing) then
+		if ([_x] call DFUNC(isCapturing)) then
 		{
 			if (side _x == attackerSide) then
 			{
@@ -36,11 +37,11 @@ while {true} do
 {
 	waitUntil {!roundInProgress};
 	waitUntil {roundInProgress};
-	
+
 	_nextTick = time;
 	_i = 0;
 	capPercentage = 0;
-	
+
 	while {roundInProgress && capPercentage < 1} do
 	{
 		waitUntil {time > _nextTick};

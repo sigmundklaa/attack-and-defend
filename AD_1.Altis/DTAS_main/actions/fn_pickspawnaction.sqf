@@ -3,7 +3,7 @@ private ["_params", "_actualMinDist"];
 _params = _this select 3;
 requestedInsertionType = _params select 0;
 
-if (sidePlayer == attackerSide) then
+if (playerSide == attackerSide) then
 {
 	["DTASChooseObjPos", "onMapSingleClick"] call BIS_fnc_removeStackedEventHandler;
 	["DTASChooseAPos", "onMapSingleClick", {[_pos] call aPosHandler}, []] call BIS_fnc_addStackedEventHandler;

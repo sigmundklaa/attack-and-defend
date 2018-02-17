@@ -12,7 +12,11 @@ params [["_dir", 1, [0]]];
 private _step = [1, _dir] select ((count _this) > 0);
 
 private _unitArr = [];
-{ if (alive _x && side _x isEqualTo sidePlayer && isPlayer _x && ((_x distance (markerPos "respawn_west")) > 100) && ((_x distance (markerPos "respawn_east")) > 100) && !(_x isEqualTo player)) then { PUSH(_unitArr,_x) } } forEach allUnits;
+{
+	if (alive _x && side _x isEqualTo playerSide && isPlayer _x && ((_x distance (markerPos "respawn_west")) > 100) && ((_x distance (markerPos "respawn_east")) > 100) && !(_x isEqualTo player)) then {
+		_unitArr pushBack _x;
+	};
+} forEach allUnits;
 private _unitArrCount = count _unitArr;
 
 private _oldUnit = spectateUnit;

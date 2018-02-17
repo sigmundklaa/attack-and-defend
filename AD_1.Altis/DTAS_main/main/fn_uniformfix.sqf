@@ -1,3 +1,5 @@
+/* 
+waitUntil {!isNil "currentUniform"};
 while {true} do
 {
 	waitUntil {uniform player != currentUniform && alive player && gearAssigned};
@@ -5,3 +7,4 @@ while {true} do
 	removeUniform player;
 	player forceAddUniform currentUniform;
 };
+ */

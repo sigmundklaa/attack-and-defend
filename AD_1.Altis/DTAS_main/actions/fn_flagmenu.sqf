@@ -1,6 +1,8 @@
+#include "..\..\script_macros.hpp"
 private ["_obj"];
 
 waitUntil {!isNil "preInitDone"};
+[] call DFUNC(defineClasses);
 
 _obj = _this select 0;
 
@@ -10,7 +12,7 @@ _obj enableSimulation false;
 fnc_isLeaderWithGroup =
 {
 	_unit = _this select 0;
-	_minGroupSize = [] call fnc_minGroupSize;
+	_minGroupSize = call DFUNC(minGroupSize);
 
 	(
 		(player == leader player)
@@ -94,12 +96,12 @@ fnc_isAdmin =
 };
 
 {
-	_obj addAction [format ["<t color='#ffe400'>%1</t>", (_x select 0)], "DTAS_fnc_pickSpawnAction", [_x select 1], (_x select 2), false, true, "", "canChangeClass && (!roundInProgress) && (attackerSide == sidePlayer) && ([player] call fnc_isLeaderWithGroup)"];
+	_obj addAction [format ["<t color='#ffe400'>%1</t>", (_x select 0)], {_this call DFUNC(pickSpawnAction)}, [_x select 1], (_x select 2), false, true, "", "canChangeClass && (!roundInProgress) && (attackerSide == sidePlayer) && ([player] call fnc_isLeaderWithGroup)"];
 } forEach [[localize "STR_JeepInsertion", 0, 14], [localize "STR_BoatInsertion", 1, 13], [localize "STR_SubmarineInsertion", 2, 12],[localize "STR_LittlebirdInsertion", 3, 11]];
 
-_obj addAction [format ["<t color='#2080ff'>%1</t>", localize "STR_ResumeSpectating"], "DTAS_fnc_nextSpectateUnit", [""], 15, false, true, "",  "roundInProgress && (!isPlaying) && (!(player getVariable ['isPlaying', false]))"];
+_obj addAction [format ["<t color='#2080ff'>%1</t>", localize "STR_ResumeSpectating"], {_this call DFUNC(nextSpectateUnit)}, [""], 15, false, true, "",  "roundInProgress && (!isPlaying) && (!(player getVariable ['isPlaying', false]))"];
 
-_obj addAction [format ["<t color='#32cd32'>%1</t>", localize "STR_Ready"], "DTAS_fnc_readyAction", [], 5, false, true, "", "(!roundInProgress) && ((sidePlayer != attackerSide) || ((group player) getVariable ['insertionPosPicked', false])) && (!((group player) getVariable ['groupReady', false])) && ([player] call fnc_isLeaderWithGroup)"];
+_obj addAction [format ["<t color='#32cd32'>%1</t>", localize "STR_Ready"], {_this call DFUNC(readyAction)}, [], 5, false, true, "", "(!roundInProgress) && ((sidePlayer != attackerSide) || ((group player) getVariable ['insertionPosPicked', false])) && (!((group player) getVariable ['groupReady', false])) && ([player] call fnc_isLeaderWithGroup)"];
 
 
 //_obj addAction [format ["<t color='#ffc000'>%1</t>", localize "STR_GroupManagementMenu"], "groups\refresh.sqf", [], 0, false, false, "", "true"];

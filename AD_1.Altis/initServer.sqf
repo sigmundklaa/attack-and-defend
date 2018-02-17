@@ -11,27 +11,23 @@ diag_log format ["================================ Misson File: %1 =============
 diag_log         "                               Initializing Server                               ";
 diag_log         "=================================================================================";
 
-[] call DFUNC(NOTIFYSTART);
-
 waitUntil {!isNil "preInitDone"};
-[] call DFUNC(srvWarningInit);
-
 call compile preprocessFileLineNumbers "serverStartConfiguration.sqf";
 
-[] call DFUNC(capture);
-[] call DFUNC(roundServer);
-[] call DFUNC(endHandler);
-[] call DFUNC(weather);
-[] call DFUNC(defineClasses);
+
+[] spawn DFUNC(srvWarningInit);
+[] spawn DFUNC(capture);
+[] spawn DFUNC(roundServer);
+[] spawn DFUNC(endHandler);
+[] spawn DFUNC(weather);
+
 
 addMissionEventHandler ["HandleDisconnect", { _this spawn FUNC(handleDisconnect) }];
 
 ["Initialize"] call BIS_fnc_dynamicGroups;
 
-serverInitDone = true;
-
 private _execTime = diag_tickTime - _initStart;
 diag_log         "=================================================================================";
 diag_log 				 "=========================== Server Initialization Completed =====================";
-diag_log format ["========================== Time: The initialization took %1 =====================", [_execTime, "MM:SS.MS"] call BIS_fnc_minutesToString];
+diag_log format ["========================== Time: The initialization took %1 =====================", [_execTime, "MM:SS.MS"] call BIS_fnc_secondsToString];
 diag_log format	["=================================  Mission: %1 ===============================", missionName];

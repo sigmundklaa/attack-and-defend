@@ -1,1 +1,0 @@
-systemChat "ADC FUNCTIONS ARE IN ORDER!";

@@ -11,7 +11,7 @@
 	["_side", WEST, [WEST]]
 ];
 
-if (_side == WEST) then
+if (_side isEqualTo WEST) then
 {
 	currentAClass = _class;
 }

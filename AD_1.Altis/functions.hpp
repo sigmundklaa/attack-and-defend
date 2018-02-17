@@ -12,41 +12,20 @@ class DTAS_Base {
   class math {
     file = "DTAS_main\math";
     class getSqrDist {};
+    class minGroupSize {};
   };
 
   class main {
     file = "DTAS_main\main";
-    class isCapturing {};
     class vehicleAllowDamage {};
-    class capture {};
-    class roundServer {};
-    class weather {};
     class deleteOldBody {};
     class assignGear {};
     class unitMarkers {};
     class defineClasses {};
-    class classAction {};
-    class roundClient {};
-    class classMenu {};
-    class afkKiller {};
-    class captureTriggerMsg {};
     class cleanName {};
-    class pickSpawnAction {};
-    class readyAction {};
     class nextSpectateUnit {};
-    class unStuck {};
     class uniformFix {};
-    class roundEndMsg {};
-    class timerUpdateClient {};
-    class findFlatEmpty {};
-    class keyUp {};
-    class setDate {};
-    class preInit {};
-    class startPos {};
     class populateAmmoCrate {};
-    class flagMenu {};
-    class timerUpdateServer {};
-    class notifyStart {};
   };
 
   class serverWarnings {
@@ -58,7 +37,41 @@ class DTAS_Base {
 
   class handlers {
     file = "DTAS_main\handlers";
+    class keyUp {};
+  };
+
+  class actions {
+    file = "DTAS_main\actions";
+    class classAction {};
+    class classMenu {};
+    class flagMenu {};
+    class pickSpawnAction {};
+    class readyAction {};
+    class unStuck {};
+    class preferDriving {};
+  };
+
+  class server {
+    file = "DTAS_main\server";
+    class capture {};
     class endHandler {};
+    class roundServer {};
+    class timerUpdateServer {};
+    class weather {};
+    class findFlatEmpty {};
+    class preInit {};
+    class startPos {};
+    class setDate {};
+  };
+
+  class client {
+    file = "DTAS_main\client";
+    class afkKiller {};
+    class timerUpdateClient {};
+    class roundClient {};
+    class isCapturing {};
+    class roundEndMsg {};
+    class captureTriggerMsg {};
   };
 };
 
@@ -67,7 +80,7 @@ class Custom_Base {
 
   class main {
     file = "custom\main";
-    class notifyStart {};
+    class playerStrip {};
   };
 
   class gui {

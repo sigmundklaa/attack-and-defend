@@ -36,8 +36,8 @@ while {_bCont} do
 	_radius = _maxRadius * sqrt (random 1);
 	_maxRadius = _maxRadius * 1.5;
 	_pos = [(_originalPos select 0) + _radius * (cos _dir), (_originalPos select 1) + _radius * (sin _dir)];
-	_pos = [_pos] call fnc_findFlatEmpty;
-	
+	_pos = [_pos] call DFUNC(findFlatEmpty);
+
 	_bCont =
 	(
 		(((surfaceIsWater _pos) && (!_isWater)) || ((!(surfaceIsWater _pos)) && _isWater))

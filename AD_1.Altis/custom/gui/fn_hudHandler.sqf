@@ -33,7 +33,7 @@ switch (_mode) do {
     uiNameSpace setVariable ["DTASHUD", _display];
 
     private _title = _display displayCtrl IDC_HUD_TITLE;
-    _title ctrlSetBackgroundColor [[1,0] select (sidePlayer isEqualTo WEST), 0, [0,1] select (sidePlayer isEqualTo WEST), 1];
+    _title ctrlSetBackgroundColor [[1,0] select (playerSide isEqualTo WEST), 0, [0,1] select (playerSide isEqualTo WEST), 1];
 
     ["update"] call FUNC(hudHandler);
   };
@@ -51,7 +51,7 @@ switch (_mode) do {
     private _scoreW = _ui displayCtrl IDC_HUD_SCOREWEST;
     private _scoreE = _ui displayCtrl IDC_HUD_SCOREEAST;
 
-    private _isCapturing = [player] call fnc_isCapturing;
+    private _isCapturing = [player] call DFUNC(isCapturing);
 
     _timer ctrlSetText _timeText;
 
@@ -69,7 +69,7 @@ switch (_mode) do {
     		localize "STR_Planning";
     	};
 
-    	case (!(sidePlayer isEqualTo attackerSide)): {
+    	case (!(playerSide isEqualTo attackerSide)): {
     		if (_isCapturing) then {
     			localize "STR_Holding";
     		} else {

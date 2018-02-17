@@ -38,19 +38,6 @@ _deleteTypes = ["GroundWeaponHolder", "WeaponHolderSimulated", "ACE_Explosive_Ob
 
 _jeepType =  "O_MRAP_02_F";
 _jeepCrewCount = 4;
-if (attackerFaction == 1 || attackerFaction == 2) then
-{
-	_jeepType = "rhsusf_m1025_d";
-};
-if (attackerFaction == 0) then
-{
-	_jeepType = "IDF_hmmwv";
-};
-if (attackerFaction == 3) then
-{
-	_jeepType = "rhs_tigr_vdv";
-	_jeepCrewCount = 9;
-};
 
 if (!isDedicated) then
 {
@@ -89,7 +76,7 @@ fnc_allGroupsReady =
 	private ["_ready", "_minGroupSize", "_group", "_atLeastOneGroup"];
 	_ready = true;
 	_atLeastOneGroup = false;
-	_minGroupSize = [] call fnc_minGroupSize;
+	_minGroupSize = [] call DFUNC(minGroupSize);
 	{
 		_group = _x;
 		//if ((side _group == attackerSide) && (count (units _group)) >= _minGroupSize) then
@@ -127,7 +114,7 @@ fnc_cleanUpVehicles =
 fnc_setupObjPos =
 {
 	private ["_group"];
-	defaultInsertionPos = [] call fnc_startPos;
+	defaultInsertionPos = [] call DFUNC(startPos);
 	publicVariable "defaultInsertionPos";
 	if (!isDedicated) then
 	{
@@ -353,8 +340,8 @@ while {true} do
 		};
 	} forEach allDead;
 
-	_toDelete = nearestObjects [markerPos "mrkObj1", _deleteTypes, deleteRadius];
-	_toDelete = _toDelete + ((markerPos "mrkObj1") nearObjects ["Default", deleteRadius]); // fix for bug with detecting satchels
+	_toDelete = nearestObjects [markerPos "mrkObj1", _deleteTypes, 10000];
+	_toDelete = _toDelete + ((markerPos "mrkObj1") nearObjects ["Default", 10000]); // fix for bug with detecting satchels
 	_toDelete = _toDelete + nearestObjects [getPos westMenuFlag, _deleteTypes, 100];
 	_toDelete = _toDelete + nearestObjects [getPos eastMenuFlag, _deleteTypes, 100];
 	for "_i" from 0 to ((count _toDelete) - 1) do
@@ -406,7 +393,7 @@ while {true} do
 	//Handle vehicle spawning and assignment
 
 	vehArr = [];
-	_minGroupSize = [] call fnc_minGroupSize;
+	_minGroupSize = [] call DFUNC(minGroupSize);
 	_unitsWithoutGroup = [] + _aUnitArr;
 	_groups = allGroups;
 	_groupIndex = 0;
@@ -448,7 +435,7 @@ while {true} do
 					// Littlebird
 					case 3:
 					{
-						_vehType = "B_Heli_Light_01_F";
+						_vehType = "O_Heli_Light_01_unarmed_F";
 						_slotCount = 6;
 					};
 				};
@@ -594,7 +581,7 @@ while {true} do
 	else
 	{
 		// Run invulnerability script on server too (already runs on host and clients from vehArrHandler)
-		[] call fnc_vehicleAllowDamage;
+		[] call DFUNC(vehicleAllowDamage);
 	};
 
 	sleep 1.5;

@@ -24,13 +24,13 @@ _playerActionsCount = 4;
 
 {
 	_group = _x;
-	if ((side _group == sidePlayer) && (_group != (group player))) then
+	if ((side _group == playerSide) && (_group != (group player))) then
 	{
 		_leader = [_group] call fnc_getLeader;
 		if ((!(isNull _leader)) && (_group getVariable ["isGroupUnlocked", true]) && ((count (units _group)) > 0)) then
 		{
 			_groupName = [name _leader] call fnc_cleanName;
-			
+
 			_units = (units _group) - [_leader];
 			_maxi = count _units;
 			if (_maxi > 0) then
@@ -61,7 +61,7 @@ if (isGroupLeader && ((count (units (group player))) > 1)) then
 	_action = player addAction ["<t color='#000000'>- - - - - - - - -</t>", "blank.sqf", [], 9, false, false, "", "isGroupLeader"];
 	playerActions set [_playerActionsCount, _action];
 	_playerActionsCount = _playerActionsCount +1;
-	
+
 	_action = player addAction ["<t color='#000000'>- - - - - - - - -</t>", "blank.sqf", [], 7, false, false, "", "isGroupLeader"];
 	playerActions set [_playerActionsCount, _action];
 	_playerActionsCount = _playerActionsCount +1;
@@ -70,10 +70,10 @@ if (isGroupLeader && ((count (units (group player))) > 1)) then
 		_action = player addAction [format ["<t color='#ff0000'>%1</t>", format [localize "STR_Kick", name _x]], "groups\kick.sqf", [_x], 8, true, true, "", "isGroupLeader"];
 		playerActions set [_playerActionsCount, _action];
 		_playerActionsCount = _playerActionsCount +1;
-		
+
 		_action = player addAction [format ["<t color='#ffa500'>%1</t>", format [localize "STR_Promote", name _x]], "groups\promote.sqf", [vehicleVarName _x], 6, true, true, "", "isGroupLeader"];
 		playerActions set [_playerActionsCount, _action];
 		_playerActionsCount = _playerActionsCount +1;
-		
+
 	} forEach ((units group player) - [player]);
 };

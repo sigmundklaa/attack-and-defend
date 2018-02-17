@@ -17,17 +17,14 @@ diag_log         "                               Initializing Player            
 diag_log         "=================================================================================";
 
 
-[] call FUNC(NOTIFYSTART);
-
 params [
 	["_unit", player, [objNull]],
 	["_isJIP", false, [false]]
 ];
 
-waitUntil {!isNil "serverInitDone"};
-
 enableSaving [false, false];
 enableSentences false;
+[] call DFUNC(defineClasses);
 
 // -- Thread for making sure that
 [] spawn {
@@ -54,7 +51,6 @@ enableSentences false;
 ["InitializePlayer", [_unit]] call BIS_fnc_dynamicGroups;
 
 isJoining = false;
-sidePlayer = side player;
 
 call compile preprocessFileLineNumbers "briefing.sqf";
 [] spawn DFUNC(unitMarkers);

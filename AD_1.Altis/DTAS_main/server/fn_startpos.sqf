@@ -1,3 +1,5 @@
+#include "..\..\script_macros.hpp"
+
 private ["_allRoads", "_road", "_sqrDist", "_newSqrDist", "_pos", "_minSqrDist"];
 
 _allRoads = [objPos select 0, objPos select 1] nearRoads 2500;
@@ -10,11 +12,11 @@ if (count _allRoads > 0) then
 	_road = _allRoads select 0;
 	_sqrDist = (2 * minDist) * (2 * minDist);
 	_minSqrDist = minDist * minDist;
-	
+
 	{
-		if ([getPos _x, objPos] call fnc_getSqrDist > _minSqrDist) then
+		if ([getPos _x, objPos] call DFUNC(getSqrDist) > _minSqrDist) then
 		{
-			_newSqrDist = [getPos _x, objPos] call fnc_getSqrDist;
+			_newSqrDist = [getPos _x, objPos] call DFUNC(getSqrDist);
 			if (_newSqrDist < _sqrDist) then
 			{
 				_sqrDist = _newSqrDist;
