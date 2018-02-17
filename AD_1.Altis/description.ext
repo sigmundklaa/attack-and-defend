@@ -251,9 +251,9 @@ class params
 };
 
 respawnDialog = false;
-author = $STR_GalZohar;
-onLoadName = $STR_DTAS;
-overviewText = $STR_BriefingDescription;
+author = "Gal Zohar, customized by Sig";
+onLoadName = "TITAN Attack and Defend";
+overviewText = "Attack and Defend mission based on Gal Zohar's Dynamic Take and Secure";
 onLoadMission = $STR_BriefingDescription;
 loadScreen = "images\titanlogo.paa";
 overviewPicture = "images\titanlogo.paa";

@@ -53,6 +53,7 @@ player setUnitLoadout _gear;
 	if !(_x isEqualTo "") exitWith {
 		player selectWeapon _x;
 	};
+	player action ["switchWeapon", player, player, 100];
 } forEach [primaryWeapon player, secondaryWeapon player, handGunWeapon player];
 
 

@@ -1,3 +1,5 @@
+#include "..\..\script_macros.hpp"
+
 private ["_dir", "_radius", "_maxRadius", "_pos", "_originalPos", "_isWater", "_bCont", "_veh", "_modifieMinDist"];
 
 unstuck_enabled = false;

@@ -19,8 +19,8 @@
 #define DGVAR(var) DOUBLES(DTAS_PREFIX, var)
 #define FUNC(var) TRIPLES(PREFIXMAIN,fnc,var)
 #define DFUNC(var) TRIPLES(DTAS_PREFIX,fnc,var)
-#define SETVAR(varspace,varname,val,global) varspace setVariable [varname,val,global]
-#define GETVAR(varspace,varname,val) varspace getVariable [varname,val]
+#define SETVAR(varspace,varname,val,global) (varspace setVariable [varname,val,global])
+#define GETVAR(varspace,varname,val) (varspace getVariable [varname,val])
 
 /****************************************
 **  Macro group: Maths

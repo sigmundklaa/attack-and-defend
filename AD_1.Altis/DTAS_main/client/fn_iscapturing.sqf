@@ -11,11 +11,7 @@ params [
 	["_unit", objNull, [objNull]]
 ];
 
-if (isServer) then {
-	private _triggerList = list trgObj;
-} else {
-	private _triggerList = list trgCapMsg;
-};
+private _triggerList = [list trgCapMsg, list trgObj] select isServer;
 
 private _inTrigger = false;
 if (!isNil "_triggerList") then {

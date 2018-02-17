@@ -21,7 +21,7 @@
 
 private _nvgs = "NVGoggles_OPFOR";
 private _attackerUniform = "U_I_G_Story_Protagonist_F";
-private _defenderUniform = "U_I_C_Solider_Para_1_F";
+private _defenderUniform = "U_I_C_Soldier_Para_1_F";
 private _vest = "V_PlateCarrierL_CTRG";
 private _helmet = "H_HelmetB_Camo";
 private _hat = "H_Beret_Colonel";

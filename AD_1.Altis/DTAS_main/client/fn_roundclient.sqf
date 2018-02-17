@@ -27,7 +27,7 @@ commandChannelEnabled = true;
 //Player actions
 fnc_addActions =
 {
-	player addAction [localize "STR_UnStuck", "DTAS_fnc_unStuck", [], 0, false, true, "",
+	player addAction [localize "STR_UnStuck", {_this call DFUNC(unStuck)}, [], 0, false, true, "",
 	"
 		unstuck_enabled
 		&&

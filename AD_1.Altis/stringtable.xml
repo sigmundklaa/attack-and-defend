@@ -57,7 +57,7 @@
 	</Container>
 	<Container name="Briefing">
 		<Key ID="STR_BriefingDescription">
-			<English>Dynamic Take And Secure by Gal Zohar: Randomized round-based attack/defend PvP mission with no respawns.</English>
+			<English>Based on 'Dynamic Take And Secure' by Gal Zohar: Randomized round-based attack/defend PvP mission with no respawns.</English>
 			<Russian>Динамический захват и зачистка от Галь Зохара - Рандомальная атака и защита основанная на раундах миссия ПВП без респаунов.</Russian>
 		</Key>
 		<Key ID="STR_DTAS">
@@ -143,7 +143,7 @@
 			<English>Number of players required dependson the numebr of players on the server. If you do not have enough squad memebers, your squad leader will not have an option to choose insertion method and position.</English>
 		</Key>
 		<Key ID="STR_Insertion3">
-			<English>A default jeep insertion location will be selected automatically and used if none were chosen after %2 seconds as well as for squads who did not have enough squad members.</English>
+			<English>A default Ifrit insertion location will be selected automatically and used if none were chosen after %2 seconds as well as for squads who did not have enough squad members.</English>
 		</Key>
 		<Key ID="STR_Insertion4">
 			<English>Drivers will be assigned to vehicles based on each player's preference, which can be set by using the action menu on the yellow cinderblocks.</English>
@@ -481,7 +481,7 @@
 			<Russian>Нажмите на карту чтобы выбрать хорошую позицию для задания.</Russian>
 		</Key>
 		<Key ID="STR_InsertionVehicle0">
-			<English>jeep</English>
+			<English>Ifrit</English>
 			<Russian>Джып</Russian>
 		</Key>
 		<Key ID="STR_InsertionVehicle1">
@@ -492,11 +492,11 @@
 			<English>submarine</English>
 		</Key>
 		<Key ID="STR_InsertionVehicle3">
-			<English>littlebird</English>
+			<English>Orca</English>
 			<Russian>Маленький верталет</Russian>
 		</Key>
 		<Key ID="STR_InsertionVehicle0s">
-			<English>jeeps</English>
+			<English>Ifrits</English>
 			<Russian>Джыпы</Russian>
 		</Key>
 		<Key ID="STR_InsertionVehicle1s">
@@ -507,13 +507,13 @@
 			<English>submarines</English>
 		</Key>
 		<Key ID="STR_InsertionVehicle3s">
-			<English>littlebirds</English>
+			<English>Orcas</English>
 			<Russian>Малые верталеты</Russian>
 		</Key>
 		<Key ID="STR_DefaultInsertion">
 			<English>Default (%1)</English>
 		</Key>
-		<Key ID="STR_JeepInsertion">
+		<Key ID="STR_IfritInsertion">
 			<English>Ifrit Insertion</English>
 			<Russian>Вторжение с помощью джыпов</Russian>
 		</Key>
@@ -524,7 +524,7 @@
 		<Key ID="STR_SubmarineInsertion">
 			<English>Submarine Insertion</English>
 		</Key>
-		<Key ID="STR_LittlebirdInsertion">
+		<Key ID="STR_OrcaInsertion">
 			<English>Orca Insertion</English>
 			<Russian>Вторжение с помощью верталетов</Russian>
 		</Key>
@@ -570,7 +570,7 @@
 			<Russian>Непрабильная позивия ! выбирите позицию для вторжения вне красного круга.</Russian>
 		</Key>
 		<Key ID="STR_InvalidPositionWater">
-			<English>Invalid position! Jeeps must start on land.</English>
+			<English>Invalid position! Ifrits must start on land.</English>
 		</Key>
 		<Key ID="STR_InvalidPositionLand">
 			<English>Invalid position! Boats and submarines must start on water.</English>
