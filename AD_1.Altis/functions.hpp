@@ -49,6 +49,7 @@ class DTAS_Base {
     class readyAction {};
     class unStuck {};
     class preferDriving {};
+    class setupActions {};
   };
 
   class server {
@@ -97,5 +98,6 @@ class Custom_Base {
     class handleDisconnect {};
     class draw3d {};
     class keyDownhandler {};
+    class killedHandler {};
   };
 };

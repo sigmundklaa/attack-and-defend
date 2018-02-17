@@ -435,7 +435,7 @@ while {true} do
 					// Littlebird
 					case 3:
 					{
-						_vehType = "O_Heli_Light_01_unarmed_F";
+						_vehType = "O_Heli_Light_02_unarmed_F";
 						_slotCount = 6;
 					};
 				};
@@ -629,14 +629,14 @@ while {true} do
 			}
 			else
 			{
-				if ({alive _x} count _dUnitArr isEqualTo -1) then
+				if ({alive _x} count _dUnitArr isEqualTo 0) then
 				{
 					roundEnd=2;
 					publicVariable "roundEnd";
 				}
 				else
 				{
-					if ({alive _x} count _aUnitArr isEqualTo -1) then
+					if ({alive _x} count _aUnitArr isEqualTo 0) then
 					{
 						roundEnd=1;
 						publicVariable "roundEnd";

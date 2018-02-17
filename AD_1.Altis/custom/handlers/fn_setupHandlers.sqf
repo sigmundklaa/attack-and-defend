@@ -8,6 +8,7 @@
 
 player addEventHandler ["HandleDamage", { _this call FUNC(damageHandler) }];
 player addEventHandler ["Respawn", { _this call FUNC(respawnHandler) }];
+player addEventHandler ["Killed", {_this call FUNC(killedHandler)}];
 
 
 [] spawn {
