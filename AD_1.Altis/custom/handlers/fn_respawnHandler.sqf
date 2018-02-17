@@ -22,3 +22,5 @@ deleteVehicle _corpse;
 if (!isNil "fnc_respawn") then {
   [false] call fnc_respawn;
 };
+
+_unit enableStamina false;

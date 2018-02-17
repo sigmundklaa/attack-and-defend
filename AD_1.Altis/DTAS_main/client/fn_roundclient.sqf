@@ -34,9 +34,9 @@ fnc_addActions =
 		isPlaying && ((time + timeLimit - endTime) > 5)
 		&&
 		(
-			(playerSide != attackerSide) && ((time + timeLimit - endTime) < 45) && (([getPos player, objPos] call fnc_getSqrDist) < 10000)
+			(playerSide != attackerSide) && ((time + timeLimit - endTime) < 45) && (([getPos player, objPos] call DTAS_fnc_getSqrDist) < 10000)
 			||
-			((vehicle player != player) && (player == driver (vehicle player)) && ([getPos player, ((group player) getVariable ['insertionPos', [0, 0, 0]])] call fnc_getSqrDist) < 5625)
+			((vehicle player != player) && (player == driver (vehicle player)) && ([getPos player, ((group player) getVariable ['insertionPos', [0, 0, 0]])] call DTAS_fnc_getSqrDist) < 5625)
 		)
 	"];
 };

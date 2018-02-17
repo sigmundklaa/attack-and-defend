@@ -94,5 +94,8 @@ class Custom_Base {
     class damageHandler {};
     class setupHandlers {};
     class respawnHandler {};
+    class handleDisconnect {};
+    class draw3d {};
+    class keyDownhandler {};
   };
 };

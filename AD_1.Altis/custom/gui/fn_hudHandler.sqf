@@ -33,7 +33,7 @@ switch (_mode) do {
     uiNameSpace setVariable ["DTASHUD", _display];
 
     private _title = _display displayCtrl IDC_HUD_TITLE;
-    _title ctrlSetBackgroundColor [[1,0] select (playerSide isEqualTo WEST), 0, [0,1] select (playerSide isEqualTo WEST), 1];
+    _title ctrlSetBackgroundColor [[1,0] select (playerSide isEqualTo WEST), 0, [0,1] select (playerSide isEqualTo WEST), 0.3];
 
     ["update"] call FUNC(hudHandler);
   };

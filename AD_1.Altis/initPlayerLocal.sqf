@@ -24,6 +24,7 @@ params [
 
 enableSaving [false, false];
 enableSentences false;
+player enableStamina false;
 [] call DFUNC(defineClasses);
 
 // -- Thread for making sure that
@@ -46,7 +47,7 @@ enableSentences false;
 	};
 };
 
-[] call FUNC(setupHandlers);
+GVAR(showHexText) = false;
 
 ["InitializePlayer", [_unit]] call BIS_fnc_dynamicGroups;
 
@@ -54,6 +55,7 @@ isJoining = false;
 
 call compile preprocessFileLineNumbers "briefing.sqf";
 [] spawn DFUNC(unitMarkers);
+[] call FUNC(setupHandlers);
 
 uiSleep .01;
 [] spawn DFUNC(roundClient);

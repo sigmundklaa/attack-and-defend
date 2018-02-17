@@ -1,23 +1,19 @@
-private ["_originalName", "_skipChars", "_nameArr", "_cleanNameArr", "_i", "_char"];
+#include "..\..\script_macros.hpp"
+/*
+*		@File: fn_cleanName.sqf
+*		@Author: Gal Zohar
+*
+*		Description: Takes gang tags out of names
+*/
 
-_originalName = _this select 0;
+params [["_originalName", "", [""]]];
 
-_skipChars = toArray "<>";
+private _skipChars = toArray "<>";
+private _nameArr = toArray _originalName;
+private _cleanNameArr = [];
 
-_nameArr = toArray _originalName;
-_cleanNameArr = [];
-for "_i" from 0 to ((count _nameArr) - 1) do
 {
-	_char = _nameArr select _i;
-	// replace < or > with space (32)
-	if (_char in _skipChars) then
-	{
-		_cleanNameArr set [_i, 32];
-	}
-	else
-	{
-		_cleanNameArr set [_i, _char];
-	};
-};
+	_cleanNamArr set [_forEachIndex, ([_x, 32] select (_x in _skipChars))]
+} forEach _nameArr;
 
 (toString _cleanNameArr)

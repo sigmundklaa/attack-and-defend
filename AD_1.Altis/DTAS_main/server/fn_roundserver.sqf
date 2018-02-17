@@ -79,7 +79,7 @@ fnc_allGroupsReady =
 	_minGroupSize = [] call DFUNC(minGroupSize);
 	{
 		_group = _x;
-		//if ((side _group == attackerSide) && (count (units _group)) >= _minGroupSize) then
+		//if ((side _group isEqualTo attackerSide) && (count (units _group)) >= _minGroupSize) then
 		if ((count (units _group)) >= _minGroupSize) then
 		{
 			_atLeastOneGroup = true;
@@ -123,7 +123,7 @@ fnc_setupObjPos =
 
 	{
 		_group = _x;
-		if (side _group == attackerSide) then
+		if (side _group isEqualTo attackerSide) then
 		{
 			_group setVariable ["insertionType", 0, true];
 			_group setVariable ["insertionPos", defaultInsertionPos, true];
@@ -137,7 +137,7 @@ fnc_setupObjPos =
 	"mrkObj" setMarkerPos objPos;
 	"mrkObj1" setMarkerPos objPos;
 
-	if (currentSetupTime == -2) then
+	if (currentSetupTime isEqualTo -2) then
 	{
 		currentSetupTime = setupTime * 2;
 	};
@@ -183,7 +183,7 @@ fnc_hasPlayers =
 		_unit = _x;
 		if (_unit getVariable ["ready", false]) then
 		{
-			if ((side _unit) == attackerSide) then
+			if ((side _unit) isEqualTo attackerSide) then
 			{
 				_aCount = _aCount + 1;
 			}
@@ -359,7 +359,7 @@ while {true} do
 	{
 		if ((isPlayer _x) && (alive _x) && (_x getVariable ["ready", false])) then
 		{
-			if (side _x == attackerSide) then
+			if (side _x isEqualTo attackerSide) then
 			{
 				_aUnitArr set [_aUnitCount, _x];
 				_aUnitCount = _aUnitCount + 1;
@@ -379,7 +379,7 @@ while {true} do
 
 	if (_changeAttackerSide) then
 	{
-		if (attackerSide == WEST) then
+		if (attackerSide isEqualTo WEST) then
 		{
 			nextAttackerSide = EAST;
 		}
@@ -407,7 +407,7 @@ while {true} do
 			_group = _groups select _groupIndex;
 			_groupIndex = _groupIndex + 1;
 			_units = units _group;
-			if (((side _group) == attackerSide) && ((count (units _group)) >= _minGroupSize)) then
+			if (((side _group) isEqualTo attackerSide) && ((count (units _group)) >= _minGroupSize)) then
 			{
 				_bSpawn = true;
 				_unitsWithoutGroup = _unitsWithoutGroup - _units;
@@ -467,7 +467,7 @@ while {true} do
 			{
 				_aStartDir = _aStartDir + 180;
 			};
-			if (_dx == 0) then
+			if (_dx isEqualTo 0) then
 			{
 				if (_dy > 0) then
 				{
@@ -539,7 +539,7 @@ while {true} do
 				(owner (_driverArray select _i)) publicVariableClient "currentVeh";
 				if (!isDedicated) then
 				{
-					if (player == (_driverArray select _i)) then
+					if (player isEqualTo (_driverArray select _i)) then
 					{
 						//[currentVeh] call currentVehHandler;
 					};
@@ -553,7 +553,7 @@ while {true} do
 						(owner (_passengerArray select ((_i * (_slotCount - 1)) + _j))) publicVariableClient "currentVeh";
 						if (!isDedicated) then
 						{
-							if (player == (_passengerArray select ((_i * (_slotCount - 1)) + _j))) then
+							if (player isEqualTo (_passengerArray select ((_i * (_slotCount - 1)) + _j))) then
 							{
 								[currentVeh] call currentVehHandler;
 							};
@@ -602,18 +602,18 @@ while {true} do
 
 	waitUntil
 	{
-		{alive _x} count _dUnitArr == 0
+		{alive _x} count _dUnitArr isEqualTo 0
 		||
-		{alive _x} count _aUnitArr == 1
+		{alive _x} count _aUnitArr isEqualTo 1
 		||
 		{alive _x} count _aUnitArr <= 0.1 * _aUnitCount
 		||
-		(bObjW && attackerSide == WEST) || (bObjE && attackerSide == EAST)
+		(bObjW && attackerSide isEqualTo WEST) || (bObjE && attackerSide isEqualTo EAST)
 		||
 		time > roundEndTime
 	};
 
-	while {roundEnd == 0} do
+	while {roundEnd isEqualTo 0} do
 	{
 		if (time > roundEndTime) then
 		{
@@ -622,21 +622,21 @@ while {true} do
 		}
 		else
 		{
-			if ((bObjW && attackerSide == WEST) || (bObjE && attackerSide == EAST)) then
+			if ((bObjW && attackerSide isEqualTo WEST) || (bObjE && attackerSide isEqualTo EAST)) then
 			{
 				roundEnd=3;
 				publicVariable "roundEnd";
 			}
 			else
 			{
-				if ({alive _x} count _dUnitArr == 0) then
+				if ({alive _x} count _dUnitArr isEqualTo -1) then
 				{
 					roundEnd=2;
 					publicVariable "roundEnd";
 				}
 				else
 				{
-					if ({alive _x} count _aUnitArr == 0) then
+					if ({alive _x} count _aUnitArr isEqualTo -1) then
 					{
 						roundEnd=1;
 						publicVariable "roundEnd";
@@ -655,11 +655,11 @@ while {true} do
 						};
 						WaitUntil
 						{
-							{alive _x} count _dUnitArr == 0
+							{alive _x} count _dUnitArr isEqualTo 0
 							||
-							{alive _x} count _aUnitArr == 0
+							{alive _x} count _aUnitArr isEqualTo 0
 							||
-							((bObjW && attackerSide == WEST) || (bObjE && attackerSide == EAST))
+							((bObjW && attackerSide isEqualTo WEST) || (bObjE && attackerSide isEqualTo EAST))
 							||
 							time > roundEndTime
 						};
@@ -669,7 +669,7 @@ while {true} do
 		};
 	};
 
-	if (((roundEnd == 2 || roundEnd == 3) && attackerSide == WEST) || ((roundEnd == 1 || roundEnd == 4) && attackerSide == EAST))then
+	if (((roundEnd isEqualTo 2 || roundEnd isEqualTo 3) && attackerSide isEqualTo WEST) || ((roundEnd isEqualTo 1 || roundEnd isEqualTo 4) && attackerSide isEqualTo EAST))then
 	{
 		scoreW = scoreW + 1;
 		publicVariable "scoreW";

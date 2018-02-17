@@ -15,8 +15,8 @@
 #define QUOTE(var) #var
 #define DOUBLES(var1,var2) ##var1##_##var2
 #define TRIPLES(var1,var2,var3) ##var1##_##var2##_##var3
-#define GVAR(var) DOUBLES(PREFIXMAIN, var)
-#define DGVAR(var) DOUBLES(DTAS_PREFIX, var)
+#define GVAR(var) DOUBLES(PREFIXMAIN,var)
+#define DGVAR(var) DOUBLES(DTAS_PREFIX,var)
 #define FUNC(var) TRIPLES(PREFIXMAIN,fnc,var)
 #define DFUNC(var) TRIPLES(DTAS_PREFIX,fnc,var)
 #define SETVAR(varspace,varname,val,global) (varspace setVariable [varname,val,global])
