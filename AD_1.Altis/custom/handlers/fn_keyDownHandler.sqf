@@ -36,8 +36,7 @@ private _overRun = false;
 for "_i" from 0 to 9 do {
   private _cmd = format ["CommandingMenu%1", _i];
   private _select = format ["SelectGroupUnit%1", _i];
-  private _cmdselect = format ["CommandingMenuSelect%1", _i];
-  if (_key in actionKeys _cmd || _key in actionkeys _select || _key in actionkeys _cmdselect) then {_overRun = true};
+  if (_key in actionKeys _cmd || _key in actionkeys _select) then {_overRun = true};
 };
 
 switch (_key) do {
@@ -70,14 +69,16 @@ switch (_key) do {
 
 //earplugs (SHIFT O)
   case 24: {
-    if !(soundVolume isEqualTo 1) then {
-      1 fadeSound 1;
-      hint "Earplugs taken out";
-    } else {
-      1 fadeSound 0.1;
-      hint "Earplugs in";
+    if (_shift) then {
+      if !(soundVolume isEqualTo 1) then {
+        1 fadeSound 1;
+        hint "Earplugs taken out";
+      } else {
+        1 fadeSound 0.1;
+        hint "Earplugs in";
+      };
+      _overRun = true;
     };
-    _overRun = true;
   };
 
 //low detail mode (SHFIT END)
