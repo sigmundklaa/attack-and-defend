@@ -30,3 +30,4 @@ if (!isNil "fnc_respawn") then {
 };
 
 _unit enableStamina false;
+[] call DFUNC(setupActions);

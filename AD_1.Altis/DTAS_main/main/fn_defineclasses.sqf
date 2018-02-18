@@ -25,7 +25,7 @@ private _defenderUniform = "U_I_C_Soldier_Para_1_F";
 private _vest = "V_PlateCarrierL_CTRG";
 private _helmet = "H_HelmetB_Camo";
 private _hat = "H_Beret_Colonel";
-private _baseScope = "optic_Arco_blk_F";
+private _baseScope = profileNameSpace getVariable ["ADC_PreferredScope", "optic_Arco_blk_F"];
 
 aClasses = [
 	[
@@ -33,7 +33,7 @@ aClasses = [
 		[],
 		[],
 		[_attackerUniform,[["FirstAidKit",5]]],
-		[_vest,[["optic_MRCO",1],["optic_hamr",1],[_nvgs,1],["20Rnd_762x51_Mag",8,20]]],
+		[_vest,[["optic_MRCO",1],["optic_hamr",1], ["optic_Arco_blk_F",1],[_nvgs,1],["20Rnd_762x51_Mag",8,20]]],
 		[],
 		_hat,
 		"",

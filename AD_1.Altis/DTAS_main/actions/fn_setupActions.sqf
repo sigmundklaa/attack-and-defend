@@ -7,3 +7,5 @@
 */
 
 GVAR(actions) = [];
+
+GVAR(actions) pushBack (player addAction ["<t color='#00f582'>Selection Menu</t>", {createDialog "ADC_playerMenuMain"}]);
