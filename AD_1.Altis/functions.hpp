@@ -88,6 +88,7 @@ class Custom_Base {
     file = "custom\gui";
     class hudHandler {};
     class hudInit {};
+    class playerMenu {};
   };
 
   class handlers {

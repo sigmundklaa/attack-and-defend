@@ -61,6 +61,7 @@ uiSleep .01;
 [] spawn DFUNC(roundClient);
 [] spawn DFUNC(afkKiller);
 [] spawn DFUNC(captureTriggerMsg);
+[] call DFUNC(setupActions);
 
 ["load"] call FUNC(hudInit);
 

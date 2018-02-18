@@ -1,5 +1,6 @@
 #include "islandspecific.hpp"
 #include "configs\config_master.hpp"
+#include "custom\gui\resources\rscIncludes.hpp"
 
 disabledAI = 1;
 respawn = 3;
@@ -30,11 +31,6 @@ class Header
 	gameType = Seize;
 	minPlayers = 4;
 	maxPlayers = 100;
-};
-
-class RscTitles
-{
-	#include "custom\gui\resources\hud_dialog.cpp"
 };
 
 class CfgNotifications
