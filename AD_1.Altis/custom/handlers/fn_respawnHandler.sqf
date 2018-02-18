@@ -21,7 +21,7 @@ setViewDistance 2000;
 _this spawn {
   params ["_unit", "_corpse"];
   waitUntil {!isPlayer _corpse};
-  { deleteVehicle _x } forEach [nearestObjects [getPos _corpse, ["WeaponHolderSimulated"], 5]];
+  { deleteVehicle _x } forEach (nearestObjects [getPos _corpse, ["WeaponHolderSimulated"], 5]);
   deleteVehicle _corpse;
 };
 

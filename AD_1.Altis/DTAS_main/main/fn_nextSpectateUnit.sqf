@@ -6,9 +6,13 @@
 *   Description: Selects the next unit to spectate
 */
 
-private ["_unitArr", "_oldUnit", "_unitArrCount", "_i", "_oldUnitIndex", "_nextUnit"];
+private ["_step", "_unitArr", "_oldUnit", "_unitArrCount", "_i", "_oldUnitIndex", "_nextUnit"];
 
-	params [["_step", 1, [0]]];
+	_step = 1;
+	if ((count _this) > 0) then
+	{
+		_step = _this select 0;
+	};
 
 	_unitArr = allUnits;
 	_unitArrCount = count _unitArr;
@@ -34,7 +38,7 @@ private ["_unitArr", "_oldUnit", "_unitArrCount", "_i", "_oldUnitIndex", "_nextU
 			(
 				(alive _nextUnit)
 				&&
-				(side _nextUnit == sidePlayer)
+				(side _nextUnit == playerSide)
 				&&
 				(isPlayer _nextUnit)
 				&&
@@ -75,9 +79,9 @@ private ["_unitArr", "_oldUnit", "_unitArrCount", "_i", "_oldUnitIndex", "_nextU
 		};
 	};
 
-isSpectating = true;
-[] call fnc_switchCamera;
-if (spectateUnit != player) then
-{
-	systemChat  format [localize "STR_SpectatingFrom", name spectateUnit];
-};
+	isSpectating = true;
+	[] call fnc_switchCamera;
+	if (spectateUnit != player) then
+	{
+		systemChat  format [localize "STR_SpectatingFrom", name spectateUnit];
+	};

@@ -37,7 +37,7 @@ for "_i" from 0 to 9 do {
   private _cmd = format ["CommandingMenu%1", _i];
   private _select = format ["SelectGroupUnit%1", _i];
   private _cmdselect = format ["CommandingMenuSelect%1", _i];
-  if (_key in actionKeys _cmd || _key in actionkeys _select || _key in actionkeys _cmdselect) then {false breakOut "main"};
+  if (_key in actionKeys _cmd || _key in actionkeys _select || _key in actionkeys _cmdselect) then {_overRun = true};
 };
 
 switch (_key) do {

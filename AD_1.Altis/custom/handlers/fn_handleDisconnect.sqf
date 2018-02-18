@@ -20,7 +20,7 @@ params [
 ];
 
 waitUntil {!isPlayer _unit};
-{ deleteVehicle _x } forEach [nearestObjects [getPos _unit, ["WeaponHolderSimulated"], 5]];
+{ deleteVehicle _x } forEach (nearestObjects [getPos _unit, ["WeaponHolderSimulated"], 5]);
 deleteVehicle _unit;
 
 false
