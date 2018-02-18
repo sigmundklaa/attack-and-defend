@@ -139,6 +139,7 @@ switch (_mode) do {
     private _disp = findDisplay IDD_PLAYERMENU_MAIN;
     private _comboVal = (_disp displayCtrl IDC_PMENU_COMBOBOX) lbValue lbCurSel (_disp displayCtrl IDC_PMENU_COMBOBOX);
     private _list = _disp displayCtrl IDC_PMENU_LISTBOX;
+    if (lbCurSel _list <= -1) then {breakOut "main"};
 
     switch (_comboVal) do {
       case 0: {
