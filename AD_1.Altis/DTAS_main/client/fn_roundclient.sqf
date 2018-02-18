@@ -312,15 +312,6 @@ restrictionCheckingEnabled = true;
 				removeBackpack player;
 				[] spawn {hintC (localize "STR_CannotCarryBackpackAndLauncher");};
 			};
-
-			if (((vehicle player) != player) && (playerSide != attackerSide)) then
-			{
-				if ([typeOf (vehicle player), true] call BIS_fnc_crewCount > 1) then
-				{
-					player action ["GetOut", vehicle player];
-					[] spawn {hintC (localize "STR_VehicleIsLocked");};
-				};
-			};
 		};
 
 		sleep .01;

@@ -2,53 +2,82 @@
 /*
 *   @File: fn_nextSpecateUnit.sqf
 *   @Author: Gal Zohar
-*     - Edited by Sig
 *
 *   Description: Selects the next unit to spectate
 */
 
-params [["_dir", 1, [0]]];
+private ["_unitArr", "_oldUnit", "_unitArrCount", "_i", "_oldUnitIndex", "_nextUnit"];
 
-private _step = [1, _dir] select ((count _this) > 0);
+	params [["_step", 1, [0]]];
 
-private _unitArr = [];
-{
-	if (alive _x && side _x isEqualTo playerSide && isPlayer _x && ((_x distance (markerPos "respawn_west")) > 100) && ((_x distance (markerPos "respawn_east")) > 100) && !(_x isEqualTo player)) then {
-		_unitArr pushBack _x;
+	_unitArr = allUnits;
+	_unitArrCount = count _unitArr;
+	_oldUnit = spectateUnit;
+	spectateUnit = player;
+	_i = 0;
+	if (_step < 0) then
+	{
+		_i = _unitArrCount - 1;
 	};
-} forEach allUnits;
-private _unitArrCount = count _unitArr;
-
-private _oldUnit = spectateUnit;
-spectateUnit = player;
-
-private _loopCount = [0, _unitArrCount - 1] select (_step < 0);
-private _oldUnitIndex = -1;
-
-for "_i" from 0 to 1 step 0 do {
-		if (_loopCount isEqualTo _oldUnitIndex) exitWith {};
-
-		if (_oldUnitIndex >= 0) exitWith {
-			specateUnit = _unitArr select _loopCount;
+	_oldUnitIndex = -1;
+	_search = true;
+	while {_search && (spectateUnit == player)} do
+	{
+		if (_i == _oldUnitIndex) then
+		{
+			_search = false;
+		};
+		if (_oldUnitIndex >= 0) then
+		{
+			_nextUnit = _unitArr select _i;
+			if
+			(
+				(alive _nextUnit)
+				&&
+				(side _nextUnit == sidePlayer)
+				&&
+				(isPlayer _nextUnit)
+				&&
+				((_nextUnit distance (markerPos "respawn_west")) > 100)
+				&&
+				((_nextUnit distance (markerPos "respawn_east")) > 100)
+			) then
+			{
+				spectateUnit = _nextUnit;
+				_search = false;
+			};
+		}
+		else
+		{
+			if ((_unitArr select _i) == _oldUnit) then
+			{
+				_oldUnitIndex = _i;
+			};
 		};
 
-	if ((_unitArr select _loopCount) isEqualTo _oldUnit) then {
-		_oldUnitIndex = _loopCount;
-	};
+		_i = _i + _step;
 
-	_loopCount = _loopCount + _step;
-
-	if (_loopCount >= _unitArrCount) then {
-		_loopCount = [0, 1] select (_oldUnitIndex < 0);
+		if (_i >= _unitArrCount) then
+		{
+			_i = 0;
+			if (_oldUnitIndex < 0) then
+			{
+				_oldUnitIndex = _unitArrCount - 1;
+			};
+		};
+		if (_i < 0) then
+		{
+			_i = _unitArrCount - 1;
+			if (_oldUnitIndex < 0) then
+			{
+				_oldUnitIndex = 0;
+			};
+		};
 	};
-	if (_loopCount < 0) then {
-		_loopCount = [_unitArrCount - 1, 0] select (_oldUnitIndex < 0);
-	};
-};
-
 
 isSpectating = true;
 [] call fnc_switchCamera;
-if !(spectateUnit isEqualTo player) then {
+if (spectateUnit != player) then
+{
 	systemChat  format [localize "STR_SpectatingFrom", name spectateUnit];
 };

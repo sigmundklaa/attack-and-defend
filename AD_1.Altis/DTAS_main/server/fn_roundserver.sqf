@@ -30,7 +30,7 @@ adminPaused = false;
 if (DefaultAdminPaused > 0) then
 {
 	// Pause start of first round until admin un-pauses.
-	adminPaused = true;
+	adminPaused = false;
 };
 publicVariable "adminPaused";
 
@@ -334,7 +334,7 @@ while {true} do
 				}
 				else
 				{
-					[_x] spawn fnc_DeleteOldBody;
+					[_x] spawn DFUNC(deleteOldBody);
 				};
 			};
 		};
@@ -414,7 +414,7 @@ while {true} do
 				_slotCount = 0;
 				switch (_group getVariable ["insertionType", 0]) do
 				{
-					// Jeep
+					// Ifrit
 					case 0:
 					{
 						_vehType = _jeepType;
@@ -432,11 +432,11 @@ while {true} do
 						_vehType = "B_SDV_01_F";
 						_slotCount = 4;
 					};
-					// Littlebird
+					// Orca
 					case 3:
 					{
 						_vehType = "O_Heli_Light_02_unarmed_F";
-						_slotCount = 6;
+						_slotCount = 8;
 					};
 				};
 			};
@@ -499,6 +499,16 @@ while {true} do
 				clearItemCargoGlobal _veh;
 				clearBackpackCargoGlobal _veh;
 				vehArr set [count vehArr, _veh];
+
+				if (_veh isKindOf "O_MRAP_02_F") then {
+																				//White			//Yellow    //Pink			//Cyan				//Black						//Purple			//Blue					//Red				//Green
+					private _tex = selectRandom [[1,1,1,0.8],[1,1,0,0.8],[1,0,0.2,0.8],[0,1,1,0.8],[0.02,0.02,0.02,1],[0.2,0,1,0.8],[0,0.2,1,0.8], [1,0,0,1], [0,1,0.3,0.8]];
+					{
+						_x params ["_red", "_green", "_blue", "_alpha"];
+						private _format = format ["#(rgb,8,8,3)color(%1,%2,%3,%4)", _red, _green, _blue, _alpha];
+						_veh setObjectTextureGlobal [_forEachIndex, _format];
+					} forEach [_tex,[0.02,0.02,0.02,1]]
+				};
 			};
 
 			_driverArray = [];
