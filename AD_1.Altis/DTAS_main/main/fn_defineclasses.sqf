@@ -27,6 +27,10 @@ private _helmet = "H_HelmetB_Camo";
 private _hat = "H_Beret_Colonel";
 private _baseScope = profileNameSpace getVariable ["ADC_PreferredScope", "optic_Arco_blk_F"];
 
+if !(_baseSope in (["optic_MRCO", "optic_hamr", "optic_Arco_blk_F"])) then {
+	_baseScope = "optic_Arco_blk_F";
+};
+
 aClasses = [
 	[
 		["srifle_DMR_03_F","","",_baseScope,["20Rnd_762x51_Mag",20],[],"bipod_01_F_blk"],

@@ -27,6 +27,8 @@ params [
   ["_params", [], [[]]]
 ];
 
+if (!canChangeClass) exitWith {};
+
 switch (_mode) do {
   case "onLoad": {
     if !(_params params [["_display", displayNull, [displayNull]]]) then {breakOut "main"};
@@ -38,11 +40,6 @@ switch (_mode) do {
 
     _bgSize params ["_bX", "_bY", "_bW", "_bH"];
     _headerPos params ["_hX", "_hY", "_hW", "_hH"];
-
-    {
-      _x ctrlSetFade 1;
-      _x ctrlCommit 0;
-    } forEach (allControls _display);
 
     _bg ctrlSetTextColor [0,0,0,0];
     _bg ctrlSetFade 0;

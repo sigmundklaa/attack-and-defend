@@ -58,6 +58,14 @@ switch (_key) do {
     };
   };
 
+  //Y (Selection Menu)
+  case 21: {
+    if (canChangeClass && ((player distance (markerPos 'respawn_west') < 100) || (player distance (markerPos 'respawn_east') < 100))) then {
+      _overRun = true;
+      createDialog "ADC_playerMenuMain";
+    };
+  };
+
 //Text below hexagons (SHIFT 6)
   case 7: {
     if (_shift) then {

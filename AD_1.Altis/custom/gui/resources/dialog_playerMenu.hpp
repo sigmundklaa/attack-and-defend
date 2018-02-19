@@ -18,6 +18,7 @@ class ADC_playerMenuMain {
     	w = 0.206302 * safezoneW;
     	h = 0.495 * safezoneH;
     	colorBackground[] = {0.16,0.16,0.16,1};
+      onLoad = "(_this select 0) ctrlSetFade 1; (_this select 0) ctrlCommit 0";
     };
     class listbox: RscListbox
     {
@@ -29,6 +30,7 @@ class ADC_playerMenuMain {
       font = P_FONT;
       onLbDblClick = "['select'] call ADC_fnc_playerMenu";
     	sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1.1)";
+      onLoad = "(_this select 0) ctrlSetFade 1; (_this select 0) ctrlCommit 0";
     };
     class header: RscText
     {
@@ -41,6 +43,7 @@ class ADC_playerMenuMain {
     	colorBackground[] = {COLOR_MAIN};
       colorText[] = {TEXT_COLOR};
       font = P_FONT;
+      onLoad = "(_this select 0) ctrlSetFade 1; (_this select 0) ctrlCommit 0";
     };
     class close: RscButton
     {
@@ -53,6 +56,7 @@ class ADC_playerMenuMain {
       onButtonClick = "closeDialog 0";
       font = P_FONT;
       colorBackgroundActive[] = {COLOR_MAIN};
+      onLoad = "(_this select 0) ctrlSetFade 1; (_this select 0) ctrlCommit 0";
     };
     class select: RscButton
     {
@@ -65,6 +69,7 @@ class ADC_playerMenuMain {
       font = P_FONT;
       colorBackgroundActive[] = {COLOR_MAIN};
       onButtonClick = "['select'] call ADC_fnc_playerMenu";
+      onLoad = "(_this select 0) ctrlSetFade 1; (_this select 0) ctrlCommit 0";
     };
     class combo: RscCombo
     {
@@ -75,6 +80,7 @@ class ADC_playerMenuMain {
     	h = 0.022 * safezoneH;
       font = P_FONT;
       onLbSelChanged = "['comboUpdate'] call ADC_fnc_playerMenu";
+      onLoad = "(_this select 0) ctrlSetFade 1; (_this select 0) ctrlCommit 0";
     };
   };
 };
