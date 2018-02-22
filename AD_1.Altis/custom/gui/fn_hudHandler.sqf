@@ -3,6 +3,7 @@
 #define IDC_HUD_TITLE 1002
 #define IDC_HUD_SCOREWEST 1101
 #define IDC_HUD_SCOREEAST 1102
+#define IDC_HUD_NEXTMAP 1003
 disableSerialization;
 /*
 *   @File: fn_hudHandler.sqf
@@ -50,6 +51,19 @@ switch (_mode) do {
     private _mission = _ui displayCtrl IDC_HUD_TITLE;
     private _scoreW = _ui displayCtrl IDC_HUD_SCOREWEST;
     private _scoreE = _ui displayCtrl IDC_HUD_SCOREEAST;
+    private _nextMission = _ui displayCtrl IDC_HUD_NEXTMAP;
+
+    private _showNextM = false;
+    if (canChangeClass && canChangeObjPos && !roundInProgress) then {
+      if (!isNil "objPosMarker") then {
+        private _text = [markerText objPosMarker, "Admin Forced"] select (objPosMarker isEqualTo "AdminForced");
+
+        _showNextM = true;
+        _nextMission ctrlSetText format ["Next Mission: %1", _text];
+      };
+    };
+
+    _nextMission ctrlShow _showNextM;
 
     private _isCapturing = [player] call DFUNC(isCapturing);
 

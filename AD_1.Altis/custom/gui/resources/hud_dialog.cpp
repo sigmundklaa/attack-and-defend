@@ -78,5 +78,20 @@
 				sizeEx = 0.05;
 			};
 
+			class nextMap: RscText
+			{
+				idc = 1003;
+				style = ST_CENTER;
+				text = ""; //--- ToDo: Localize;
+				x = 0.236965 * safezoneW + safezoneX;
+				y = 0.02 * safezoneH + safezoneY;
+				w = 0.211459 * safezoneW;
+				h = 0.04 * safezoneH;
+				font = "PuristaMedium";
+				sizeEx = 0.05;
+				colorText[] = {1,1,1,1};
+				onLoad = "(_this select 0) ctrlShow false; (_this select 0) ctrlCommit 0";
+				colorBackground[] = {0,0,0,0.3};
+			};
 		};
 	};

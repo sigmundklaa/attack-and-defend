@@ -89,6 +89,7 @@ class Custom_Base {
     class hudHandler {};
     class hudInit {};
     class playerMenu {};
+    class mapVoteMenu {};
   };
 
   class handlers {
@@ -100,5 +101,6 @@ class Custom_Base {
     class draw3d {};
     class keyDownhandler {};
     class killedHandler {};
+    class mapHandler {};
   };
 };

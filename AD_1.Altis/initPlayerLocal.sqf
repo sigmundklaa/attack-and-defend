@@ -48,6 +48,7 @@ player enableStamina false;
 };
 
 GVAR(showHexText) = false;
+GVAR(AlreadyVoted) = false;
 
 ["InitializePlayer", [_unit]] call BIS_fnc_dynamicGroups;
 
@@ -58,6 +59,8 @@ call compile preprocessFileLineNumbers "briefing.sqf";
 [] call FUNC(setupHandlers);
 
 uiSleep .01;
+[] spawn DFUNC(endHandler);
+[] spawn DFUNC(weather);
 [] spawn DFUNC(roundClient);
 [] spawn DFUNC(afkKiller);
 [] spawn DFUNC(captureTriggerMsg);

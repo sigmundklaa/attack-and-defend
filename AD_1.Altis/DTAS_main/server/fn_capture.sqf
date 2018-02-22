@@ -41,6 +41,7 @@ while {true} do
 	_nextTick = time;
 	_i = 0;
 	capPercentage = 0;
+	publicVariable "capPercentage";
 
 	while {roundInProgress && capPercentage < 1} do
 	{

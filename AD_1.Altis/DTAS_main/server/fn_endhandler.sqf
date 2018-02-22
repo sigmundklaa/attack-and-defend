@@ -22,7 +22,7 @@ if (!isDedicated) then
 	};
 };
 
-private _maxScore = getNumber(missionConfigFile >> "CfgDTAS_Settings" >> "maxScore");
+private _maxScore = 15;
 
 if (isServer) then
 {

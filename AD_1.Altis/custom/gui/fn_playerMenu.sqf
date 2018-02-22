@@ -27,7 +27,7 @@ params [
   ["_params", [], [[]]]
 ];
 
-if (!canChangeClass) exitWith {};
+if (!canChangeClass && !(_mode isEqualTo "close")) exitWith {};
 
 switch (_mode) do {
   case "onLoad": {
@@ -69,12 +69,22 @@ switch (_mode) do {
     } forEach (allControls _display);
 
     private _combo = _display displayCtrl IDC_PMENU_COMBOBOX;
-    private _arr = [[["Classes", 0], ["Insertion Methods", 1], ["Scopes", 2]], [["Classes", 0], ["Scopes", 2]]] select !([player] call fnc_isLeaderWithGroup);
+    private _arr = [];
+
+    _arr pushBack ["Classes", 0];
+    if ([player] call fnc_isLeaderWithGroup) then {
+      _arr pushBack ["Insertion Methods", 1];
+    };
+    _arr pushBack ["Scopes", 2];
+    _arr pushBack ["Online Players", 3];
+
     {
       _combo lbAdd (_x select 0);
       _combo lbSetValue [(lbSize _combo) - 1, (_x select 1)];
     } forEach _arr;
     _combo lbSetCurSel 0;
+
+    _display displayAddEventHandler ["KeyDown", {if (_this select 1 isEqualTo 1) then {['close'] spawn FUNC(ME); true};}];
 
     ["comboUpdate"] call FUNC(ME);
   };
@@ -99,6 +109,7 @@ switch (_mode) do {
           _list lbAdd _name;
           _list lbSetData [lbSize _list - 1, (str(_x))];
           _list lbSetPicture [lbSize _list - 1, _pic];
+          _list lbSetPictureColor [lbSize _list - 1, [1,1,1,0.8]];
         } forEach _classes;
       };
 
@@ -113,6 +124,7 @@ switch (_mode) do {
           _list lbAdd _name;
           _list lbSetPicture [(lbSize _list) - 1, _pic];
           _list lbSetValue [(lbSize _list) - 1, _val];
+          _list lbSetPictureColor [lbSize _list - 1, [1,1,1,0.8]];
         } forEach _methods;
       };
 
@@ -126,8 +138,26 @@ switch (_mode) do {
 
           _list lbAdd _name;
           _list lbSetData [(lbSize _list) - 1, _x];
-          _list lbSetPicture [(lbSize _list) - 1, _pic]
+          _list lbSetPicture [(lbSize _list) - 1, _pic];
+          _list lbSetPictureColor [lbSize _list - 1, [1,1,1,0.8]];
         } forEach _scopes;
+      };
+
+      case 3: {
+        _header ctrlSetText "ONLINE PLAYER LIST";
+        private _players = allUnits - [player];
+
+        {
+          if (isPlayer _x) then {
+            private _pic = ["\a3\ui_f\data\GUI\Cfg\GameTypes\defend_ca.paa", "\a3\ui_f\data\GUI\Cfg\GameTypes\seize_ca.paa"] select (side _x isEqualTo attackerSide);
+
+            _list lbAdd (name _x);
+            _list lbSetPicture [lbSize _list - 1, _pic];
+            _list lbSetData [lbSize _list - 1, str(_x)];
+            _list lbSetPictureColor [lbSize _list - 1, [[1,0,0,0.8], [0,0.2,1,0.8]] select (side _x isEqualTo WEST)];
+            _list lbSetToolTip [lbSize _list - 1, format ["Nickname - %1", GETVAR(_x,"shortName",name _x)]];
+          };
+        } forEach _players;
       };
     };
   };
@@ -168,5 +198,32 @@ switch (_mode) do {
         [] call DFUNC(defineClasses);
       };
     };
+  };
+
+  case "close": {
+    private _display = findDisplay IDD_PLAYERMENU_MAIN;
+    if (isNull _display) then {breakOut "main"};
+    private _header = _display displayCtrl IDC_PMENU_HEADER;
+    private _bg = _display displayCtrl IDC_PMENU_BACKGROUND;
+    private _ctrls = (allControls _display) - [_header, _bg];
+    private _combo = _display displayCtrl IDC_PMENU_COMBOBOX;
+
+    (ctrlPosition _bg) params ["_bX", "_bY", "_bW", "_bH"];
+    (ctrlPosition _header) params ["_hX", "_hY", "_hW", "_hH"];
+
+    _header ctrlSetTextColor [0,0,0,0];
+    _header ctrlCommit 0.1;
+    {
+      _x ctrlSetFade 1;
+      _x ctrlCommit 0.05;
+    } forEach _ctrls;
+
+    _header ctrlSetPosition [_hX, _bY, _hW, 0];
+    _bg ctrlSetPosition [_bX, _bY, _bW, 0];
+    _bg ctrlCommit 0.2;
+    _header ctrlCommit 0.2;
+
+    waitUntil {ctrlCommitted _header};
+    closeDialog 0;
   };
 };

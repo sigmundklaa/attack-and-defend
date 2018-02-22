@@ -17,7 +17,7 @@ class ADC_playerMenuMain {
     	y = 0.258 * safezoneH + safezoneY;
     	w = 0.206302 * safezoneW;
     	h = 0.495 * safezoneH;
-    	colorBackground[] = {0.16,0.16,0.16,1};
+    	colorBackground[] = {COLOR_BG};
       onLoad = "(_this select 0) ctrlSetFade 1; (_this select 0) ctrlCommit 0";
     };
     class listbox: RscListbox
@@ -53,7 +53,7 @@ class ADC_playerMenuMain {
     	y = 0.72 * safezoneH + safezoneY;
     	w = 0.0618905 * safezoneW;
     	h = 0.022 * safezoneH;
-      onButtonClick = "closeDialog 0";
+      onButtonClick = "['close'] spawn ADC_fnc_playerMenu";
       font = P_FONT;
       colorBackgroundActive[] = {COLOR_MAIN};
       onLoad = "(_this select 0) ctrlSetFade 1; (_this select 0) ctrlCommit 0";

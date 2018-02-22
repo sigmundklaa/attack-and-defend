@@ -116,6 +116,7 @@ _aRadiusMarker setMarkerAlphaLocal 0;
 objPosHandlerClient =
 {
 	trgCapMsg setPos objPos;
+	["update"] call FUNC(hudHandler);
 	if ((!roundInProgress) && (attackerSide == playerSide) && ([player] call fnc_isLeaderWithGroup)) then
 	{
 		hint (localize "STR_SelectInsertionMethod");
@@ -433,6 +434,7 @@ while {true} do
 	waitUntil {!(alive player) || !roundInProgress};
 	isPlaying = false;
 	player setVariable ["isPlaying", false];
+	GVAR(AlreadyVoted) = false;
 	bKeepPlayerInBox = true;
 	[false] call fnc_respawn;
 

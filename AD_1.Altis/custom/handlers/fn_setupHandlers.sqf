@@ -21,3 +21,4 @@ player addEventHandler ["Killed", {_this call FUNC(killedHandler)}];
 };
 
 addMissionEventHandler ["Draw3D", {_this call FUNC(draw3d)}];
+addMissionEventHandler ["Map", {_this call FUNC(mapHandler)}];

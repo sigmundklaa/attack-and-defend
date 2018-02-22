@@ -4,7 +4,7 @@
 *		@Author: Gal Zohar
 */
 
-private ["_deleteTypes", "_i", "_j", "_changeAttackerSide", "_dUnitArr", "_aUnitArr", "_dUnitCount", "_aUnitCount", "_minX", "_maxX", "_minY", "_maxY", "_vehType", "_vehCount", "_slotCount", "_veh", "_pos", "_aStartDir", "_zoneMarker", "_area", "_posFound", "_driverArray", "_driverArrayCount", "_passengerArray", "_passengerArrayCount", "_endTime", "_group", "_groups", "_groupIndex", "_maxGroupIndex", "_minGroupSize", "_unitsWithoutGroup", "_units", "_vehicleIndex", "_bCont", "_bSpawn", "_spawnMode", "_toDelete", "_crate", "_dx", "_dy", "_jeepType", "_jeepCrewCount"];
+private ["_deleteTypes", "_i", "_j", "_dUnitArr", "_aUnitArr", "_dUnitCount", "_aUnitCount", "_minX", "_maxX", "_minY", "_maxY", "_vehType", "_vehCount", "_slotCount", "_veh", "_pos", "_aStartDir", "_zoneMarker", "_area", "_posFound", "_driverArray", "_driverArrayCount", "_passengerArray", "_passengerArrayCount", "_endTime", "_group", "_groups", "_groupIndex", "_maxGroupIndex", "_minGroupSize", "_unitsWithoutGroup", "_units", "_vehicleIndex", "_bCont", "_bSpawn", "_spawnMode", "_toDelete", "_crate", "_dx", "_dy", "_jeepType", "_jeepCrewCount"];
 
 fnc_startPos = DFUNC(startPos);
 
@@ -22,10 +22,19 @@ roundInProgress = false;
 publicVariable "roundInProgress";
 canChangeClass = true;
 publicVariable "canChangeClass";
-_changeAttackerSide = true;
+changeAttackerSide = true;
+publicVariable "changeAttackerSide";
 "mrkObj" setMarkerSize [capRad, capRad];
 trgObj setTriggerArea [capRad, capRad, 0, false];
 currentSetupTime = FirstRoundSetupTime;
+canChangeObjPos = true;
+publicVariable "canChangeObjPos";
+canVote = true;
+publicVariable "canVote";
+
+ADC_VoteList = [];
+publicVariable "ADC_VoteList";
+
 adminPaused = false;
 if (DefaultAdminPaused > 0) then
 {
@@ -152,9 +161,42 @@ fnc_setupObjPos =
 	publicVariable "aStartPosPicked";
 
 	canChangeObjPos = true;
+	publicVariable "canChangeObjPos";
 
 	forceRoundStart = false;
 };
+
+voteObjPosHandler = {
+	private _maxVote = 0;
+	private _currentZone = nil;
+	{
+		_x params ["_zone", "_count"];
+		if (_count > _maxVote) then {
+			_maxVote = _count;
+			_currentZone = _zone;
+		};
+	} forEach ADC_VoteList;
+
+	if (!isNil "_currentZone" && _maxVote > (count playableUnits * 0.5)) then {
+		private _minX = (markerPos _currentZone select 0) - (markerSize _currentZone select 0);
+		private _maxX = (markerPos _currentZone select 0) + (markerSize _currentZone select 0);
+		private _minY = (markerPos _currentZone select 1) - (markerSize _currentZone select 1);
+		private _maxY = (markerPos _currentZone select 1) + (markerSize _currentZone select 1);
+
+		objPos = [_minX + random (_maxX - _minX), _minY + random (_maxY - _minY)];
+		publicVariable "objPos";
+		objPosMarker = _currentZone;
+		publicVariable "objPosMarker";
+
+		if (!isDedicated) then
+		{
+			[] call objPosHandlerClient;
+			["update"] call FUNC(mapVoteMenu);
+		};
+		[] call fnc_setupObjPos;
+	};
+};
+"ADC_VoteList" addPublicVariableEventHandler voteObjPosHandler;
 
 adminObjPosHandler =
 {
@@ -163,6 +205,9 @@ adminObjPosHandler =
 	{
 		objPos = adminObjPos;
 		publicVariable "objPos";
+		objPosMarker = "AdminForced";
+		publicVariable "objPosMarker";
+
 		if (!isDedicated) then
 		{
 			[] call objPosHandlerClient;
@@ -224,6 +269,7 @@ _maxi = count _markerPrefixCharArray;
 		_j = _j + 1;
 	};
 } forEach allMapMarkers;
+publicVariable "markerAreaArray";
 
 [] spawn
 {
@@ -245,21 +291,17 @@ while {true} do
 	fakeExtraDefenderTime = 0;
 	publicVariable "fakeExtraDefenderTime";
 
-	if (_changeAttackerSide) then
+	ADC_VoteList = [];
+	publicVariable "ADC_VoteList"; // -- Set the vote list to no votes
+	canVote = true;
+	publicVariable "canVote";
+
+	if (changeAttackerSide) then
 	{
 		_posFound = false;
 		while {!_posFound} do
 		{
-			_randomAreaSelector = random totalMarkerArea;
-			_i = 0;
-			_totalCheckedArea = (markerAreaArray select _i) select 1;
-			_zoneMarker = (markerAreaArray select _i) select 0;
-			while {_totalCheckedArea < _randomAreaSelector} do
-			{
-				_i = _i + 1;
-				_totalCheckedArea = _totalCheckedArea + ((markerAreaArray select _i) select 1);
-				_zoneMarker = (markerAreaArray select _i) select 0;
-			};
+			_zoneMarker = (selectRandom markerAreaArray) select 0;
 
 			_minX = (markerPos _zoneMarker select 0) - (markerSize _zoneMarker select 0);
 			_maxX = (markerPos _zoneMarker select 0) + (markerSize _zoneMarker select 0);
@@ -267,6 +309,7 @@ while {true} do
 			_maxY = (markerPos _zoneMarker select 1) + (markerSize _zoneMarker select 1);
 
 			objPos = [_minX + random (_maxX - _minX), _minY + random (_maxY - _minY)];
+			objPosMarker = _zoneMarker;
 
 			if
 			(
@@ -282,6 +325,7 @@ while {true} do
 		};
 
 		publicVariable "objPos";
+		publicVariable "objPosMarker";
 		if (!isDedicated) then
 		{
 			[] call objPosHandlerClient;
@@ -317,6 +361,7 @@ while {true} do
 	};
 
 	canChangeObjPos = false;
+	publicVariable "canChangeObjPos";
 
 	currentSetupTime = setupTime;
 
@@ -377,7 +422,7 @@ while {true} do
 	canChangeClass = false;
 	publicVariable "canChangeClass";
 
-	if (_changeAttackerSide) then
+	if (changeAttackerSide) then
 	{
 		if (attackerSide isEqualTo WEST) then
 		{
@@ -703,7 +748,8 @@ while {true} do
 		clearItemCargoGlobal _crate;
 	} forEach all_crates;
 
-	_changeAttackerSide = !_changeAttackerSide;
+	changeAttackerSide = !changeAttackerSide;
 	attackerSide = nextAttackerSide;
+	publicVariable "changeAttackerSide";
 	publicVariable "attackerSide";
 };

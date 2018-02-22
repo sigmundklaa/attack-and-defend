@@ -60,7 +60,7 @@ switch (_key) do {
 
   //Y (Selection Menu)
   case 21: {
-    if (canChangeClass && ((player distance (markerPos 'respawn_west') < 100) || (player distance (markerPos 'respawn_east') < 100))) then {
+    if (canChangeClass && ((player distance (markerPos 'respawn_west') < 100) || (player distance (markerPos 'respawn_east') < 100)) && !dialog) then {
       _overRun = true;
       createDialog "ADC_playerMenuMain";
     };
