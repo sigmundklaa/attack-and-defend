@@ -29,11 +29,11 @@ trgObj setTriggerArea [capRad, capRad, 0, false];
 currentSetupTime = FirstRoundSetupTime;
 canChangeObjPos = true;
 publicVariable "canChangeObjPos";
-canVote = true;
-publicVariable "canVote";
 
 ADC_VoteList = [];
 publicVariable "ADC_VoteList";
+lastObjPosMarker = "";
+publicVariable "lastObjPosMarker";
 
 adminPaused = false;
 if (DefaultAdminPaused > 0) then
@@ -166,38 +166,6 @@ fnc_setupObjPos =
 	forceRoundStart = false;
 };
 
-voteObjPosHandler = {
-	private _maxVote = 0;
-	private _currentZone = nil;
-	{
-		_x params ["_zone", "_count"];
-		if (_count > _maxVote) then {
-			_maxVote = _count;
-			_currentZone = _zone;
-		};
-	} forEach ADC_VoteList;
-
-	if (!isNil "_currentZone" && _maxVote > (count playableUnits * 0.5)) then {
-		private _minX = (markerPos _currentZone select 0) - (markerSize _currentZone select 0);
-		private _maxX = (markerPos _currentZone select 0) + (markerSize _currentZone select 0);
-		private _minY = (markerPos _currentZone select 1) - (markerSize _currentZone select 1);
-		private _maxY = (markerPos _currentZone select 1) + (markerSize _currentZone select 1);
-
-		objPos = [_minX + random (_maxX - _minX), _minY + random (_maxY - _minY)];
-		publicVariable "objPos";
-		objPosMarker = _currentZone;
-		publicVariable "objPosMarker";
-
-		if (!isDedicated) then
-		{
-			[] call objPosHandlerClient;
-			["update"] call FUNC(mapVoteMenu);
-		};
-		[] call fnc_setupObjPos;
-	};
-};
-"ADC_VoteList" addPublicVariableEventHandler voteObjPosHandler;
-
 adminObjPosHandler =
 {
 	// This condition is almost the same as roundInProgress, but safe for updating objective position.
@@ -292,9 +260,7 @@ while {true} do
 	publicVariable "fakeExtraDefenderTime";
 
 	ADC_VoteList = [];
-	publicVariable "ADC_VoteList"; // -- Set the vote list to no votes
-	canVote = true;
-	publicVariable "canVote";
+	publicVariable "ADC_VoteList";
 
 	if (changeAttackerSide) then
 	{
@@ -318,6 +284,8 @@ while {true} do
 				(!(([objPos, (markerPos "respawn_west")] call fnc_airDistance) < (minDist + 50)))
 				&&
 				(!(([objPos, (markerPos "respawn_east")] call fnc_airDistance) < (minDist + 50)))
+				&&
+				!(objPosMarker isEqualTo lastObjPosMarker)
 			) then
 			{
 				_posFound = true;
@@ -362,6 +330,9 @@ while {true} do
 
 	canChangeObjPos = false;
 	publicVariable "canChangeObjPos";
+
+	lastObjPosMarker = objPosMarker;
+	publicVariable "lastObjPosMarker";
 
 	currentSetupTime = setupTime;
 

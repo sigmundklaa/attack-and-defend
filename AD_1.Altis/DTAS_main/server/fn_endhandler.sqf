@@ -22,13 +22,11 @@ if (!isDedicated) then
 	};
 };
 
-private _maxScore = 15;
-
 if (isServer) then
 {
 	waitUntil {!(isNil "scoreW")};
 	waitUntil {!(isNil "scoreE")};
-	waitUntil {((scoreW >= _maxScore) && (scoreW > (scoreE + 1))) || ((scoreE >= _maxScore) && (scoreE > (scoreW + 1)))};
+	waitUntil {((scoreW >= maxScore) && (scoreW > (scoreE + 1))) || ((scoreE >= maxScore) && (scoreE > (scoreW + 1)))};
 	if (scoreW > scoreE) then
 	{
 		winnerSide = West;

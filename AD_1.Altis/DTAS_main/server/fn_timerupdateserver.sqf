@@ -22,11 +22,6 @@ while {true} do
 	else
 	{
 		timeLeft = roundStartTime - time;
-		[] spawn {
-			waitUntil {timeLeft < (roundStartTime * 0.33)};
-			canVote = false;
-			publicVariable "canVote";
-		};
 	};
 	publicVariable "timeLeft";
 	if (!isDedicated) then

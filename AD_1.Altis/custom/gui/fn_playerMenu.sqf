@@ -196,6 +196,10 @@ switch (_mode) do {
         saveProfileNameSpace;
 
         [] call DFUNC(defineClasses);
+
+        {
+          (_x select 0) set [3, _scope];
+        } forEach [currentAClass, currentDClass];
       };
     };
   };

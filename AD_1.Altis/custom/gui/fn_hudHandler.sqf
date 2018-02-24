@@ -4,6 +4,7 @@
 #define IDC_HUD_SCOREWEST 1101
 #define IDC_HUD_SCOREEAST 1102
 #define IDC_HUD_NEXTMAP 1003
+#define IDC_HUD_VOTELIST 1004
 disableSerialization;
 /*
 *   @File: fn_hudHandler.sqf
@@ -52,18 +53,27 @@ switch (_mode) do {
     private _scoreW = _ui displayCtrl IDC_HUD_SCOREWEST;
     private _scoreE = _ui displayCtrl IDC_HUD_SCOREEAST;
     private _nextMission = _ui displayCtrl IDC_HUD_NEXTMAP;
+    private _voteList = _ui displayCtrl IDC_HUD_VOTELIST;
 
     private _showNextM = false;
-    if (canChangeClass && canChangeObjPos && !roundInProgress) then {
+    if (canChangeClass && canChangeObjPos && !roundInProgress && changeAttackerSide) then {
       if (!isNil "objPosMarker") then {
         private _text = [markerText objPosMarker, "Admin Forced"] select (objPosMarker isEqualTo "AdminForced");
 
         _showNextM = true;
-        _nextMission ctrlSetText format ["Next Mission: %1", _text];
+        _nextMission ctrlSetText format ["Next Objective: %1", _text];
+        lnbClear _voteList;
+        {
+          _x params ["_name", "_votes"];
+          _voteList lnbAddRow [markerText _name, str _votes];
+          _voteList lnbSetValue [[((lnbSize _voteList) select 0) - 1, 1], _votes];
+        } forEach ADC_VoteList;
+        _voteList lnbSortByValue [1, true];
       };
     };
 
     _nextMission ctrlShow _showNextM;
+    _voteList ctrlShow _showNextM;
 
     private _isCapturing = [player] call DFUNC(isCapturing);
 

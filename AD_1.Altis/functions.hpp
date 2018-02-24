@@ -103,4 +103,9 @@ class Custom_Base {
     class killedHandler {};
     class mapHandler {};
   };
+
+  class vote {
+    file = "custom\vote";
+    class registerVote {};
+  };
 };

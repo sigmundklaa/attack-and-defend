@@ -1,7 +1,7 @@
 #include "..\..\script_macros.hpp"
 /*
 *		@File: fn_classAction.sqf
-*		@Author: Sig
+*		@Author: Gal Zohar
 *
 *		Description: Fired when the player selects a new class
 */

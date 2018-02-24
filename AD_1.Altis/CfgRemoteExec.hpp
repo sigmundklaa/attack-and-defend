@@ -12,7 +12,8 @@
 
 class CfgRemoteExec {
   class functions {
-    F(bis_fnc_call,ANY)
+    F(BIS_fnc_call,ANY)
+    F(ADC_fnc_registerVote,SERVER)
   };
 
   class commands {

@@ -78,20 +78,39 @@
 				sizeEx = 0.05;
 			};
 
-			class nextMap: RscText
+			class voteList: RscListNBox
+			{
+				idc = 1004;
+				x = 0.840398 * safezoneW + safezoneX;
+				y = 0.214 * safezoneH + safezoneY;
+				w = 0.149569 * safezoneW;
+				h = 0.154 * safezoneH;
+				font = "PuristaMedium";
+				onLoad = "(_this select 0) ctrlShow false";
+				colorBackground[] = {0,0,0,0.5};
+			  columns[] = {-0.01, 0.87};
+			  class ListScrollBar
+			  {
+				  arrowEmpty = "#(argb,8,8,3)color(0,0,0,0)";
+				  arrowFull = "#(argb,8,8,3)color(0,0,0,0)";
+				  border = "#(argb,8,8,3)color(0,0,0,0)";
+				  color[] = {1,1,1,0};
+				  colorActive[] = {1,1,1,0};
+				  colorDisabled[] = {1,1,1,0};
+				  thumb = "#(argb,8,8,3)color(1,1,1,0)";
+			  };
+			};
+			class nextMissionHeader: RscText
 			{
 				idc = 1003;
-				style = ST_CENTER;
 				text = ""; //--- ToDo: Localize;
-				x = 0.236965 * safezoneW + safezoneX;
-				y = 0.02 * safezoneH + safezoneY;
-				w = 0.211459 * safezoneW;
-				h = 0.04 * safezoneH;
-				font = "PuristaMedium";
-				sizeEx = 0.05;
-				colorText[] = {1,1,1,1};
-				onLoad = "(_this select 0) ctrlShow false; (_this select 0) ctrlCommit 0";
-				colorBackground[] = {0,0,0,0.3};
+				x = 0.840398 * safezoneW + safezoneX;
+				y = 0.192 * safezoneH + safezoneY;
+				w = 0.149569 * safezoneW;
+				h = 0.022 * safezoneH;
+				font = "PuristaLight";
+				onLoad = "(_this select 0) ctrlShow false";
+				colorBackground[] = {0,0,0,0.7};
 			};
 		};
 	};

@@ -136,9 +136,15 @@ switch (_mode) do {
     {
       _x params ["_name"];
       private _text = markerText _name;
+      private _pic = ["\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\default_ca.paa", "\a3\ui_f\data\IGUI\Cfg\simpleTasks\types\danger_ca.paa"] select (_name isEqualTo lastObjPosMarker);
+
       if (!isNil "_text" && !(_text isEqualTo "")) then {
         _list lbAdd _text;
         _list lbSetData [lbSize _list - 1, _x select 0];
+        _list lbSetPicture [lbSize _list - 1, _pic];
+        if (_name isEqualTo lastObjPosMarker) then {
+          _list lbSetTooltip [lbSize _list - 1, format ["You can not vote for %1 because it was played last round", _text]];
+        };
       };
     } forEach markerAreaArray;
   };
@@ -158,20 +164,7 @@ switch (_mode) do {
     // -- Run a loop to see whether we should add to an existing array or make a new one
 
     GVAR(AlreadyVoted) = true;
-    private _add = true;
-
-    if (!canVote) exitWith {hint "Voting time has expired."; ["collapse"] spawn FUNC(ME)};
-    {
-      _x params ["_name", "_count"];
-      if (_data isEqualTo _name) exitWith {
-        _add = false;
-        ADC_VoteList set [_forEachIndex, (_count + 1)];
-      };
-    } forEach ADC_VoteList;
-
-    if (_add) then {
-      ADC_VoteList pushBack [_data, 1];
-    };
+    [_data] remoteExecCall ["ADC_fnc_registerVote", 2];
 
     publicVariable "ADC_VoteList";
     hint format ["You voted for %1.", markerText _data];
@@ -193,10 +186,14 @@ switch (_mode) do {
   case "selChanged": {
     private _display = findDisplay IDD_MAPVOTE_MENU;
     private _list = _display displayCtrl IDC_MAPVOTE_LISTBOX;
+    private _voteBtn = _display displayCtrl IDC_MAPVOTE_BTNVOTE;
 
     if (lbCurSel _list <= -1) then {breakOut "main"};
 
     private _data = _list lbData lbCurSel _list;
+
+    _voteBtn ctrlEnable (!(_data isEqualTo lastObjPosMarker));
+
     mapAnimAdd [1, 0.1, markerPos _data];
     mapAnimCommit;
   };

@@ -20,7 +20,7 @@ params [
 ];
 
 if (_open) then {
-  if (!GVAR(alreadyVoted) && canChangeObjPos && changeAttackerSide && canVote) then {
+  if (!GVAR(alreadyVoted) && canChangeObjPos && changeAttackerSide) then {
     (findDisplay 46) createDisplay "ADC_mapVoteMenu";
     GVAR(voteDisplayMarkers) = [];
     {
