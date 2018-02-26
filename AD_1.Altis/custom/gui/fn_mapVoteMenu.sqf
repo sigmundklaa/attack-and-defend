@@ -197,4 +197,40 @@ switch (_mode) do {
     mapAnimAdd [1, 0.1, markerPos _data];
     mapAnimCommit;
   };
+
+  case "markers": {
+    private _display = findDisplay IDD_MAPVOTE_MENU;
+    waitUntil {!isNull _display};
+
+    private _tick = _display displayCtrl IDC_MAPVOTE_MARKERTICK;
+    if (profileNameSpace getVariable ["ADC_showVotePreviewMarkers", true]) then {
+      GVAR(voteDisplayMarkers) = [];
+      {
+        _x params ["_name", ""];
+
+        private _marker = createMarkerLocal [format ["Display_marker%1_%2", _forEachIndex, random 100], markerPos _name];
+        _marker setMarkerTypeLocal "mil_marker";
+        _marker setMarkerColorLocal "colorYellow";
+        _marker setMarkerTextLocal (markerText _name);
+
+        GVAR(voteDisplayMarkers) pushBack _marker;
+      } forEach markerAreaArray;
+
+      _tick cbSetChecked true;
+    } else {
+      if (!isNil "ADC_voteDisplayMarkers") then {
+        {
+          deleteMarkerLocal _x;
+        } forEach GVAR(voteDisplayMarkers);
+      };
+
+      _tick cbSetChecked false;
+    };
+  };
+
+  case "markerTick": {
+    profileNameSpace setVariable ["ADC_showVotePreviewMarkers", !(profileNameSpace getVariable ["ADC_showVotePreviewMarkers", true])];
+    ["markers"] spawn FUNC(ME);
+    saveProfileNameSpace;
+  };
 };

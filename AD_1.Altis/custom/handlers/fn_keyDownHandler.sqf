@@ -58,6 +58,17 @@ switch (_key) do {
     };
   };
 
+  case 6: {
+    if (_shift) then {
+      if (roundInProgress && player getVariable ["isPlaying",false]) then {
+        [true] call DFUNC(assignGear);
+      } else {
+        [false] call DFUNC(assignGear);
+      };
+      titleText ["Your gear has been re-equipped", "PLAIN"];
+    };
+  };
+
   //Y (Selection Menu)
   case 21: {
     if (canChangeClass && ((player distance (markerPos 'respawn_west') < 100) || (player distance (markerPos 'respawn_east') < 100)) && !dialog) then {

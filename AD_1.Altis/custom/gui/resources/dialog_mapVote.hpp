@@ -59,5 +59,27 @@ class ADC_mapVoteMenu {
       onLoad = HIDE;
       onButtonClick = "['vote'] call ADC_fnc_mapVoteMenu";
     };
+    class mapVoteMarkerTick: RscCheckBox
+    {
+      idc = IDC_MAPVOTE_MARKERTICK;
+    	x = 0.0048394 * safezoneW + safezoneX;
+    	y = 0.764 * safezoneH + safezoneY;
+    	w = 0.0165 * safezoneW;
+    	h = 0.022 * safezoneH;
+      onLoad = HIDE;
+      onCheckedChanged = "['markerTick'] call ADC_fnc_mapVoteMenu";
+    };
+    class mapVoteMarkerText: RscText
+    {
+      idc = -1;
+      text = "SHOW MARKERS";
+      font = P_FONT;
+    	x = 0.0223394 * safezoneW + safezoneX;
+    	y = 0.764 * safezoneH + safezoneY;
+    	w = 0.06 * safezoneW;
+    	h = 0.022 * safezoneH;
+      onLoad = HIDE;
+    	sizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 0.7)";
+    };
   };
 };

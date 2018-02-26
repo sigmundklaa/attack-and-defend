@@ -92,7 +92,7 @@ adminObjPosClickHandler =
 fnc_isAdmin =
 {
 	serverCommandAvailable '#kick' ||
-	(getPlayerUID player) in globalAdminList
+	(call FUNC(adminLevel) > 0)
 };
 
 {
@@ -106,7 +106,7 @@ _obj addAction [format ["<t color='#32cd32'>%1</t>", localize "STR_Ready"], {_th
 
 //_obj addAction [format ["<t color='#ffc000'>%1</t>", localize "STR_GroupManagementMenu"], "groups\refresh.sqf", [], 0, false, false, "", "true"];
 
-_obj addAction [format ["<t color='#CA2E2E'>%1</t>", localize "STR_ForceRoundStart"], "adminactions\forceroundstart.sqf", [], 0, false, false, "", "([] call fnc_isAdmin) && !roundInProgress"];
-_obj addAction [format ["<t color='#CA2E2E'>%1</t>", localize "STR_PauseRoundStart"], "adminactions\pauseroundstart.sqf", [], 0, false, false, "", "([] call fnc_isAdmin) && !adminPaused"];
-_obj addAction [format ["<t color='#CA2E2E'>%1</t>", localize "STR_UnpauseRoundStart"], "adminactions\unpauseroundstart.sqf", [], 0, false, false, "", "([] call fnc_isAdmin) && adminPaused"];
-_obj addAction [format ["<t color='#CA2E2E'>%1</t>", localize "STR_ReLocateObjectivePosition"], "adminactions\relocateobjective.sqf", [], 0, false, false, "", "([] call fnc_isAdmin) && !roundInProgress"];
+_obj addAction [format ["<t color='#CA2E2E'>%1</t>", localize "STR_ForceRoundStart"], {_this call DFUNC(forceRoundStart)}, [], 0, false, false, "", "(call ADC_fnc_adminLevel >= 2) && !roundInProgress"];
+_obj addAction [format ["<t color='#CA2E2E'>%1</t>", localize "STR_PauseRoundStart"], {_this call DFUNC(pauseRoundStart)}, [], 0, false, false, "", "(call ADC_fnc_adminLevel >= 1) && !adminPaused"];
+_obj addAction [format ["<t color='#CA2E2E'>%1</t>", localize "STR_UnpauseRoundStart"], {_this call DFUNC(unPauseRoundStart)}, [], 0, false, false, "", "(call ADC_fnc_adminlevel >= 1) && adminPaused"];
+_obj addAction [format ["<t color='#CA2E2E'>%1</t>", localize "STR_ReLocateObjectivePosition"], {_this call DFUNC(relocate)}, [], 0, false, false, "", "(call ADC_fnc_adminLevel >= 3) && !roundInProgress"];

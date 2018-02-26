@@ -12,7 +12,7 @@ capPercentage = 0;
 [] spawn DFUNC(afkKiller);
 
 nameTagMaxDistance = 60;
-[] execVM "cursornames\cursornames_init.sqf";
+[] spawn DFUNC(cursor_init);
 
 player setVariable ["shortName", "-", true];
 preferDriver = false;

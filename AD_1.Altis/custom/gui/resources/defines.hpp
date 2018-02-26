@@ -726,14 +726,14 @@ class RscButton
 		0,
 		0,
 		0,
-		1
+		0.5
 	};
 	colorFocused[] =
 	{
 		0,
 		0,
 		0,
-		1
+		0.5
 	};
 	colorShadow[] =
 	{

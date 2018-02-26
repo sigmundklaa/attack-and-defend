@@ -78,6 +78,10 @@ switch (_mode) do {
     _arr pushBack ["Scopes", 2];
     _arr pushBack ["Online Players", 3];
 
+    if ([] call FUNC(adminLevel) > 0) then {
+      _arr pushBack ["Admin Commands", 4];
+    };
+
     {
       _combo lbAdd (_x select 0);
       _combo lbSetValue [(lbSize _combo) - 1, (_x select 1)];
@@ -159,6 +163,22 @@ switch (_mode) do {
           };
         } forEach _players;
       };
+
+      case 4: {
+        _header ctrlSetText "ADMIN COMMANDS";
+        _array = "[] call ADC_fnc_adminLevel >= getNumber(_x >> 'level') && [] call compile getText(_x >> 'condition')" configClasses (missionConfigFile >> "adminCommands");
+
+        {
+          private _displayName = getText(missionConfigFile >> "adminCommands" >> configName _x >> "displayName");
+          private _pic = getText(missionConfigFile >> "adminCommands" >> configName _x >> "picture");
+
+          _list lbAdd _displayName;
+          _list lbSetData [(lbSize _list) - 1, configName _x];
+          if !(_pic isEqualTo "") then {
+            _list lbSetPicture [(lbSize _list) - 1, _pic];
+          };
+        } forEach _array;
+      };
     };
   };
 
@@ -200,6 +220,25 @@ switch (_mode) do {
         {
           (_x select 0) set [3, _scope];
         } forEach [currentAClass, currentDClass];
+      };
+
+      case 3: {
+        private _data = call compile (_list lbData lbCurSel _list);
+
+        if (isNull _data) then {breakOut "main"};
+
+        ["open", _data] spawn FUNC(nickNameMenu);
+      };
+
+      case 4: {
+        private _data = _list lbData lbCurSel _list;
+        private _condition = getText(missionConfigFile >> "adminCommands" >> _data >> "condition");
+        private _level = getNumber(missionConfigFile >> "adminCommands" >> _data >> "level");
+
+        if (call compile _condition && [] call FUNC(adminLevel) >= _level) then {
+          call compile (getText(missionConfigFile >> "adminCommands" >> _data >> "action"));
+          ["close"] spawn FUNC(ME);
+        };
       };
     };
   };

@@ -423,7 +423,7 @@ while {true} do
 			_group = _groups select _groupIndex;
 			_groupIndex = _groupIndex + 1;
 			_units = units _group;
-			if (((side _group) isEqualTo attackerSide) && ((count (units _group)) >= _minGroupSize)) then
+			if (((side _group) isEqualTo attackerSide) && ((count (units _group)) >= 3)) then
 			{
 				_bSpawn = true;
 				_unitsWithoutGroup = _unitsWithoutGroup - _units;

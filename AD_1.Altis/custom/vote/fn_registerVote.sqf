@@ -50,7 +50,7 @@ private _area = "";
   _totalCount = _totalCount + _count;
 } forEach ADC_VoteList;
 
-if (_maxCount > 0 && !(_area isEqualTo "")) then {
+if (_maxCount > 0 && !(_area isEqualTo "") && !(_area isEqualTo lastObjPosMarker)) then {
   if (_totalCount >= (count playableUnits * 0.5)) then {
     (markerPos _area) params ["_x", "_y"];
     (markerSize _area) params ["_w", "_h"];

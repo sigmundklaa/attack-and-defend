@@ -29,7 +29,7 @@ class DTAS_Base {
   };
 
   class serverWarnings {
-    file = "serverWarnings";
+    file = "DTAS_main\server\serverWarnings";
     class srvWarningInit {};
     class difficulty {};
     class fpsMonitor {};
@@ -74,6 +74,20 @@ class DTAS_Base {
     class roundEndMsg {};
     class captureTriggerMsg {};
   };
+
+  class admin {
+    file = "DTAS_main\admin";
+    class forceRoundStart {};
+    class pauseRoundStart {};
+    class relocate {};
+    class unpauseRoundStart {};
+  };
+
+  class cursorNames {
+    file = "DTAS_main\cursorNames";
+    class cursor_init {};
+    class cursor_main {};
+  };
 };
 
 class Custom_Base {
@@ -84,12 +98,18 @@ class Custom_Base {
     class playerStrip {};
   };
 
+  class admin {
+    file = "custom\admin";
+    class adminLevel {};
+  };
+
   class gui {
     file = "custom\gui";
     class hudHandler {};
     class hudInit {};
     class playerMenu {};
     class mapVoteMenu {};
+    class nickNameMenu {};
   };
 
   class handlers {
