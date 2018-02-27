@@ -711,6 +711,11 @@ while {true} do
 	// Clean up vehicles
 	[] call fnc_cleanUpVehicles;
 
+	//Reset broken down buildings
+	{
+		_x setDamage 0;
+	} forEach nearestTerrainObjects [objPos, [], 300];
+
 	// Empty base crates
 	{
 		_crate = _x;

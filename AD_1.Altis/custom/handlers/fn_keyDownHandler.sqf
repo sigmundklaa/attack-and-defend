@@ -29,7 +29,7 @@ private _overRun = false;
 
 {
   if (_key in actionKeys _x) then {
-    false breakOut "main"
+    true breakOut "main"
   };
 } forEach ["TacticalView"];
 
