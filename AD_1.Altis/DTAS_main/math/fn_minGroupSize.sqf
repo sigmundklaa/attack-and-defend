@@ -6,4 +6,6 @@
 *   Description: Calculates minimum group size
 */
 
-((playersNumber (attackerSide)) / 3) min 3
+//((playersNumber (attackerSide)) / 3) min 3 Temp fix lad, was spawning shittons if ifrit for some bent reason
+
+3

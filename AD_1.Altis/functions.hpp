@@ -96,6 +96,7 @@ class Custom_Base {
   class main {
     file = "custom\main";
     class playerStrip {};
+    class repack {};
   };
 
   class admin {
