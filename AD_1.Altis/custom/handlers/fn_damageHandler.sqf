@@ -32,6 +32,7 @@ params [
 
 private _neutralDamage = [_unit getHit _selection, damage _unit] select (_selection isEqualTo "");
 
-if (!GETVAR(_unit,"playerAllowDamage",false)) exitWith {_neutralDamage};
+if !(_unit getVariable ["playerAllowDamage", true]) exitWith {_neutralDamage};
+if (_unit distance objPos > 750) exitWith {_neutralDamage};
 
 _damage

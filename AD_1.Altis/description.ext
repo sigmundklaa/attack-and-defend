@@ -262,11 +262,11 @@ class params
 
 respawnDialog = false;
 author = "Gal Zohar, customized by Sig";
-onLoadName = "TITAN Attack and Defend";
+onLoadName = "PhoenixRP Attack and Defend";
 overviewText = "Attack and Defend mission based on Gal Zohar's Dynamic Take and Secure";
 onLoadMission = $STR_BriefingDescription;
-loadScreen = "images\titanlogo.paa";
-overviewPicture = "images\titanlogo.paa";
+loadScreen = "images\introimg.paa";
+overviewPicture = "images\introimg.paa";
 onLoadIntroTime = 0;
 
 joinUnassigned = 0;

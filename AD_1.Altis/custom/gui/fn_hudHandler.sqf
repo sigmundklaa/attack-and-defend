@@ -67,7 +67,7 @@ switch (_mode) do {
           _x params ["_name", "_votes"];
           _voteList lnbAddRow [markerText _name, str _votes];
           _voteList lnbSetValue [[((lnbSize _voteList) select 0) - 1, 1], _votes];
-        } forEach ADC_VoteList;
+        } forEach GVAR(voteList);
         _voteList lnbSortByValue [1, true];
       };
     };
