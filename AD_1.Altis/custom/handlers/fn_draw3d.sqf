@@ -6,9 +6,9 @@
 *   Description: Handles drawing of all 3D icons and lines
 */
 
-#define ID QGVAR(Draw_Hexagons)
+#define ID VARQ(Draw_Hexagons)
 
-if (isNil missionNameSpace getVariable ID) then {
+if (isNil {missionNameSpace getVariable ID}) then {
   missionNameSpace setVariable [ID, addMissionEventHandler ["Draw3D", {
     _this call {
 

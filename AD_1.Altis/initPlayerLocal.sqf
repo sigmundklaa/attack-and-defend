@@ -53,6 +53,7 @@ GVAR(AlreadyVoted) = false;
 ["InitializePlayer", [_unit]] call BIS_fnc_dynamicGroups;
 
 isJoining = false;
+forceRoundStart = false;
 
 call compile preprocessFileLineNumbers "briefing.sqf";
 [] spawn DFUNC(unitMarkers);

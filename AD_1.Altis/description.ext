@@ -265,8 +265,8 @@ author = "Gal Zohar, customized by Sig";
 onLoadName = "PhoenixRP Attack and Defend";
 overviewText = "Attack and Defend mission based on Gal Zohar's Dynamic Take and Secure";
 onLoadMission = $STR_BriefingDescription;
-loadScreen = "images\introimg.paa";
-overviewPicture = "images\introimg.paa";
+loadScreen = "images\intro.paa";
+overviewPicture = "images\intro.paa";
 onLoadIntroTime = 0;
 
 joinUnassigned = 0;
