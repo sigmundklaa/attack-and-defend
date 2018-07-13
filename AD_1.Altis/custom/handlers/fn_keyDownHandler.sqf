@@ -27,6 +27,8 @@ params [
 scopeName "main";
 private _overRun = false;
 
+private _jumpButton = 57;
+
 {
   if (_key in actionKeys _x) then {
     true breakOut "main"
@@ -85,6 +87,14 @@ switch (_key) do {
       _overRun = true;
     };
   };
+
+case _jumpButton: {
+  if (_shift && {!(animationState player isEqualTo "AovrPercMrunSrasWrflDf")} && {isTouchingGround player} && {stance player in ["STAND", "CROUCH"]} && {speed player > 2} && {((velocity player) select 2) < 2.5} && {time - (player getVariable [VARQ(jumpActionTime), 0]) > 1.5}) then {
+    player setVariable [VARQ(jumpActionTime), time, true];
+    [player] remoteExec [QFNC(jumpAction), 0]; //Global execution
+    _overRun = true;
+  };
+};
 
 //earplugs (SHIFT O)
   case 24: {
