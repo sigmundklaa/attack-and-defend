@@ -2,6 +2,8 @@
 #include "configs\config_master.hpp"
 #include "custom\gui\resources\rscIncludes.hpp"
 
+#define INFISTAR_A3_ACTIVE
+
 disabledAI = 1;
 respawn = 3;
 respawndelay = 1;
@@ -12,6 +14,9 @@ class CfgFunctions {
 	#include "functions.hpp"
 };
 
+#ifdef INFISTAR_A3_ACTIVE
+#include "infiSTAR_AdminMenu.hpp"
+#endif
 
 #include "CfgRemoteExec.hpp"
 
