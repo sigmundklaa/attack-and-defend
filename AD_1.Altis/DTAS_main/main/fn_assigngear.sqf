@@ -22,7 +22,7 @@ gearAssigned = false;
 
 private _aClassSide = [nextAttackerSide, attackerSide] select _bGiveWeapons;
 private _currentClass = [currentDClass, currentAClass] select (_aClassSide isEqualTo playerSide);
-private _gear = _currentClass;
+private _gear = +_currentClass;
 
 // -- Since resize and set alters the array, the only way I could think of was to re-alter the array at the end with the previous variables
 private _name = _gear select 10;
@@ -55,15 +55,5 @@ player setUnitLoadout _gear;
 	};
 	player action ["switchWeapon", player, player, 100];
 } forEach [primaryWeapon player, secondaryWeapon player, handGunWeapon player];
-
-
-//Re-alter the array.
-if (!_bGiveWeapons) then {
-	{
-		_gear set [_forEachIndex, _x];
-	} forEach _weapons;
-};
-_gear set [10, _name];
-_gear set [8, _rgF];
 
 gearAssigned = true;

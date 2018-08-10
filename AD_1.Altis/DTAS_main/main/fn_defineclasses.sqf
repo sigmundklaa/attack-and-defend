@@ -17,6 +17,9 @@
 *			8 - Items							<ARRAY> Misc items (I think, all I know is that binos go in that array)
 *			9 - Linked items			<ARRAY> (GPS, Map, Compass, NVG etc)
 *			10 - Display Name 		<STRING> of the class
+*
+*		To add a new class, simply follow the format and put it in the aClasses for attacker side, or dClasses for defending side
+*		The class will automatically be added
 */
 
 private _nvgs = "NVGoggles_OPFOR";

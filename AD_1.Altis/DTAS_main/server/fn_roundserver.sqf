@@ -164,6 +164,7 @@ fnc_setupObjPos =
 	publicVariable "canChangeObjPos";
 
 	forceRoundStart = false;
+	publicVariable "forceRoundStart";
 };
 
 adminObjPosHandler =
