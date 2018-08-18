@@ -39,7 +39,7 @@ switch (_mode) do {
     private _name = ctrlText _edit;
     private _arr = toArray _name;
 
-    if (count _arr < 6) then {
+    if (count _arr <= 20) then {
       closeDialog 0;
       _unit setVariable ["shortName", _name];
       hint format ["You have successfully set a new nickname for %1 (%2)", name _unit, _name];
