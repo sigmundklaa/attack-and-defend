@@ -5,7 +5,7 @@
 
 #include "..\..\..\macros\script.hpp"
 
-params [["_config", configNull, [configNull]]];
+params [["_config", configNull, [configNull]], ["_global", false, [false]]];
 
 private _vars = configProperties [_config, "!(isClass _x)"] apply {[configName _x, _x call core(configValue)]};
 private _constructor_cfg = _config >> "Constructor";
@@ -15,5 +15,6 @@ private _constructor = [{}, getText (_constructor_cfg >> "code")] select (isClas
 [
 	_vars,
 	compile _constructor,
-	getArray (_constructor_cfg >> "args")
+	getArray (_constructor_cfg >> "args"),
+	_global
 ] call core(createObj)

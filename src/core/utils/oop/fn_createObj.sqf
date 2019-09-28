@@ -5,10 +5,14 @@
  * Has the ability to set, get variables and call methods
  */
 
-params [["_vars", [], [[]]], ["_constructor", {}, [{}]], ["_constructorArgs", [], [[]]]];
+params [["_vars", [], [[]]], ["_constructor", {}, [{}]], ["_constructorArgs", [], [[]]], ["_global", false, [false]]];
 
 private _objType = "Helper_Base_F";
-private _object = _objType createVehicleLocal [_objType, [0, 0, 0]];
+private _object = if _global then {
+	_objType createVehicleLocal [_objType, [0, 0, 0]]
+} else {
+	_objType createVehicle [_objType, [0, 0, 0]]
+};
 
 {
 	_x params ["_name", "_value"];

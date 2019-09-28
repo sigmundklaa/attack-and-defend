@@ -6,21 +6,12 @@ _fnc_extraAttackersInZone =
 	private ["_count", "_units", "_defenderSide"];
 	_count = 0;
 	_units = list trgObj;
-	_defenderSide = EAST;
-	if (attackerSide == EAST) then
-	{
-		_defenderSide = WEST;
-	};
 	{
 		if ([_x] call DFUNC(isCapturing)) then
 		{
 			if (side _x == attackerSide) then
 			{
 				_count = _count + 1;
-			};
-			if (side _x == _defenderSide) then
-			{
-				//_count = _count - 1;
 			};
 		};
 	} forEach _units;

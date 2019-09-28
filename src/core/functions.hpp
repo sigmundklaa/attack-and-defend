@@ -11,9 +11,17 @@ class Core {
 		#include "game\functions.hpp"
 	};
 
+	class Units {
+		file = "units";
+		class isCapturing {};
+	};
+
 	class Utils {
 		file = "utils";
 		class configValue {};
+		class any {};
+		class all {};
+		class handleString {};
 	};
 
 	class Utils_OOP {
