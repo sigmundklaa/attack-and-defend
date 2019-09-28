@@ -1,0 +1,2 @@
+
+#define QUOTE(x) #x

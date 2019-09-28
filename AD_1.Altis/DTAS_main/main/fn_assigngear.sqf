@@ -24,7 +24,6 @@ private _aClassSide = [nextAttackerSide, attackerSide] select _bGiveWeapons;
 private _currentClass = [currentDClass, currentAClass] select (_aClassSide isEqualTo playerSide);
 private _gear = +_currentClass;
 
-// -- Since resize and set alters the array, the only way I could think of was to re-alter the array at the end with the previous variables
 private _name = _gear select 10;
 private _weapons = [_gear select 0, _gear select 1, _gear select 2];
 private _rgF = _gear select 8;

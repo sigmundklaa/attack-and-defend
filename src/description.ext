@@ -1,0 +1,12 @@
+
+#include "macros\utils.hpp"
+
+#include "core\includes.hpp"
+
+class CfgFunctions {
+	#include "core\functions.hpp"
+};
+
+class RscTitles {
+
+};

@@ -10,6 +10,7 @@
   jip = 1; \
 };
 
+// Idek if this shit is update somebody should probably check that lmao
 class CfgRemoteExec {
   class functions {
     F(BIS_fnc_call,ANY)

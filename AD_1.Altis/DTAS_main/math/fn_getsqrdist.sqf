@@ -12,7 +12,7 @@ params [
   ["_pos2", [], [[]]]
 ];
 
-private _dx = SUB(_pos1 select 0, _pos2 select 0);
-private _dy = SUB(_pos1 select 1, _pos2 select 1);
+_pos1 params ["_x1", "_y1"];
+_pos2 params ["_x2", "_y2"];
 
-ADD(_dx ^ 2, _dy ^ 2)
+((_x1 - _x2) ^ 2) + ((_y1 - _y2) ^ 2)
