@@ -1,3 +1,3 @@
 
-class init {};
+class gameInit {};
 class selectZone {};
