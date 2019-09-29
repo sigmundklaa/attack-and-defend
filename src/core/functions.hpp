@@ -13,6 +13,7 @@ class Core {
 
 	class Utils {
 		file = "core\utils";
+		class log {};
 		class configValue {};
 		class configGet {};
 		class any {};

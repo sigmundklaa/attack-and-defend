@@ -15,6 +15,7 @@ _self spawn {
 	private _capTimeBase = _self getVariable ["capTimeBase", 0.5];
 	private _curProgress = _self getVariable ["roundProgress", 0];
 	private _aliveCheck = {alive _x && _x getVariable ["roundAlive", false]};
+	private _winnerSide = objNull;
 
 	for "_i" from 0 to 1 step 0 do {
 		scopeName "loop";
@@ -45,5 +46,5 @@ _self spawn {
 	};
 
 	// TODO: Call with status
-	_self call core(roundEnd);
+	[_self, _winnerSide] call core(roundEnd);
 };

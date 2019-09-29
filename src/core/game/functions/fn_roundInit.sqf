@@ -36,4 +36,6 @@ for "_i" from 0 to 1 step 0 do {
 			([] call core(roundStart)) breakOut "roundInit";
 		};
 	};
+
+	sleep 0.1;
 };
