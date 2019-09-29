@@ -12,3 +12,5 @@ class roundEnd {};
 class roundStart {};
 class selectZone {};
 class teamShift {};
+class startPaused {};
+class pauseStart {};

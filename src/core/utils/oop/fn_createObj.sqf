@@ -9,9 +9,9 @@ params [["_vars", [], [[]]], ["_constructor", {}, [{}]], ["_constructorArgs", []
 
 private _objType = "Helper_Base_F";
 private _object = if _global then {
-	_objType createVehicleLocal [_objType, [0, 0, 0]]
+	_objType createVehicleLocal [0, 0, 0]
 } else {
-	_objType createVehicle [_objType, [0, 0, 0]]
+	_objType createVehicle [0, 0, 0]
 };
 
 {

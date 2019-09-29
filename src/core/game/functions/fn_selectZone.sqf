@@ -6,6 +6,8 @@
  * :param string _zone: Selected zone
  */
 
+#include "..\..\..\macros\script.hpp"
+
 params [["_self", objNull, [objNull]], ["_zone", "", [""]]];
 
 private _zoneConfig = missionConfigFile >> "ZonesConfig" >> "Zones" >> _zone;
@@ -20,17 +22,21 @@ private _radius = [_zoneConfig >> "radius", 50] call core(configGet);
 private _color = [_settings >> "markerColor", "COLORGREEN"] call core(configGet);
 private _type = [_settings >> "marker", "mil_triangle"] call core(configGet);
 
+diag_log format ["%1, %2, %3, %4, %5", _position, _displayName, _radius, _color, _type];
+
 private _marker = createMarker [configName _zoneConfig, _position];
 _marker setMarkerColor _color;
 _marker setMarkerType _type;
+_marker setMarkerText _displayName;
 
 private _areaMarker = createMarker ["area_" + configName _zoneConfig, _position];
 _areaMarker setMarkerSize [_radius, _radius];
 _areaMarker setMarkerShape "ELLIPSE";
-_areaMarker setMarkerBrush "SolidBorder";
+_areaMarker setMarkerBrush "Border";
 _areaMarker setMarkerColor _color;
 
 _self setVariable ["zone", _zone, true];
 _self setVariable ["zoneAreaMarker", _areaMarker, true];
+_self setVariable ["zoneMarker", _marker, true];
 
 true

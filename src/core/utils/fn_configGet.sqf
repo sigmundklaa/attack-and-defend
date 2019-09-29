@@ -9,4 +9,4 @@ params [["_config", configNull, [configNull]], ["_default", nil, []]];
 
 private _real = _config call core(configValue);
 
-[_real, _default] select (isNull _real)
+[_real, _default] select (_real isEqualTo configNull)

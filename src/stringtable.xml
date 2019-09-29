@@ -2,7 +2,10 @@
 <Project name="AnD">
   <Package name="Mission">
     <Container name="General">
-
+      <Key ID="STR_Zone_OGArms">
+        <Original>OG Arms</Original>
+        <English>OG Arms</English>
+      </Key>
     </Container>
   </Package>
 </Project>

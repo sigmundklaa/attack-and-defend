@@ -10,8 +10,12 @@
 
 #ifdef DEBUG
 
+diag_log "========================== SERVER START ============================";
+
 private _game = [] call core(gameInit);
 [_game, "OGArms"] call core(selectZone);
-_game call core(roundInit);
+// _game spawn core(roundInit);
+
+diag_log "========================== SERVER END ===============================";
 
 #endif

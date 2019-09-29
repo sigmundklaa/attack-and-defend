@@ -5,16 +5,17 @@
 
 #include "..\..\..\macros\script.hpp"
 
-params [["_config", configNull, [configNull]], ["_global", false, [false]]];
+params [["_config", "", [""]], ["_global", false, [false]]];
 
+_config = (missionConfigFile >> _config);
 private _vars = configProperties [_config, "!(isClass _x)"] apply {[configName _x, _x call core(configValue)]};
 private _constructor_cfg = _config >> "Constructor";
 
-private _constructor = [{}, getText (_constructor_cfg >> "code")] select (isClass _constructor_cfg);
+private _constructor = [{}, compile (getText (_constructor_cfg >> "code"))] select (isClass _constructor_cfg);
 
 [
 	_vars,
-	compile _constructor,
+	_constructor,
 	getArray (_constructor_cfg >> "args"),
 	_global
 ] call core(createObj)

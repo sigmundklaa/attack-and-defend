@@ -17,23 +17,22 @@ if (_attackerCount > 1) then {
 
 // TODO: Init round for clients
 private _roundWaitTime = _self getVariable "roundWaitTime";
-private _startTime = time;
+private _endTime = time + _roundWaitTime;
 
 for "_i" from 0 to 1 step 0 do {
-	private _newTime = call {
-		if (0 in [count ([_self, true] call core(getTeamPlayers)), count ([_self, false] call core(getTeamPlayers))]) exitWith {
-			_self setVariable ["roundStartPaused", true, true];
-			true
-		};
-
-		false
+	private _playersMissing = (0 in [count ([_self, true] call core(getTeamPlayers)), count ([_self, false] call core(getTeamPlayers))]);
+	
+	if (_playersMissing) then {
+		[_self, "players_missing"] call core(pauseStart);
+	} else {
+		[_self, "players_missing", false] call core(pauseStart);
 	};
 
 	// Round can be paused externally, e.g. from admins
-	if (_newTime || _self getVariable ["roundStartPaused", false]) then {
-		_startTime = time;
+	if (_self call core(startPaused)) then {
+		_endTime = time + _roundWaitTime;
 	} else {
-		if (time - _startTime > _roundWaitTime) then {
+		if (time > _endTime) then {
 			([] call core(roundStart)) breakOut "roundInit";
 		};
 	};

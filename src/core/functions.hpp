@@ -2,31 +2,27 @@
 class Core {
 	tag = "core";
 
-	class NoName {
-		file = "";
-		class getSetting {};
-	};
-
 	class Game {
+		file = "core\game\functions";
 		#include "game\functions.hpp"
 	};
 
 	class Units {
-		file = "units";
-		class isCapturing {};
+		file = "core\units";
 	};
 
 	class Utils {
-		file = "utils";
+		file = "core\utils";
 		class configValue {};
 		class configGet {};
 		class any {};
 		class all {};
 		class handleString {};
+		class getSetting {};
 	};
 
 	class Utils_OOP {
-		file = "utils\oop";
+		file = "core\utils\oop";
 		class classNew {};
 		class createObj {};
 	};
