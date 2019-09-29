@@ -4,6 +4,7 @@
  */
 
 #include "..\..\..\macros\script.hpp"
+#include "..\..\..\debug.hpp"
 
 scopeName "roundInit";
 params [["_self", objNull, [objNull]]];
@@ -15,25 +16,29 @@ if (_attackerCount > 1) then {
 	_self call core(teamShift);
 };
 
+["debug", "initializing round"] call core(log);
+
 // TODO: Init round for clients
 private _roundWaitTime = _self getVariable "roundWaitTime";
-private _endTime = time + _roundWaitTime;
+
+#ifdef DEBUG
+	private _endTime = time + (_roundWaitTime / 10);
+#else
+	private _endTime = time + _roundWaitTime;
+#endif
 
 for "_i" from 0 to 1 step 0 do {
 	private _playersMissing = (0 in [count ([_self, true] call core(getTeamPlayers)), count ([_self, false] call core(getTeamPlayers))]);
 	
-	if (_playersMissing) then {
-		[_self, "missing_players"] call core(pauseStart);
-	} else {
-		[_self, "missing_players", false] call core(pauseStart);
-	};
+	[_self, "missing_players", _playersMissing] call core(pauseStart);
 
 	// Round can be paused externally, e.g. from admins
 	if (_self call core(startPaused)) then {
 		_endTime = time + _roundWaitTime;
 	} else {
+		["debug", format ["comparing time %1 > %2", time, _endTime]] call core(log);
 		if (time > _endTime) then {
-			([] call core(roundStart)) breakOut "roundInit";
+			(_self call core(roundStart)) breakOut "roundInit";
 		};
 	};
 

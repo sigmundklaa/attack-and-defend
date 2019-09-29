@@ -20,11 +20,13 @@ _self spawn {
 	for "_i" from 0 to 1 step 0 do {
 		scopeName "loop";
 		if (_self getVariable ["roundActive", false]) then {
-			private _attackers = count [_self, true] call core(getTeamPlayers);
-			private _defenders = count [_self, false] call core(getTeamPlayers);
+			private _attackers = [_self, true] call core(getTeamPlayers);
+			private _defenders = [_self, false] call core(getTeamPlayers);
 
-			if (_attackers > 0 && (_defenders isEqualTo 0)) then {
-				_curProgress = _curProgress + (((_attackers / 100) min 0.04) max 0.01);
+			private _attackerCount = count _attackers;
+
+			if (_attackerCount > 0 && ((count _defenders) isEqualTo 0)) then {
+				_curProgress = _curProgress + (((_attackerCount / 100) min 0.04) max 0.01);
 				_zone setVariable ["roundProgress", _curProgress, true];
 
 				["debug", format ["progress %1", (round (_curProgress * 100)) min 100]] call core(log);

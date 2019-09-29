@@ -9,7 +9,7 @@
 params [["_self", objNull, [objNull]]];
 
 #ifdef DEBUG
-false
+	false
 #else
-(_self getVariable ["roundStartPauses", []]) call core(any)
+	(_self getVariable ["roundStartPauses", []]) call core(any)
 #endif
