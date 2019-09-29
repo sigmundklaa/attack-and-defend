@@ -25,9 +25,12 @@ _self spawn {
 			if (_attackers > 0 && (_defenders isEqualTo 0)) then {
 				_curProgress = _curProgress + (((_attackers / 100) min 0.04) max 0.01);
 				_zone setVariable ["roundProgress", _curProgress, true];
+
+				["debug", format ["progress %1", (round (_curProgress * 100)) min 100]] call core(log);
 			};
 
 			if (0 in [_aliveCheck count _attackers, _aliveCheck count _defenders]) then {
+				["debug", "win by elimination"] call core(log);
 				breakout "loop";
 			};
 
@@ -42,5 +45,5 @@ _self spawn {
 	};
 
 	// TODO: Call with status
-	[] call core(roundEnd);
+	_self call core(roundEnd);
 };

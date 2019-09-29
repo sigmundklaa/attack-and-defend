@@ -16,7 +16,7 @@ if (isNull _self) exitWith {};
 private _index = [_strArray find (toLower _mode), _mode] select (_mode isEqualType 0);
 private _pauseArr = _self getVariable ["roundStartPauses", []];
 
-if (_mode isEqualTo -1) exitWith {false};
+if (_index isEqualTo -1) exitWith {false};
 
 _pauseArr set [_index, _pause];
 _self setVariable ["roundStartPauses", _pauseArr, true];

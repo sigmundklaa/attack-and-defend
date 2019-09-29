@@ -23,9 +23,9 @@ for "_i" from 0 to 1 step 0 do {
 	private _playersMissing = (0 in [count ([_self, true] call core(getTeamPlayers)), count ([_self, false] call core(getTeamPlayers))]);
 	
 	if (_playersMissing) then {
-		[_self, "players_missing"] call core(pauseStart);
+		[_self, "missing_players"] call core(pauseStart);
 	} else {
-		[_self, "players_missing", false] call core(pauseStart);
+		[_self, "missing_players", false] call core(pauseStart);
 	};
 
 	// Round can be paused externally, e.g. from admins
