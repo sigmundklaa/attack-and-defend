@@ -19,6 +19,7 @@ class Core {
 	class Utils {
 		file = "utils";
 		class configValue {};
+		class configGet {};
 		class any {};
 		class all {};
 		class handleString {};

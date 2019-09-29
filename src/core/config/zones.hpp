@@ -4,7 +4,6 @@
 class ZonesConfig {
 	class Settings {
 		marker = "mil_triangle";
-		markerShape = "ICON";
 		markerColor = "COLORGREEN";
 	};
 	class Zones {

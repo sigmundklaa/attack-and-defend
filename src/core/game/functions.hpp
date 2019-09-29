@@ -1,9 +1,10 @@
 
 class gameInit {};
-class getSide {};
-class isCapturing {};
+class getTeam {};
+class getTeamPlayers {};
+class inZone {};
 class joinGame {};
-class joinSide {};
+class joinTeam {};
 class roundEnd {};
 class roundStart {};
 class selectZone {};

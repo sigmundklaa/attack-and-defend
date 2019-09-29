@@ -19,10 +19,10 @@ if (isNull _self) then {
 
 	missionNameSpace setVariable ["games", _games, true];
 
-	private _sides = [
-		["Side", true] call core(classNew),
-		["Side", true] call core(classNew)
+	private _teams = [
+		["Team", true] call core(classNew),
+		["Team", true] call core(classNew)
 	];
 
-	_self setVariable ["sides", _sides, true];
+	_self setVariable ["teams", _teams, true];
 };
