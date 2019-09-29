@@ -14,6 +14,7 @@ _self spawn {
 
 	private _capTimeBase = _self getVariable ["capTimeBase", 0.5];
 	private _curProgress = _self getVariable ["roundProgress", 0];
+	private _aliveCheck = {alive _x && _x getVariable ["roundAlive", false]};
 
 	for "_i" from 0 to 1 step 0 do {
 		scopeName "loop";
@@ -26,6 +27,10 @@ _self spawn {
 				_zone setVariable ["roundProgress", _curProgress, true];
 			};
 
+			if (0 in [_aliveCheck count _attackers, _aliveCheck count _defenders]) then {
+				breakout "loop";
+			};
+
 			if (_curProgress >= 1) then {
 				breakOut "loop";
 			};
@@ -36,5 +41,6 @@ _self spawn {
 		};
 	};
 
+	// TODO: Call with status
 	[] call core(roundEnd);
 };

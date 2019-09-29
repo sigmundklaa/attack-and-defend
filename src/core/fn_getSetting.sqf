@@ -8,8 +8,5 @@
 params [["_configName", "", [""]], ["_default", nil, []]];
 
 private _config = (missionConfigFile >> "Settings" >> _configName);
-private _real = _config call core(configValue);
 
-if (isNull _real) exitWith {_default};
-
-_real
+[_config, _default] call core(configGet)
