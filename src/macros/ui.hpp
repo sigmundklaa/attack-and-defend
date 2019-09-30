@@ -5,6 +5,7 @@
 #define PIXEL_W (pixelW * pixelGrid)
 #define PIXEL_H (pixelH * pixelGrid)
 
+#define _START(parent, size) (0)
 #define _CENTER(parent, size) ((parent / 2) - (size / 2))
 #define _END(parent, size) (parent - size)
 
