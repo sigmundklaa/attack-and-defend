@@ -27,4 +27,11 @@ class Core {
 		class classNew {};
 		class createObj {};
 	};
+
+};
+
+class GUI {
+	tag = "core_gui";
+	
+	#include "gui\functions.hpp"
 };
