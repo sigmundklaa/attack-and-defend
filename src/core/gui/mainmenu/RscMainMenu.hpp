@@ -10,7 +10,6 @@ class SquareImgButton : RscStructuredText {
 
 	style = ST_CENTER;
 	colorBackground[] = {0.09, 0.09, 0.09, 1};
-	onButtonClick = "hint str _this";
 
 	w = BUTTON_W;
 	h = BUTTON_H;
