@@ -1,31 +1,32 @@
 /**
  * @Function: core::gui::common::sqrButtonRow
  * @Description: Populates a row of square buttons (SquareImgButton)
+ *
+ * :param display _display: Display to create the row on
+ * :param array _buttons: Array of [text, action, image] to represent the buttons to be loaded
+ * :param number _width: Button width
+ * :param number _height: Button height
+ * :param number _margin: Margin between buttons
+ * :param code _posApply: A function of signature (w, h): [x, y] to create x and y values for the group
  */
 
 #include "..\..\..\macros\ui.hpp"
 
 disableSerialization;
-params [
+if (!params [
 	["_display", displayNull, [displayNull]],
 	["_buttons", [], [[]]],
 	["_width", 0, [0]],
 	["_height", 0, [0]],
-	["_margin", 0, [0]]
-];
-
-if (isNull _display || _items isEqualTo [] || (0 in _this)) exitWith {controlNull};
+	["_margin", 0, [0]],
+	["_posApply", {}, [{}]]
+]) exitWith {controlNull};
 
 private _buttonCount = count _buttons;
 private _groupW = (_width * _buttonCount) + (_margin * (_buttonCount - 1));
 
 private _group = _display ctrlCreate ["RscControlsGroupNoScroll", -1];
-_group ctrlSetPosition [
-	safeZoneX + _CENTER(safeZoneW, _groupW),
-	safeZoneY + _CENTER(safeZoneH, _height),
-	_groupW,
-	_height
-];
+_group ctrlSetPosition ([_groupW, _height] call _posApply + ([_groupW, _height]));
 _group ctrlCommit 0;
 
 {
