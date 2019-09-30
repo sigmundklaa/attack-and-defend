@@ -1,6 +1,7 @@
 
 import os
 import shutil
+import datetime
 
 def move(out_path):
     par_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
@@ -10,6 +11,7 @@ def move(out_path):
         shutil.rmtree(out_path)
 
     shutil.copytree(path, out_path)
+    print('Moved at %s' % str(datetime.datetime.now()))
 
 if __name__ == '__main__':
     import sys

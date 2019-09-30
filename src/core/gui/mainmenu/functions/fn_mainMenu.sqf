@@ -33,9 +33,16 @@ switch (toLower _mode) do {
 
 		{
 			private _ctrl = _display ctrlCreate ["SquareImgButton", -1, _group];
-			(_ctrl controlsGroupCtrl 1) ctrlSetText (getText (_x >> "image"));
-			(_ctrl controlsGroupCtrl 2) ctrlSetText (getText (_x >> "text"));
+			private _text = "";
+			private _image = getText (_x >> "image");
+			if !(_image isEqualTo "") then {
+				_text = _text + format ["<img size='3' image='%1'/><br/>", _image]
+			};
 
+			private _configText = getText (_x >> "text");
+			_text = _text + format ["<t size='1'>%1</t>", _configText];
+
+			_ctrl ctrlSetStructuredText parseText format ["<t valign='bottom'>%1</t>", _text];
 			_ctrl ctrlSetPosition [_forEachIndex * (BUTTON_MARGIN_W + BUTTON_W), 0];
 			_ctrl ctrlCommit 0;
 

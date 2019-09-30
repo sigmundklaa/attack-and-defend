@@ -211,6 +211,14 @@ class RscText
 	SizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
 	linespacing = 1;
 };
+class StructuredTextAttr
+{
+	font = "PuristaMedium";
+	color = "#ffffff";
+	colorLink = "#D09B43";
+	align = "left";
+	shadow = 1;
+};
 class RscStructuredText
 {
 	deletable = 0;
@@ -226,14 +234,7 @@ class RscStructuredText
 		1,
 		1
 	};
-	class Attributes
-	{
-		font = "PuristaMedium";
-		color = "#ffffff";
-		colorLink = "#D09B43";
-		align = "center";
-		shadow = 1;
-	};
+	class Attributes : StructuredTextAttr {};
 	x = 0;
 	y = 0;
 	h = 0.035;
