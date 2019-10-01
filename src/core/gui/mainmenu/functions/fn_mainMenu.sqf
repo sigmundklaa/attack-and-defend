@@ -23,7 +23,7 @@ switch (toLower _mode) do {
 		[_display, _buttons, BUTTON_W, BUTTON_H, BUTTON_MARGIN_W, {
 			params ["_w", "_h"];
 
-			[safeZoneX + _CENTER(safeZoneW, _w), safeZoneY + _CENTER(safeZoneH, _w)]
+			[safeZoneX + _CENTER(safeZoneW, _w), safeZoneY + _CENTER(safeZoneH, _h)]
 		}] call coreGui(sqrButtonRow);
 		
 	};

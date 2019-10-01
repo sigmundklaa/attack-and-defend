@@ -20,6 +20,7 @@ class Core {
 		class all {};
 		class handleString {};
 		class getSetting {};
+		class getColor {};
 	};
 
 	class Utils_OOP {
