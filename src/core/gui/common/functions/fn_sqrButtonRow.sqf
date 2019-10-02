@@ -31,7 +31,7 @@ _group ctrlSetPosition (([_groupW, _height] call _posApply) + ([_groupW, _height
 _group ctrlCommit 0;
 
 {
-	_x params ["_text", ["_action", ""], ["_image", ""]];
+	_x params [["_text", ""], ["_action", ""], ["_image", ""]];
 
 	private _ctrl = _display ctrlCreate ["SquareImgButton", -1, _group];
 	_ctrl call coreGui(loadColors);
@@ -42,7 +42,9 @@ _group ctrlCommit 0;
 		_outText = _outText + format ["<img size='5' image='%1'/><br/>", _image]
 	};
 
-	_outText = _outText + format ["<t size='1'>%1</t>", _text];
+	if !(_text isEqualTo "") then {
+		_outText = _outText + format ["<t size='1'>%1</t>", _text];
+	};
 
 	_ctrl ctrlSetStructuredText parseText format ["<t color='%2'>%1</t>", _outText, (
 		("TextMain" call core(getColor)) call BIS_fnc_colorRGBAtoHTML 

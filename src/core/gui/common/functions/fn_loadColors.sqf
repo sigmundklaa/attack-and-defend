@@ -8,7 +8,13 @@
 disableSerialization;
 scopeName "loadColors";
 
-if !(params [["_control", controlNull, [controlNull]]]) exitWith {};
+if !(params [["_control", controlNull, [controlNull, displayNull]]]) exitWith {};
+
+if (_control isEqualType displayNull) exitWith {
+	{
+		_x call coreGui(loadColors);
+	} forEach allControls _control;
+};
 
 private _className = ctrlClassName _ctrl;
 private _controlConfig = missionConfigFile >>_className;
@@ -23,7 +29,7 @@ if (isNull _controlConfig) then {
 {
 	private _key = '_' + getText (_x >> "key");
 	private _val = _controlConfig >> _key;
-	
+
 	if !(isNull _val) then {
 		[_control, (getText _val) call core(getColor)] call compile (getText (_x >> "callback"));
 	};

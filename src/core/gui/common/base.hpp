@@ -1653,4 +1653,19 @@ class RscControlsGroupNoScroll : RscControlsGroupNoVScroll
 	class HScrollbar {};
 };
 
+class RscProgress
+{
+	type = CT_PROGRESS;
+	style = ST_LEFT;
+	x = 0;
+	y = 0;
+	w = 0;
+	h = 0;
+	texture = "";
+	shadow = 0;
+	colorFrame[] = {0,0,0,1};
+	colorFrame[] = {0,0,0,1};
+	colorBar[] = {0,0,0,1};
+};
+
 #endif // BASE_CLASSES_H

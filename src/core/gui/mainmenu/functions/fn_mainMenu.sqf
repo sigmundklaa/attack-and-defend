@@ -10,6 +10,8 @@
 disableSerialization;
 params [["_mode", "", [""]], ["_display", displayNull, [displayNull]]];
 
+private _rest = _this select [2];
+
 switch (toLower _mode) do {
 	case "onload": {
 		[_display] call coreGui(displayBlur);
@@ -33,6 +35,10 @@ switch (toLower _mode) do {
 	};
 
 	case "onunload": {
+		_rest params ["_exitCode"];
+
+		hint str _exitCode;
+
 		[false] call core(cinematicMode);
 	};
 };

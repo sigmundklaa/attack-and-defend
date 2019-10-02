@@ -4,6 +4,12 @@ class MainMenu {
 	class mainMenu {};
 };
 
+class IdleMenu {
+	file = "core\gui\idlemenu\functions";
+	class idleMenu {};
+	class wideSection {};
+};
+
 class Common {
 	file = "core\gui\common\functions";
 	class sqrButtonRow {};
