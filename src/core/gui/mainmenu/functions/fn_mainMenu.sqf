@@ -14,6 +14,7 @@ systemChat "initializing main menu";
 
 switch (toLower _mode) do {
 	case "onload": {
+		[_display] call coreGui(displayBlur);
 		["unload", _display] call coreGui(mainMenu);
 
 		private _buttons = "[] call compile getText (_x >> 'condition')" configClasses (

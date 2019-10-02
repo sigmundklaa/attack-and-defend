@@ -8,4 +8,5 @@ class Common {
 	file = "core\gui\common\functions";
 	class sqrButtonRow {};
 	class loadColors {};
+	class displayBlur {};
 };
