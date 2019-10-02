@@ -32,6 +32,16 @@ for "_i" from 0 to 1 step 0 do {
 	
 	[_self, "missing_players", _playersMissing] call core(pauseStart);
 
+	private _extend = _self getVariable "extendGameStart";
+	if (!isNil "_extend") then {
+
+#ifdef DEBUG
+	_extend = _extend / 10
+#endif
+
+		_endTime = time + _extend;
+	};
+
 	// Round can be paused externally, e.g. from admins
 	if (_self call core(startPaused)) then {
 		_endTime = time + _roundWaitTime;

@@ -1,6 +1,7 @@
 
 #include "defines.hpp"
 
+// TODO: Make RscShortCutButton
 class SquareImgButton : RscStructuredText {
 	class Attributes : StructuredTextAttr {
 		font = "PuristaMedium";
@@ -20,4 +21,5 @@ class SquareImgButton : RscStructuredText {
 class MainMenu {
 	idd = 10000;
 	onLoad = ['onLoad', _this select 0] call coreGui(mainMenu);
+	onUnLoad = ['onUnLoad', _this select 0] call coreGui(mainMenu);
 };

@@ -10,12 +10,12 @@
 disableSerialization;
 params [["_mode", "", [""]], ["_display", displayNull, [displayNull]]];
 
-systemChat "initializing main menu";
-
 switch (toLower _mode) do {
 	case "onload": {
 		[_display] call coreGui(displayBlur);
-		["unload", _display] call coreGui(mainMenu);
+		[] call core(cinematicMode);
+
+		["_purge", _display] call coreGui(mainMenu);
 
 		private _buttons = "[] call compile getText (_x >> 'condition')" configClasses (
 			missionConfigFile >> "MainMenuConfig" >> "Buttons"
@@ -28,7 +28,11 @@ switch (toLower _mode) do {
 		}] call coreGui(sqrButtonRow);
 		
 	};
-	case "unload": {
+	case "_purge": {
 		{ctrlDelete _x} forEach (allControls _display);
+	};
+
+	case "onunload": {
+		[false] call core(cinematicMode);
 	};
 };

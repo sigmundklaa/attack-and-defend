@@ -47,11 +47,10 @@ _group ctrlCommit 0;
 	_ctrl ctrlSetStructuredText parseText format ["<t color='%2'>%1</t>", _outText, (
 		("TextMain" call core(getColor)) call BIS_fnc_colorRGBAtoHTML 
 	)];
+	_ctrl ctrlAddEventHandler ["ButtonClick", _action];
 	_ctrl ctrlSetPosition [_forEachIndex * (_margin + _width), 0];
 	_ctrl ctrlCommit 0;
 
-	systemChat format ["creating button %1 (%2)", _forEachIndex, ctrlPosition _ctrl];
-	
 } forEach _buttons;
 
 _group

@@ -21,6 +21,8 @@ class Core {
 		class handleString {};
 		class getSetting {};
 		class getColor {};
+		class fadeSound {};
+		class cinematicMode {};
 	};
 
 	class Utils_OOP {

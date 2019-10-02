@@ -23,9 +23,7 @@ if (isNull _controlConfig) then {
 {
 	private _key = '_' + getText (_x >> "key");
 	private _val = _controlConfig >> _key;
-
-	hint format ["%1: %2", _key, _val];
-
+	
 	if !(isNull _val) then {
 		[_control, (getText _val) call core(getColor)] call compile (getText (_x >> "callback"));
 	};
