@@ -36,7 +36,7 @@ for "_i" from 0 to 1 step 0 do {
 	if (!isNil "_extend") then {
 
 #ifdef DEBUG
-		_extend = _extend / 10
+		_extend = _extend / 10;
 #endif
 
 		_endTime = time + _extend;

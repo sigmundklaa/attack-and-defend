@@ -17,6 +17,7 @@ diag_log str (missionNameSpace getVariable ["games", objNull]);
 _game call core(joinGame);
 
 (selectRandom (_game getVariable "teams")) call core(joinTeam);
+[] call core(setupHandlers);
 
 diag_log "================ LOCAL END ===================";
 

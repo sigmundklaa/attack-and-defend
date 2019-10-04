@@ -10,11 +10,11 @@
 disableSerialization;
 params [["_mode", "", [""]], ["_control", controlNull, [controlNull]]];
 
-private _rest = _this select [2];
+private _rest = _this select [2, count _this];
 
 switch (toLower _mode) do {
 	case "onload": {
-		(["update"] + _this select [1]) call coreGui(wideSection);
+		(["update"] + (_this select [1, count _this])) call coreGui(wideSection);
 	};
 	case "update": {
 		private _display = ctrlParent _control;
@@ -29,7 +29,7 @@ switch (toLower _mode) do {
 		private _defending = [_game, false] call core(getTeam);
 
 		private _loadSection = {
-			params ["_right", "_attacker", "_units", "_control", "_display"];
+			params [["_right", false, [false]], "_attacker", "_units", "_control", "_display"];
 
 			private _group = _display ctrlCreate ["RscControlsGroupNoVScroll", -1, _control];
 			private _unitCount = count _units;
@@ -39,21 +39,25 @@ switch (toLower _mode) do {
 			private _marginH = PLYR_SPCT_MARGIN * PIXEL_H;
 			
 			private _xPos = [0, _END(DISPLAY_W,_width)] select _right;
+			systemChat format ["width is %1", _width];
 
 			_group ctrlSetPosition [_xPos, 0, _width, WIDE_SECTION_H];
 			_group ctrlCommit 0;
 
 			{
 				private _ctrl = _display ctrlCreate ["PlayerSpectateBar", -1, _group];
-				_ctrl ctrlSetPosition [0, index * (_margin + _h)];
+				_ctrl ctrlSetPosition [0, _forEachIndex * (_marginH + _height)];
 				_ctrl ctrlCommit 0;
 			} forEach _units;
 
 		};
 
-		private _attackerRight = _attacking isEqualTo (player getVariable "team");
-		[_attackerRight, true, _attacking getVariable ["players", []], _control, _display] call _loadSection;
+		private _attackerRight = _attacker isEqualTo (player getVariable "team");
+		[_attackerRight, true, _attacker getVariable ["players", []], _control, _display] call _loadSection;
 		[!_attackerRight, false, _defending getVariable ["players", []], _control, _display] call _loadSection;
+
+	};
+	case "mode_map": {
 
 	};
 };

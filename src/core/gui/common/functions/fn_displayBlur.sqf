@@ -4,6 +4,7 @@
  */
 
 #define VARNAME "and_display_blur"
+#include "..\..\..\..\macros\script.hpp"
 
 disableSerialization;
 params [["_display", displayNull, [displayNull]], ["_removeOnExit", false, [false]]];

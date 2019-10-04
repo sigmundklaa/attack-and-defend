@@ -7,8 +7,10 @@ class Core {
 		#include "game\functions.hpp"
 	};
 
-	class Units {
-		file = "core\units";
+	class Events {
+		file = "core\events";
+		class onMap {};
+		class setupHandlers {};
 	};
 
 	class Utils {

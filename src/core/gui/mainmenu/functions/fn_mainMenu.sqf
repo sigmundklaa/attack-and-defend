@@ -10,11 +10,11 @@
 disableSerialization;
 params [["_mode", "", [""]], ["_display", displayNull, [displayNull]]];
 
-private _rest = _this select [2];
+private _rest = _this select [2, count _this];
 
 switch (toLower _mode) do {
 	case "onload": {
-		[_display] call coreGui(displayBlur);
+		[_display, true] call coreGui(displayBlur);
 		[] call core(cinematicMode);
 
 		["_purge", _display] call coreGui(mainMenu);
@@ -37,7 +37,7 @@ switch (toLower _mode) do {
 	case "onunload": {
 		_rest params ["_exitCode"];
 
-		hint str _exitCode;
+		systemChat str _exitCode;
 
 		[false] call core(cinematicMode);
 	};

@@ -1,4 +1,5 @@
 
+#include "core\gui\common\ids.hpp"
 #include "macros\utils.hpp"
 #include "macros\function.hpp"
 #include "macros\ui.hpp"

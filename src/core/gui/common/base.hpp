@@ -1664,7 +1664,6 @@ class RscProgress
 	texture = "";
 	shadow = 0;
 	colorFrame[] = {0,0,0,1};
-	colorFrame[] = {0,0,0,1};
 	colorBar[] = {0,0,0,1};
 };
 

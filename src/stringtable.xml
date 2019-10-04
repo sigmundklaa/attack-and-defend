@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project name="AnD">
   <Package name="Mission">
+    <Container name="UI">
+      <Key ID="STR_UI_SettingUp">
+        <Original>Setting up user interface</Original>
+        <English>Setting up user interface</English>
+      </Key>
+    </Container>
     <Container name="Zones">
       <Key ID="STR_Zone_OGArms">
         <Original>OG Arms</Original>

@@ -19,7 +19,7 @@ class SquareImgButton : RscStructuredText {
 };
 
 class MainMenu {
-	idd = 10000;
+	idd = IDD_MAINMENU;
 	onLoad = (['onLoad'] + _this) call coreGui(mainMenu);
-	onUnLoad = (['onUnLoad'] + _this) call coreGui(mainMenu);
+	onUnload = (['onUnload'] + _this) call coreGui(mainMenu);
 };
