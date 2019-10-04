@@ -10,7 +10,7 @@
 
 params [["_self", objNull, [objNull]], ["_zone", "", [""]]];
 
-private _zoneConfig = missionConfigFile >> "ZonesConfig" >> "Zones" >> _zone;
+private _zoneConfig = missionConfigFile >> "ZonesConfig" >> worldName >> "Zones" >> _zone;
 private _settings = missionConfigFile >> "ZonesConfig" >> "Settings";
 
 if (!(isClass _zoneConfig) || ((getNumber (_zoneConfig >> "active")) isEqualTo 0)) exitWith {false};
