@@ -46,5 +46,18 @@ class LoadoutsConfig {
 			primary[] = {"srifle_DMR_03_F", "", {BASE_SCOPES}, "20Rnd_762x51_Mag", "bipod_01_F_blk"};
 			displayName = "MK-I EMR";
 		};
+		class MK_18 : _BaseLoadout {
+			primary[] = {"srifle_EBR_F", "", {BASE_SCOPES}, "20Rnd_762x51_Mag", "bipod_01_F_blk"};
+			displayName = "Mk18 ABR";
+		};
+		class MK_14 : _BaseLoadout {
+			primary[] = {"srifle_DMR_06_olive_F", "", {BASE_SCOPES}, "20Rnd_762x51_Mag", "bipod_01_F_blk"};
+			displayName = "Mk14";
+		};
+		class MXSW : _BaseLoadout {
+			primary[] = {"arifle_MX_SW_Black_F", "", {BASE_SCOPES}, "30Rnd_65x39_caseless_mag", "bipod_01_F_blk"};
+			displayName = "MXSW";
+		};
+		
 	};
 };
