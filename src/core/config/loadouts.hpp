@@ -1,19 +1,30 @@
 /**
- * primary[] = {weaponName, silencer, available scopes, mag to use, bipod}
+ * All loadouts must inherit from the _BaseLoadout class.
+ * 
+ * Loadout structure:
+ * 	displayName = class display name
+ * 	primary[] = {weaponName, silencer, available scopes, mag to use, bipod}
+ * 	handgun[] = same as above without bipod
+ * 	vest = classname of vest
+ * 	headgear = classname of headgear
+ * 	uniform = classname of uniform
+ * 
+ * To make a property attacker/defender sided add a subclass like so:
+ * 	class Attacker : _BaseAttacker {
+ *    	property = value;	 
+ *  };
  *
- [
-		["srifle_DMR_03_F","","",_baseScope,["20Rnd_762x51_Mag",20],[],"bipod_01_F_blk"],
-		[],
-		[],
-		[_attackerUniform,[["FirstAidKit",5]]],
-		[_vest,[["optic_MRCO",1],["optic_hamr",1], ["optic_Arco_blk_F",1],[_nvgs,1],["20Rnd_762x51_Mag",8,20]]],
-		[],
-		_hat,
-		"",
-		["Rangefinder","","","",[],[],""],
-		["ItemMap","ItemGPS","","ItemCompass","ItemWatch",""],
-		"MK-I EMR"
-	]
+ * Or, for defender:
+ *  class Defender : _BaseDefender {
+ *		property = value;
+ *	};
+ *
+ * For example, to add a custom uniform for the attacker side,
+ *	class <Loadout> : _BaseLoadout {
+ * 		class Attacker : _BaseAttacker {
+ *			uniform = "whateverthenameoftheuniformis"
+ *	 	};
+ * 	};
  */
 
 #define BASE_SCOPES "optic_MRCO", "optic_hamr", "optic_Arco_blk_F"
