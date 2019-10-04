@@ -2,16 +2,16 @@
 class Settings {
 	class Vehicles {
 		class LandVehicle {
-			vehicle = "";
+			vehicle = "O_MRAP_02_F";
 			seats = 4;
 		};
 		class Air {
-			vehicle = "";
-			seats = 6;
+			vehicle = "O_Heli_Light_02_unarmed_F";
+			seats = 8;
 		};
 		class Ship {
-			vehicle = "";
-			seats = 6;
+			vehicle = "O_G_Boat_Transport_02_F";
+			seats = 10;
 		};
 	};
 };
