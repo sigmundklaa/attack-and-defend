@@ -39,7 +39,6 @@ switch (toLower _mode) do {
 			private _marginH = PLYR_SPCT_MARGIN * PIXEL_H;
 			
 			private _xPos = [0, _END(DISPLAY_W,_width)] select _right;
-			systemChat format ["width is %1", _width];
 
 			_group ctrlSetPosition [_xPos, 0, _width, WIDE_SECTION_H];
 			_group ctrlCommit 0;
@@ -47,6 +46,7 @@ switch (toLower _mode) do {
 			{
 				private _ctrl = _display ctrlCreate ["PlayerSpectateBar", -1, _group];
 				_ctrl ctrlSetPosition [0, _forEachIndex * (_marginH + _height)];
+				[_ctrl, true] call coreGui(loadColors);
 				_ctrl ctrlCommit 0;
 			} forEach _units;
 

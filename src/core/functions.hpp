@@ -25,6 +25,7 @@ class Core {
 		class getColor {};
 		class fadeSound {};
 		class cinematicMode {};
+		class ctrlTree {};
 	};
 
 	class Utils_OOP {

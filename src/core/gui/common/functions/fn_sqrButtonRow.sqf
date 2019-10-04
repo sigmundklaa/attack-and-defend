@@ -34,7 +34,7 @@ _group ctrlCommit 0;
 	_x params [["_text", ""], ["_action", ""], ["_image", ""]];
 
 	private _ctrl = _display ctrlCreate ["SquareImgButton", -1, _group];
-	_ctrl call coreGui(loadColors);
+	[_ctrl, true] call coreGui(loadColors);
 	
 	private _outText = "";
 

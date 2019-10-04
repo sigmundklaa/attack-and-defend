@@ -206,7 +206,7 @@ class RscText
 	y = 0;
 	h = 0.037;
 	w = 0.3;
-	shadow = 1;
+	shadow = 0;
 	font = "RobotoCondensed";
 	SizeEx = "(((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)";
 	linespacing = 1;

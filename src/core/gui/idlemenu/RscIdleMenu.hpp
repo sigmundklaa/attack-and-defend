@@ -11,7 +11,8 @@ class PlayerSpectateBar : RscControlsGroupNoScroll {
 			y = 0;
 			w = PLYR_SPCT_W;
 			h = PLYR_SPCT_H;
-			_colorBackground = "MainBackground";
+			_colorBackground = "BackgroundMain";
+			// colorBackground[] = {1, 0,0,1};
 		};
 	};
 };
@@ -23,13 +24,15 @@ class IdleMenu {
 
 	class controls {
 		class ProgressBar : RscControlsGroupNoScroll {
-			x = _CENTER(DISPLAY_W,PROGRESS_W);
-			y = _END(DISPLAY_H,PROGRESS_FULL_H);
+			x = safeZoneX + _CENTER(DISPLAY_W,PROGRESS_W);
+			y = safeZoneY + _END(DISPLAY_H,PROGRESS_FULL_H);
 			w = PROGRESS_W;
 			h = PROGRESS_FULL_H;
 			class controls {
 				class Bar : RscProgress {
 					idc = 1;
+					h = PROGRESS_H;
+					w = PROGRESS_W;
 				};
 				class StatusText : RscText {
 					idc = 2;
@@ -45,10 +48,19 @@ class IdleMenu {
 
 		class WideSection : RscControlsGroupNoScroll {
 			onLoad = (['onLoad'] + _this) call coreGui(wideSection);
-			x = 0;
-			y = _CENTER(DISPLAY_H, WIDE_SECTION_H);
+			x = DISPLAY_X;
+			y = safeZoneY + _CENTER(DISPLAY_H,WIDE_SECTION_H);
 			w = DISPLAY_W;
 			h = WIDE_SECTION_H;
+			class controls {
+				// class Background : RscText {
+				// 	colorBackground[] = {0, 1, 1, 1};
+				// 	x = 0;
+				// 	y = 0;
+				// 	w = DISPLAY_W;
+				// 	h = WIDE_SECTION_H;
+				// };
+			};
 		};
 	};
 };
