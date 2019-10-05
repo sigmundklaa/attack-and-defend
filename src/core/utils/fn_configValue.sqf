@@ -11,5 +11,5 @@ call {
 	if (isText (_config)) exitWith {getText _config};
 	if (isClass (_config)) exitWith {_config};
 
-	configNull
+	nil
 }

@@ -11,6 +11,7 @@ class Core {
 		file = "core\events";
 		class onMap {};
 		class setupHandlers {};
+		class onReloaded {};
 	};
 
 	class Utils {
@@ -26,12 +27,21 @@ class Core {
 		class fadeSound {};
 		class cinematicMode {};
 		class ctrlTree {};
+		class configHasProp {};
+		class isAttacker {};
 	};
 
 	class Utils_OOP {
 		file = "core\utils\oop";
 		class classNew {};
 		class createObj {};
+	};
+
+	class Loadout {
+		file = "core\loadout";
+		class setLoadout {};
+		class assignLoadout {};
+		class wipeLoadout {};
 	};
 
 };
