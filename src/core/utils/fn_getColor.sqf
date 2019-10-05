@@ -16,7 +16,7 @@ private _theme = profileNameSpace getVariable ["and_color_theme", _defaultTheme]
 
 _fullConfig = _config >> _theme;
 if (isNull _fullConfig) then {
-	_fullConfig = _config >> _defaultTheme;
+	_fullConfig = _config >> "default";
 };
 
 if (isText (_fullConfig)) then {

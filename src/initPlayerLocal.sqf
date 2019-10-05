@@ -11,10 +11,13 @@
 params ["_unit", "_jip"];
 
 _unit call core(wipeLoadout);
+[] call core(setupActions);
 
 #ifdef DEBUG
 
 diag_log "=================== LOCAL START ===============";
+
+waitUntil {!isNil {missionNameSpace getVariable "games"}};
 
 private _game = (missionNameSpace getVariable ["games", []]) select 0;
 diag_log str (missionNameSpace getVariable ["games", objNull]);
@@ -28,7 +31,7 @@ _unit spawn {
 
 	for "_i" from 0 to 1 step 0 do {
 		NEW_LOADOUT = false;
-		
+
 		private _loadouts = ("true" configClasses (missionConfigFile >> "LoadoutsConfig" >> "Loadouts")) apply {configName _x};
 
 		[selectRandom _loadouts, _unit] call core(setLoadout);

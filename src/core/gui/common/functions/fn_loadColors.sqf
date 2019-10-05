@@ -12,7 +12,11 @@ scopeName "loadColors";
 
 params [["_control", controlNull, [controlNull, displayNull]], ["_static", [false, controlNull], [[], true]]];
 
+diag_log "Loading unknown control";
+
 if (isNull _control) exitWith {};
+
+diag_log format ["Loading control %1", ctrlClassName _control];
 
 _static params [
 	["_isStatic", false, [false]],
@@ -57,6 +61,8 @@ private _tree = if (_isStatic) then {
 	_fullTree
 };
 
+diag_log format ["Getting %1 (tree: %2)", ctrlClassName _control, _tree];
+
 {
 	_x params ["_curCtrl", "_configName"];
 	_config = _config >> _configName;
@@ -68,7 +74,7 @@ private _tree = if (_isStatic) then {
 {
 	private _key = '_' + getText (_x >> "key");
 	private _val = _config >> _key;
-	
+
 	if !(isNull _val) then {
 		[_control, (getText _val) call core(getColor)] call compile (getText (_x >> "callback"));
 	};

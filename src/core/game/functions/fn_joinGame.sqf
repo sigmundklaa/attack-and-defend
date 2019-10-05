@@ -3,8 +3,8 @@
  * @Description: Joins the given game
  */
 
-params [["_game", objNull, [objNull]]];
+params [["_game", objNull, [objNull]], ["_unit", player, [objNull]]];
 
 if (isNull _game) exitWith {false};
 
-player setVariable ["game", _game, true];
+_unit setVariable ["game", _game, true];

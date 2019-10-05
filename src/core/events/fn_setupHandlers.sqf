@@ -5,11 +5,19 @@
 
 #include "..\..\macros\script.hpp"
 
-params [["_unit", player, [objNull]], ["_isServer", false, [false]]];
+_this spawn {
 
-if _isServer then {
+	params [["_unit", player, [objNull]], ["_isServer", false, [false]]];
 
-} else {
-	_unit addEventHandler ["Reloaded", core(onReloaded)];
-	addMissionEventHandler ["Map", core(onMap)];
+	if _isServer then {
+
+	} else {
+		_unit addEventHandler ["Reloaded", core(onReloaded)];
+		
+		addMissionEventHandler ["Map", core(onMap)];
+
+		waitUntil {!isNull (findDisplay 46)};
+		(findDisplay 46) displayAddEventHandler ["KeyDown", {_this call core(onKeyDown)}];
+	};
+
 };

@@ -7,11 +7,19 @@ class Core {
 		#include "game\functions.hpp"
 	};
 
+	class Actions {
+		file = "core\actions";
+		class heal {};
+		class setupActions {};
+	};
+
 	class Events {
 		file = "core\events";
 		class onMap {};
 		class setupHandlers {};
 		class onReloaded {};
+		class onKeyDown {};
+		class jump {};
 	};
 
 	class Utils {

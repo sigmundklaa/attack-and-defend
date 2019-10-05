@@ -31,21 +31,23 @@
 
 #define BASE_SCOPES "optic_MRCO", "optic_hamr", "optic_Arco_blk_F"
 #define HELMET "H_HelmetSpecB_blk"
-#define HAT "H_Beret_Colonel"
+#define HAT "H_Cap_Oli_hs"
 
 class _BaseAttacker {
-	uniform = "U_B_CTRG_Soldier_F";
+	uniform = "U_B_CTRG_1";
+	facewear = "G_Balaclava_TI_blk_F";
 };
 
 class _BaseDefender {
-	uniform = "U_I_G_Story_Protagonist_F";
+	uniform = "U_I_C_Soldier_Para_1_F";
+	headgear = HAT;
+	facewear = "G_Bandanna_beast";
 };
 
 class _BaseLoadout {
-	vest = "V_PlateCarrier2_blk";
+	vest = "V_PlateCarrier2_rgr_noflag_F";
 	binoculars[] = {"Rangefinder", "", "", "", {}, {}, ""};
 	linked[] = {"ItemMap","ItemGPS","ItemRadio","ItemCompass","ItemWatch",""};
-	headgear = HELMET;
 
 	class Attacker : _BaseAttacker {};
 	class Defender : _BaseDefender {};

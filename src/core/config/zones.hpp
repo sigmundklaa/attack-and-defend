@@ -1,7 +1,7 @@
 
 // Arma preprocessing really is a work of art >:(
 #define _TEMP(x) $STR_Zone_##x
-#define STR(x) QUOTE(_TEMP(x))
+#define STR(x) __stringify(_TEMP(x))
 
 class ZonesConfig {
 	class Settings {

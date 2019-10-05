@@ -3,13 +3,13 @@
  * @Description: Joins the given side
  */
 
-params [["_team", objNull, [objNull]]];
+params [["_team", objNull, [objNull]], ["_unit", player, [objNull]]];
 
 if (isNull _team) exitWith {false};
 
-player setVariable ["team", _team, true];
+_unit setVariable ["team", _team, true];
 
 private _allTeamPlayers = _team getVariable ["players", []];
-_allTeamPlayers pushBackUnique player;
+_allTeamPlayers pushBackUnique _unit;
 
 _team setVariable ["players", _allTeamPlayers, true];

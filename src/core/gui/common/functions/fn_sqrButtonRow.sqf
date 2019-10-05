@@ -31,7 +31,7 @@ _group ctrlSetPosition (([_groupW, _height] call _posApply) + ([_groupW, _height
 _group ctrlCommit 0;
 
 {
-	_x params [["_text", ""], ["_action", ""], ["_image", ""]];
+	_x params [["_text", ""], ["_action", ""], ["_image", ""], ["_tooltip", ""]];
 
 	private _ctrl = _display ctrlCreate ["SquareImgButton", -1, _group];
 	[_ctrl, true] call coreGui(loadColors);
@@ -44,6 +44,10 @@ _group ctrlCommit 0;
 
 	if !(_text isEqualTo "") then {
 		_outText = _outText + format ["<t size='1'>%1</t>", _text];
+	};
+
+	if !(_tooltip isEqualTo "") then {
+		_ctrl ctrlSetTooltip _tooltip;
 	};
 
 	_ctrl ctrlSetStructuredText parseText format ["<t color='%2'>%1</t>", _outText, (

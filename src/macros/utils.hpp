@@ -2,6 +2,6 @@
 // #ifndef UTILS_HPP
 // #define UTILS_HPP
 
-#define QUOTE(x) #x
+#define __stringify(x) #x
 
 // #endif
