@@ -1,0 +1,5 @@
+
+*.pbo
+__pycache__/
+*.lock
+*.env

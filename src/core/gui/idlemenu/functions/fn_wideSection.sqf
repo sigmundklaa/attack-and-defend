@@ -52,7 +52,7 @@ switch (toLower _mode) do {
 
 		};
 
-		private _attackerRight = _attacker isEqualTo (player getVariable "team");
+		private _attackerRight = !(_attacker isEqualTo (player getVariable "team"));
 		[_attackerRight, true, _attacker getVariable ["players", []], _control, _display] call _loadSection;
 		[!_attackerRight, false, _defending getVariable ["players", []], _control, _display] call _loadSection;
 

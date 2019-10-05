@@ -33,7 +33,7 @@ private _children = if _isDisplay then {
 	// Yes this is real now move along cunt
 	(allControls ((_fullTree select 0) select 0)) select {
 		!(_x isEqualTo _control) &&
-		{(ctrlClassName _control) in ((_x call core(ctrlTree)) apply {_x # 1})}
+		{_control in ((_x call core(ctrlTree)) apply {_x # 0})}
 	}
 };
 
@@ -51,7 +51,7 @@ private _tree = if (_isStatic) then {
 	if (!isNull _parent) then {
 		_fullTree select [(_fullTree apply {_x # 0}) find _parent, count _fullTree]
 	} else {
-		[_control, ctrlClassName _control]
+		[[_control, ctrlClassName _control]]
 	}
 } else {
 	_fullTree
@@ -59,6 +59,7 @@ private _tree = if (_isStatic) then {
 
 {
 	_x params ["_curCtrl", "_configName"];
+	systemChat format ["Old config: %1, %2 (%3)", _config, _configName, _x];
 	_config = _config >> _configName;
 	if !(_curCtrl isEqualTo _control) then {
 		_config = _config >> "controls";
