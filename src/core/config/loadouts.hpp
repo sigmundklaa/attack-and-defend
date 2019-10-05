@@ -43,7 +43,7 @@ class _BaseDefender {
 
 class _BaseLoadout {
 	vest = "V_PlateCarrier2_blk";
-	binoculars[] = {"Rangefinder", "", "", "", [], [], ""};
+	binoculars[] = {"Rangefinder", "", "", "", {}, {}, ""};
 	linked[] = {"ItemMap","ItemGPS","ItemRadio","ItemCompass","ItemWatch",""};
 	headgear = HELMET;
 
