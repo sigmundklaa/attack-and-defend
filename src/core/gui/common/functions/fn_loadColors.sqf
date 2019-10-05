@@ -59,7 +59,6 @@ private _tree = if (_isStatic) then {
 
 {
 	_x params ["_curCtrl", "_configName"];
-	systemChat format ["Old config: %1, %2 (%3)", _config, _configName, _x];
 	_config = _config >> _configName;
 	if !(_curCtrl isEqualTo _control) then {
 		_config = _config >> "controls";
