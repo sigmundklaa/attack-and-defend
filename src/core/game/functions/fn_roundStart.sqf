@@ -9,44 +9,18 @@
 
 params [["_self", objNull, [objNull]]];
 
-_self spawn {
-	params ["_self"];
+if (isServer) then {
+	_self spawn {
+		params ["_self"];
 
-	private _capTimeBase = _self getVariable ["capTimeBase", 0.5];
-	private _curProgress = _self getVariable ["roundProgress", 0];
-	private _aliveCheck = {alive _x && _x getVariable ["roundAlive", false]};
-	private _winnerSide = objNull;
+		// Reset deaths array so it doesnt take up as much memory
+		_self setVariable ["deaths", [], true];
 
-	for "_i" from 0 to 1 step 0 do {
-		scopeName "loop";
-		if (_self getVariable ["roundActive", false]) then {
-			private _attackers = [_self, true] call core(getTeamPlayers);
-			private _defenders = [_self, false] call core(getTeamPlayers);
-
-			private _attackerCount = count _attackers;
-
-			if (_attackerCount > 0 && ((count _defenders) isEqualTo 0)) then {
-				_curProgress = _curProgress + (((_attackerCount / 100) min 0.04) max 0.01);
-				_zone setVariable ["roundProgress", _curProgress, true];
-
-				["debug", format ["progress %1", (round (_curProgress * 100)) min 100]] call core(log);
-			};
-
-			if (0 in [_aliveCheck count _attackers, _aliveCheck count _defenders]) then {
-				["debug", "win by elimination"] call core(log);
-				breakout "loop";
-			};
-
-			if (_curProgress >= 1) then {
-				breakOut "loop";
-			};
-
-			sleep _capTimeBase;
-		} else {
-			sleep 0.1;
-		};
+		// Wait for captureLoop to end, and pass the winner to roundEnd
+		[_self, _self call core(captureLoop)] call core(roundEnd);
 	};
+};
 
-	// TODO: Call with status
-	[_self, _winnerSide] call core(roundEnd);
+if (!isDedicated) then {
+	player setVariable ["roundAlive", true, true];
 };

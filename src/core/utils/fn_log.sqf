@@ -3,12 +3,20 @@
  * @Description: Main function for logging
  */
 
+#include "..\..\debug.hpp"
 #include "..\..\macros\script.hpp"
 
 params [["_mode", "", [""]], ["_message", "", [""]]];
 
+#ifndef DEBUG
+private _debugActive = false;
+#else
+private _debugActive = true;
+#endif
+
 private _modes = [
-	["debug", true]
+	["debug", _debugActive],
+	["info", true]
 ];
 
 _mode = toLower _mode;

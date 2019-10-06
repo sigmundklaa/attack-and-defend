@@ -13,9 +13,9 @@ params ["_unit", "_jip"];
 _unit call core(wipeLoadout);
 [] call core(setupActions);
 
-#ifdef DEBUG
+["info", "=================== LOCAL START ==============="] call core(log);
 
-diag_log "=================== LOCAL START ===============";
+#ifdef DEBUG
 
 waitUntil {!isNil {missionNameSpace getVariable "games"}};
 
@@ -25,6 +25,8 @@ _game call core(joinGame);
 
 (selectRandom (_game getVariable "teams")) call core(joinTeam);
 [_unit] call core(setupHandlers);
+
+[true, 0.2] call core(fadeSound);
 
 _unit spawn {
 	params ["_unit"];
@@ -42,6 +44,6 @@ _unit spawn {
 
 };
 
-diag_log "================ LOCAL END ===================";
-
 #endif
+
+["info", "================ LOCAL END ==================="] call core(log);

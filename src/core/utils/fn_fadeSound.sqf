@@ -5,7 +5,7 @@
 
 params [["_fade", true, [false]], ["_amount", 0, [0]], ["_time", 0, [0]]];
 
-private _varName = _fnc_scriptName + 'old_sound';
+private _varName = _fnc_scriptName + '_old_sound';
 
 if _fade then {
 	uiNameSpace setVariable [_varName, soundVolume];

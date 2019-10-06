@@ -16,3 +16,8 @@ class Common {
 	class loadColors {};
 	class displayBlur {};
 };
+
+class HUD {
+	file = "core\gui\hud\functions";
+	class hud {};
+};

@@ -14,3 +14,4 @@ class selectZone {};
 class teamShift {};
 class startPaused {};
 class pauseStart {};
+class captureLoop {};

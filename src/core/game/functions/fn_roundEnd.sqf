@@ -4,6 +4,7 @@
  */
 
 #include "..\..\..\macros\script.hpp"
+#include "..\..\..\macros\remote.hpp"
 
 params [["_self", objNull, [objNull]], ["_winner", objNull, [objNull]]];
 
@@ -17,7 +18,7 @@ private _wins = (_winner getVariable ["wins", 0]) + 1;
 _winner setVariable ["wins", _wins, true];
 
 if (_wins >= _self getVariable ["firstTo", 15]) then {
-
+	[_self, _winner] remoteExecCall [__stringify(core(gameEnd)), R_ALL];
 } else {
-	_self call core(roundInit);
+	[_self] remoteExecCall [__stringify(core(roundInit)), R_ALL];
 };

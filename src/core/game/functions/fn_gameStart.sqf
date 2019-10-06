@@ -4,11 +4,12 @@
  */
 
 #include "..\..\..\macros\script.hpp"
+#include "..\..\..\macros\remote.hpp"
 
 params [["_self", objNull, [objNull]]];
 
 if (isNull _self) exitWith {false};
 
-_self call core(roundInit);
+[_self] remoteExecCall [__stringify(core(roundInit)), R_ALL];
 
 true

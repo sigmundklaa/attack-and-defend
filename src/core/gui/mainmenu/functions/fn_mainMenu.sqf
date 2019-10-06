@@ -10,7 +10,7 @@
 disableSerialization;
 params [["_mode", "", [""]], ["_display", displayNull, [displayNull]]];
 
-private _rest = _this select [2, count _this];
+__rest_args(_rest, 2);
 
 switch (toLower _mode) do {
 	case "onload": {

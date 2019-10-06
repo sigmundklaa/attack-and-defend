@@ -12,5 +12,5 @@ class CfgFunctions {
 };
 
 class RscTitles {
-
+	#include "core\gui\titles.hpp"
 };
