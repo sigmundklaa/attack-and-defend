@@ -13,5 +13,8 @@ params [
 
 _new params ["_mag"];
 
+// Weapons that should not be reloaded
+if ((toLower _weapon) in ["throw"]) exitWith {};
+
 _unit removeMagazines _mag;
 _unit addMagazine _mag;
