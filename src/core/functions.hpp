@@ -13,6 +13,11 @@ class Core {
 		class setupActions {};
 	};
 
+	class Anims {
+		file = "core\anims";
+		class animHandler {};
+	};
+
 	class Events {
 		file = "core\events";
 		class onMap {};

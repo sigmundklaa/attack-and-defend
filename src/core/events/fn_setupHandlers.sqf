@@ -13,6 +13,8 @@ _this spawn {
 
 	} else {
 		_unit addEventHandler ["Reloaded", core(onReloaded)];
+		_unit addEventHandler ["AnimDone", {(["done"] + _this) call core(animHandler)}];
+		_unit addEventHandler ["AnimChanged", {(["started"] + _this) call core(animHandler)}];
 		
 		addMissionEventHandler ["Map", core(onMap)];
 

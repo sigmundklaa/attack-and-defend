@@ -79,7 +79,6 @@ _unit setUnitLoadout _new;
 
 	for "_i" from 0 to ((_count - 1) max 0) do {
 		_unit addItem _item;
-		systemChat format ["Adding %4 number %1 (%2: %3)", _i, _items, _forEachIndex, _item];
 	};
 
 } forEach _items;

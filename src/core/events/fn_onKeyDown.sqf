@@ -17,7 +17,7 @@ params [
 ];
 
 if (_key in actionKeys "GetOver" && {_shift}) exitWith {
-	if (!(animationState player isEqualTo "AovrPercMrunSrasWrflDf") && {isTouchingGround player} && {stance player in ["STAND", "CROUCH"]} && {speed player > 2} && {((velocity player) select 2) < 2.5} && {time - (player getVariable ["lastJump", 0]) > 1.5}) then {
+	if (!(animationState player isEqualTo "AovrPercMrunSrasWrflDf") && {isTouchingGround player} && {stance player in ["STAND", "CROUCH"]} && {((velocity player) select 2) < 2.5} && {time - (player getVariable ["lastJump", 0]) > 1.5}) then {
     	player setVariable ["lastJump", time, true];
 		[player] remoteExecCall [__stringify(core(jump)), R_ALL];
   	};

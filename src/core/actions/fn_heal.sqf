@@ -3,21 +3,25 @@
  * @Description: Heals the player
  */
 
-_ANIM = toLower "AinvPknlMstpSlayWrflDnon_medic";
-_ANIMPRONE = toLower "AinvPpneMstpSlayWnonDnon_medic";
+#include "..\..\macros\script.hpp"
+#define ANIM "AinvPknlMstpSlayWrflDnon_medic" 
+#define ANIM_PRONE "AinvPpneMstpSlayWnonDnon_medic"
 
 if (!params [["_unit", objNull, [objNull]]] || isNull _unit) exitWith {};
 
-if (animationState _unit isEqualTo _ANIM || animationState _unit isEqualTo _ANIMPRONE) exitWith {};
-_stance = stance player;
+private _anim = [ANIM, ANIM_PRONE] select ((stance _unit) isEqualTo "PRONE");
 
-if (_stance isEqualTo "PRONE") then {
-   _unit switchMove _ANIMPRONE;
-   _unit playMoveNow _ANIMPRONE;
-} else {
-   _unit switchMove _ANIM;
-   _unit playMoveNow _ANIM;
-};
-waitUntil{!((animationState _unit isEqualTo _ANIM) || (animationState _unit isEqualTo _ANIMPRONE)) };
+_unit switchMove _anim;
+_unit playMoveNow _anim;
 
-player setDamage 0;
+["push", _unit, _anim,
+   [{
+      (_this # 0) setDamage 0;
+      hint format ["Healed %1", name (_this # 0)];
+      true
+   }],
+   [{
+      systemChat "Healing canceled";
+      true
+   }]
+] call core(animHandler);
