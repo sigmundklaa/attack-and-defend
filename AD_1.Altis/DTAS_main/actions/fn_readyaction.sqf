@@ -1,1 +1,0 @@
-(group player) setVariable ["groupReady", true, true];

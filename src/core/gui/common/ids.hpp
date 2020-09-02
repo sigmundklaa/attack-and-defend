@@ -1,0 +1,3 @@
+
+#define IDD_MAINMENU 10000
+#define IDD_IDLEMENU 10001

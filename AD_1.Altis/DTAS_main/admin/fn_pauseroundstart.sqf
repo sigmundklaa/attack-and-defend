@@ -1,2 +1,0 @@
-adminPaused = true;
-publicVariable "adminPaused";

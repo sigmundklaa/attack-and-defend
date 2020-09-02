@@ -1,2 +1,0 @@
-forceRoundStart = true;
-publicVariable "forceRoundStart";

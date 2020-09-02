@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project name="AnD">
+  <Package name="Mission">
+    <Container name="UI">
+      <Key ID="STR_UI_SettingUp">
+        <Original>Setting up user interface</Original>
+        <English>Setting up user interface</English>
+      </Key>
+    </Container>
+    <Container name="Zones">
+      <Key ID="STR_Zone_OGArms">
+        <Original>OG Arms</Original>
+        <English>OG Arms</English>
+      </Key>
+      <Key ID="STR_Zone_ChurchArms">
+        <Original>Church Arms</Original>
+        <English>Church Arms</English>
+      </Key>
+      <Key ID="STR_Zone_EastArms">
+        <Original>East Arms</Original>
+        <English>East Arms</English>
+      </Key>
+      <Key ID="STR_Zone_Terminal">
+        <Original>Terminal</Original>
+        <English>Terminal</English>
+      </Key>
+      <Key ID="STR_Zone_FriniDMT">
+        <Original>Frini DMT</Original>
+        <English>Frini DMT</English>
+      </Key>
+      <Key ID="STR_Zone_AthiraDMT">
+        <Original>Athira DMT</Original>
+        <English>Athira DMT</English>
+      </Key>
+      <Key ID="STR_Zone_NorthPen">
+        <Original>Northern Peninsula</Original>
+        <English>Northern Peninsula</English>
+      </Key>
+      <Key ID="STR_Zone_LakkaDMT">
+        <Original>Lakka DMT</Original>
+        <English>Lakka DMT</English>
+      </Key>
+      <Key ID="STR_Zone_KavDMT">
+        <Original>Kavala DMT</Original>
+        <English>Kavala DMT</English>
+      </Key>
+      <Key ID="STR_Zone_Lighthouse">
+        <Original>Lighthouse</Original>
+        <English>Lighthouse</English>
+      </Key>
+      <Key ID="STR_Zone_DelfinakiMB">
+        <Original>Delfinaki MB</Original>
+        <English>Delfinaki MB</English>
+      </Key>
+      <Key ID="STR_Zone_PefkasDMT">
+        <Original>Pefkas DMT</Original>
+        <English>Pefkas DMT</English>
+      </Key>
+      <Key ID="STR_Zone_PyrgosMB">
+        <Original>Pyrgos MB</Original>
+        <English>Pyrgos MB</English>
+      </Key>
+      <Key ID="STR_Zone_SyrtaDMT">
+        <Original>Syrta DMT</Original>
+        <English>Syrta DMT</English>
+      </Key>
+      <Key ID="STR_Zone_KoreDMT">
+        <Original>Kore DMT</Original>
+        <English>Kore DMT</English>
+      </Key>
+      <Key ID="STR_Zone_OKCastle">
+        <Original>Oreokastro Castle</Original>
+        <English>Oreokastro Castle</English>
+      </Key>
+      <Key ID="STR_Zone_ZarosDMT">
+        <Original>Zaros DMT</Original>
+        <English>Zaros DMT</English>
+      </Key>
+    </Container>
+    <Container name="MainMenu">
+      <Key ID="STR_MainMenu_JoinGame">
+        <Original>Join Game</Original>
+        <English>Join Game</English>
+      </Key>
+      <Key ID="STR_MainMenu_CreateGame">
+        <Original>Create New Game</Original>
+        <English>Create New Game</English>
+      </Key>
+      <Key ID="STR_MainMenu_Leave">
+        <Original>Leave</Original>
+        <English>Leave</English>
+      </Key>
+    </Container>
+  </Package>
+</Project>
