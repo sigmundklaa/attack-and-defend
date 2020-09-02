@@ -1,0 +1,16 @@
+
+#define POINT_SIZE 4.5
+
+#ifndef DISPLAY_W
+#define DISPLAY_W safeZoneW
+#endif
+
+#define PROGRESS_W (0.3 * DISPLAY_W)
+#define PROGRESS_H (POINT_SIZE * PIXEL_H)
+
+#define PROGRESS_TEXT_H (3 * PIXEL_H)
+
+#define PROGRESS_MARGIN 2
+
+#define PROGRESS_FULL_H ((PROGRESS_MARGIN * PIXEL_H) + PROGRESS_H + PROGRESS_TEXT_H)
+#define PROGRESS_FULL_W (((POINT_SIZE * PIXEL_W) * 2) + PROGRESS_W)

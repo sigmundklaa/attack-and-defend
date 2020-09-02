@@ -1,0 +1,16 @@
+
+#include "core\gui\common\ids.hpp"
+#include "macros\utils.hpp"
+#include "macros\function.hpp"
+#include "macros\ui.hpp"
+
+#include "core\includes.hpp"
+
+class CfgFunctions {
+	#include "core\functions.hpp"
+	#include "core\gui\functions.hpp"
+};
+
+class RscTitles {
+	#include "core\gui\titles.hpp"
+};
