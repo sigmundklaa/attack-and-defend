@@ -1,4 +1,1 @@
-# Attack-and-Defend-Mission
-
-Attack and Defend is a gamemode built off of Gal Zohar's Dynamic Take and Secure (DTAS).
-Everything in this repository is developed by him, unless stated otherwise in the top comments of the files
+This repo contains source code for an abandonded project of mine, an attempt at an improved version of Gal Zohar's Dynamic Take and Secure gamemode for Arma 3.
