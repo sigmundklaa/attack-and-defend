@@ -15,6 +15,9 @@ if (isServer) then {
 
 		// Reset deaths array so it doesnt take up as much memory
 		_self setVariable ["deaths", [], true];
+		_self setVariable ["roundActive", true, true];
+
+		["debug", "round starting"] call core(log);
 
 		// Wait for captureLoop to end, and pass the winner to roundEnd
 		[_self, _self call core(captureLoop)] call core(roundEnd);

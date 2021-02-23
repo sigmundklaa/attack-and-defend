@@ -14,6 +14,8 @@ if (isNull _self || isNull _winner) then {
 	["error", "core::game::roundEnd - self or winner is null"] call core(log);
 };
 
+_self setVariable ["roundActive", false, true];
+
 private _wins = (_winner getVariable ["wins", 0]) + 1;
 _winner setVariable ["wins", _wins, true];
 

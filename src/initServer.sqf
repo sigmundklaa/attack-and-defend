@@ -25,6 +25,8 @@ private _loadouts = ("true" configClasses (missionConfigFile >> "LoadoutsConfig"
 
 		[selectRandom _loadouts, _x] call core(setLoadout);
 		[_x] call core(assignLoadout);
+
+		_x setVariable ["roundAlive", true, true];
 	};
 } forEach allUnits;
 

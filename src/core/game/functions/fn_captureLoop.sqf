@@ -15,11 +15,16 @@ private _winnerSide = objNull;
 for "_i" from 0 to 1 step 0 do {
 	scopeName "loop";
 	if (_self getVariable ["roundActive", false]) then {
+		private _attacking = [_self, true] call core(getTeam);
+		private _defending = [_self, false] call core(getTeam);
+
 		private _attackers = [_self, true] call core(getTeamPlayers);
 		private _defenders = [_self, false] call core(getTeamPlayers);
 
 		private _attackerCount = count _attackers;
 		private _defenderCount = count _defenders;
+
+		["debug", format ["%1 attackers alive, %2 defenders", _attackerCount, _defenderCount]] call core(log);
 
 		private _newProgress = call {
 			if (_attackerCount > 0 && _defenderCount isEqualTo 0) exitWith {
@@ -48,7 +53,7 @@ for "_i" from 0 to 1 step 0 do {
 			["debug", "win by elimination"] call core(log);
 
 			if (_aboveZero > -1) then {
-				_winnerSide = [_attackers, _defenders] select _aboveZero;
+				_winnerSide = [_attacking, _defending] select _aboveZero;
 				breakOut "loop";
 			} else {
 				private _deaths = _self getVariable ["deaths", []];
@@ -64,7 +69,7 @@ for "_i" from 0 to 1 step 0 do {
 		};
 
 		if (_curProgress >= 1) then {
-			_winnerSide = _attackers;
+			_winnerSide = _attacking;
 			breakOut "loop";
 		};
 
