@@ -24,6 +24,6 @@ private _index = _modes findIf {(_x # 0) isEqualTo _mode && (_x # 1)};
 
 if (_index isEqualTo -1) exitWith {false};
 
-diag_log format ["<Logger '%1'>: %2", _mode, _message call core(handleString)];
+diag_log format ["<Logger '%1' (called from %3)>: %2", _mode, _message call core(handleString), _fnc_scriptNameParent];
 
 true
